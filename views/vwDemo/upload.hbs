@@ -1,0 +1,38 @@
+{{#section 'css'}}
+<link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.2.2/css/fileinput.min.css" media="all"
+  rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.min.css"
+  crossorigin="anonymous">
+{{/section}}
+
+{{#section 'js'}}
+<script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.2.2/js/fileinput.min.js"></script>
+<script>
+  $('#txtCover').fileinput({
+    allowedFileExtensions: ['jpg', 'png', 'gif'],
+    dropZoneEnabled: false,
+  });
+</script>
+{{/section}}
+
+<div class="card">
+  <h4 class="card-header">
+    New Post
+  </h4>
+  <div class="card-body">
+    <form method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="txtTitle">Title</label>
+        <input type="text" class="form-control" id="txtTitle" name="title" autofocus>
+      </div>
+      <div class="form-group">
+        <label for="txtCover">Cover Photo</label>
+        <input type="file" class="form-control" id="txtCover" name="cover" multiple>
+      </div>
+      <button type="submit" class="btn btn-success">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        Save
+      </button>
+    </form>
+  </div>
+</div>

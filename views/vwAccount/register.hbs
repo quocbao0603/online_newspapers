@@ -1,0 +1,74 @@
+{{#section 'css'}}
+<link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+{{/section}}
+
+{{#section 'js'}}
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+<script>
+  $('#frmRegister').on('submit', function (e) {
+    e.preventDefault();
+
+    const username = $('#txtUsername').val();
+    if (username.length === 0) {
+      alert('Invalid data.');
+      return;
+    }
+
+    $.getJSON(`/account/is-available?user=${username}`, function (data) {
+      if (data === false) {
+        alert('Not available!');
+      } else {
+        $('#frmRegister').off('submit').submit();
+      }
+    });
+  })
+
+  $('#txtDOB').datetimepicker({
+    format: 'd/m/Y',
+    timepicker: false,
+    mask: true
+  });
+
+  $('#txtUsername').focus();
+</script>
+{{/section}}
+
+<div class="card">
+  <h4 class="card-header">
+    Register
+  </h4>
+  <div class="card-body">
+    <form id="frmRegister" method="POST">
+      <div class="form-group">
+        <label for="txtUsername">User</label>
+        <input type="text" class="form-control" id="txtUsername" name="username">
+      </div>
+      <div class="form-group">
+        <label for="txtPassword">Password</label>
+        <input type="password" class="form-control" id="txtPassword" name="raw_password">
+      </div>
+      <div class="form-group">
+        <label for="txtConfirm">Confirm</label>
+        <input type="password" class="form-control" id="txtConfirm" name="">
+      </div>
+      <div class="form-group">
+        <label for="txtName">Name</label>
+        <input type="text" class="form-control" id="txtName" name="name">
+      </div>
+      <div class="form-group">
+        <label for="txtEmail">Email</label>
+        <input type="text" class="form-control" id="txtEmail" name="email">
+      </div>
+      <div class="form-group">
+        <label for="txtDOB">DOB</label>
+        <input type="text" class="form-control" id="txtDOB" name="raw_dob">
+      </div>
+      <button type="submit" class="btn btn-success">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        Register
+      </button>
+    </form>
+  </div>
+</div>

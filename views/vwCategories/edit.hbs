@@ -1,0 +1,30 @@
+<div class="card">
+  <h4 class="card-header">
+    Category
+  </h4>
+  <div class="card-body">
+    <form method="POST">
+      <div class="form-group">
+        <label for="txtCatID">#</label>
+        <input type="text" readonly class="form-control" id="txtCatID" name="CatID" value="{{this.category.CatID}}">
+      </div>
+      <div class="form-group">
+        <label for="txtCatName">Category</label>
+        <input type="text" class="form-control" id="txtCatName" name="CatName" autofocus
+          value="{{this.category.CatName}}">
+      </div>
+      <a class="btn btn-primary" href="/admin/categories/" role="button">
+        <i class="fa fa-backward" aria-hidden="true"></i>
+        Back to List
+      </a>
+      <button type="submit" class="btn btn-danger" formaction="/admin/categories/del">
+        <i class="fa fa-trash-o" aria-hidden="true"></i>
+        Delete
+      </button>
+      <button type="submit" class="btn btn-success" formaction="/admin/categories/patch">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        Save
+      </button>
+    </form>
+  </div>
+</div>

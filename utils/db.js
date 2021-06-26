@@ -3,9 +3,9 @@ const knex = require('knex')({
   connection: {
     host: '127.0.0.1',
     user: 'root',
-    password: 'root',
-    database: 'qlbh',
-    port: 8889
+    password: '',
+    database: 'ec',
+    port: 3306
   },
   pool: {
     min: 0,

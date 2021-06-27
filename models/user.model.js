@@ -1,19 +1,32 @@
-const db = require('../utils/db');
+const db = require("../utils/db");
 
 module.exports = {
   all() {
-    return db('users');
+    return db("users");
   },
-
-  add(user) {
-    return db('users').insert(user);
+  getUserByUserName(username) {
+    return db("users").where("username", username).first();
   },
-
-  async findByUsername(username) {
-    const rows = await db('users').where('username', username);
-    if (rows.length === 0)
-      return null;
-
-    return rows[0];
+  getUserById(ID) {
+    return db("users").where("id", ID).first();
   },
+  getUserIdByEmail(Email) {
+    return db("users").where("email", Email).first();
+  },
+  getUserByEmail(email) {
+    return db("users").where("email", email).first();
+  },
+  getIdByUIdAndProvider(uid, provider) {
+    return db("linkedusers").where({
+      "uId": uid,
+      "Provider":  provider
+    }).first();
+  },
+  addLinkedUser(new_linkedUser) {
+    return db("linkedusers").insert(new_linkedUser);
+  },
+  addUser(new_user) {
+    return db("users").insert(new_user);
+  },
+  
 };

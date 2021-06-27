@@ -1,84 +1,126 @@
-const express = require('express');
-const bcrypt = require('bcryptjs');
-const moment = require('moment');
+const express = require("express");
+const bcrypt = require("bcrypt");
+const moment = require("moment");
+const passport = require("passport");
 
-const userModel = require('../models/user.model');
-const auth = require('../middlewares/auth.mdw');
+const userModel = require("../models/user.model");
+const auth = require("../middlewares/auth.mdw");
+
+const initializePassport = require("../passport-config");
+initializePassport(passport);
 
 const router = express.Router();
 
-router.get('/profile', auth, function (req, res) {
-  res.render('vwAccount/profile');
+router.get("/login/style.css", (req, res) => {
+  res.sendFile("style.css", { root: "./views/vwAccount" });
+});
+router.get("/login/script.js", (req, res) => {
+  res.sendFile("script.js", { root: "./views/vwAccount" });
 });
 
-router.get('/register', function (req, res) {
-  res.render('vwAccount/register');
-})
-
-router.post('/register', async function (req, res) {
-  const hash = bcrypt.hashSync(req.body.raw_password, 10);
-  const dob = moment(req.body.raw_dob, 'DD/MM/YYYY').format('YYYY-MM-DD');
-  const user = {
-    username: req.body.username,
-    password: hash,
-    dob: dob,
-    name: req.body.name,
-    email: req.body.email,
-    permission: 0
-  }
-
-  await userModel.add(user);
-  res.render('vwAccount/register');
-})
-
-router.get('/is-available', async function (req, res) {
+router.get("/is-correct", async function (req, res) {
   const username = req.query.user;
-  const user = await userModel.findByUsername(username);
-  if (user === null) {
+  const password = req.query.pw;
+  const user = await userModel.getUserByUserName(username);
+  console.log(user);
+  if (user === undefined) {
+    return res.json("Invalid username!");
+  }
+  if (await bcrypt.compare(password, user.password)) {
+    return res.json("Correct");
+  }
+  return res.json("Invalid password!");
+});
+
+router.get("/is-available", async function (req, res) {
+  const username = req.query.user;
+  const user = await userModel.getUserByUserName(username);
+  if (user === undefined) {
     return res.json(true);
   }
 
   res.json(false);
-})
+});
 
-router.get('/login', async function (req, res) {
-  res.render('vwAccount/login', {
-    layout: false
+router.get("/profile", auth, function (req, res) {
+  const user = req.user;
+  user.dob = moment(user.dob, 'YYYY-MM-DD').format('DD/MM/YYYY');
+  res.render("vwAccount/profile", {infoUser: user});
+});
+
+router.get("/login", async function (req, res) {
+  res.render("vwAccount/login", {
+    layout: false,
   });
 });
 
-router.post('/login', async function (req, res) {
-  const user = await userModel.findByUsername(req.body.username);
-  if (user === null) {
-    return res.render('vwAccount/login', {
-      layout: false,
-      err_message: 'Invalid username!'
-    })
-  }
+router.post("/login", checkNotAuthenticated, function (req, res, next) {
+  passport.authenticate("local", function (err, user, info) {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      return res.redirect("/account/login");
+    }
+    req.logIn(user, function (err) {
+      if (err) {
+        return next(err);
+      }
+      console.log(req.session.retUrl);
+      const url = req.session.retUrl || "/";
+      return res.redirect(url);
+    });
+  })(req, res, next);
+});
 
-  const ret = bcrypt.compareSync(req.body.password, user.password);
-  if (ret === false) {
-    return res.render('vwAccount/login', {
-      layout: false,
-      err_message: 'Invalid password!'
-    })
-  }
+router.get("/login/facebook", passport.authenticate("facebook", { scope: ['email'] }));
 
-  delete user.password;
-  req.session.auth = true;
-  req.session.authUser = user;
+router.get("/facebook/return",
+  passport.authenticate("facebook", { failureRedirect: "/account/login" }),
+  login_with_facebook_and_google
+);
+router.get("/login/google",
+  passport.authenticate("google", { scope : ['profile', 'email'] })
+);
 
-  const url = req.session.retUrl || '/';
+router.get("/google/return",
+  passport.authenticate("google", { failureRedirect: '/error' }),
+  login_with_facebook_and_google
+);
+
+router.post("/register", checkNotAuthenticated, Create_user_in_db);
+
+router.post("/logout", (req, res) => {
+  req.logOut();
+  req.session.retUrl = "";
+
+  const url = req.headers.referer || "/";
   res.redirect(url);
-})
+});
 
-router.post('/logout', auth, async function (req, res) {
-  req.session.auth = false;
-  req.session.authUser = null;
-  req.session.retUrl = '';
 
-  const url = req.headers.referer || '/';
-  res.redirect(url);
-})
+async function Create_user_in_db(req, res) {
+  const hashedPassword = await bcrypt.hash(req.body.password, 10);
+  const dob = moment(req.body.dob, 'DD/MM/YYYY').format('YYYY-MM-DD');
+  const new_user = {
+    username: req.body.username,
+    password: hashedPassword,
+    name: req.body.name,
+    email: req.body.email,
+    dob: dob,
+  };
+  await userModel.addUser(new_user);
+  res.redirect("/account/login");
+}
 
+async function login_with_facebook_and_google(req, res) {
+  res.redirect("/");
+}
+
+function checkNotAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return res.redirect("/index");
+  }
+  next();
+}
 module.exports = router;

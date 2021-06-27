@@ -1,14 +1,15 @@
 const categoryModel = require('../models/category.model');
-
 module.exports = function (app) {
 
   app.use(function (req, res, next) {
-    if (typeof (req.session.auth) === 'undefined') {
-      req.session.auth = false;
+    if (typeof req.user === "undefined") {
+      res.locals.auth = false;
+      res.locals.authUser = null;
     }
-
-    res.locals.auth = req.session.auth;
-    res.locals.authUser = req.session.authUser;
+    else {
+      res.locals.auth = true;
+      res.locals.authUser = req.user;
+    }
     next();
   })
 

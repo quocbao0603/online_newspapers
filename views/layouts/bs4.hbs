@@ -69,7 +69,14 @@
                 <span class="navbar-toggler-icon"></span>
               </button> --}}
               <div class="navbar-nav m-auto">
-                  <a href="/" class="nav-item nav-link active">Home</a>
+                <a href="/" class="nav-item nav-link ">Home</a>
+                {{#each lcCategories}}
+                  <a href="/products/byCat/{{CatID}}"
+                  class="nav-item nav-link {{#if IsActive}}active{{/if}}">
+                  {{CatName}}
+                  </a>
+                {{/each}}
+                  {{!-- <a href="/" class="nav-item nav-link active">Home</a>
                   <a href="#" class="nav-item nav-link">Sports</a>
                   <a href="#" class="nav-item nav-link">Tech</a>
                   <a href="#" class="nav-item nav-link">Fashion</a>
@@ -81,7 +88,7 @@
                       </div>
                   </div>
                   <a href="" class="nav-item nav-link">Single Page</a>
-                  <a href="" class="nav-item nav-link">Contact Us</a>
+                  <a href="" class="nav-item nav-link">Contact Us</a> --}}
               </div>
               <form id="frmLogout" action="/account/logout" method="POST"></form>
     <ul class="navbar-nav">
@@ -123,51 +130,7 @@
     </div>
   </div>
 
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm-2">
-        <div class="card mb-2">
-          <h4 class="card-header">
-            Categories
-          </h4>
-          <div class="list-group list-group-flush">
-            {{#each lcCategories}}
-            <a href="/products/byCat/{{CatID}}"
-              class="list-group-item list-group-item-action {{#if IsActive}}active{{/if}}">
-              <i class="fa fa-caret-right" aria-hidden="true"></i>
-              {{CatName}}
-              {{#if ProductCount}}
-              <span class="badge badge-pill badge-danger float-right">{{ProductCount}}</span>
-              {{/if}}
-            </a>
-            {{/each}}
-            {{!-- <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-              The current link item
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">A second link item</a>
-            <a href="#" class="list-group-item list-group-item-action">A third link item</a>
-            <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
-            <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">A
-              disabled link
-              item</a>--}}
-          </div>
-        </div>
-        <div class="card">
-          <h4 class="card-header">
-            Featured
-          </h4>
-          <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-10">
-        {{{body}}}
-      </div>
-    </div>
-  </div>
+  {{{body}}}
     <div class="footer">
         <div class="container-fluid">
             <div class="row">

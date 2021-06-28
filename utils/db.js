@@ -1,16 +1,16 @@
-const knex = require('knex')({
-  client: 'mysql2',
+const knex = require("knex")({
+  client: "mysql2",
   connection: {
-    host: '127.0.0.1',
-    user: 'root',
-    password: '',
-    database: 'qlbh',
-    port: 3306
+    host: process.env.YOUR_DATABASE_HOST,
+    user: process.env.YOUR_DATABASE_USER,
+    password: process.env.YOUR_DATABASE_PASSWORD,
+    database: process.env.MY_APP_TEST,
+    port: process.env.YOUR_DATABASE_PORT,
   },
   pool: {
     min: 0,
-    max: 50
-  }
+    max: 50,
+  },
 });
 
 module.exports = knex;

@@ -11,7 +11,7 @@
         integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link rel="stylesheet" href="./login/style.css">
     <link rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+        href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
     <title>Login</title>
 
 </head>
@@ -25,10 +25,12 @@
             <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Đăng nhập</h1>
             <div class="social-login">
                 <button class="btn facebook-btn social-btn" type="button"
-                    onclick="window.location='/account/login/facebook';"><span><i class="fab fa-facebook-f"></i> Đăng nhập với
+                    onclick="window.location='/account/login/facebook';"><span><i class="fab fa-facebook-f"></i> Đăng
+                        nhập với
                         Facebook</span> </button>
                 <button class="btn google-btn social-btn" type="button"
-                    onclick="window.location='/account/login/google';"><span><i class="fab fa-google-plus-g"></i> Đăng nhập với
+                    onclick="window.location='/account/login/google';"><span><i class="fab fa-google-plus-g"></i> Đăng
+                        nhập với
                         Google+</span> </button>
             </div>
             <p style="text-align:center"> Hoặc </p>
@@ -57,12 +59,14 @@
         <form action="/account/register" id="signup-form" class="form-signup" method="POST">
             <div class="social-login">
                 <button class="btn facebook-btn social-btn" type="button"
-                    onclick="window.location='/account/login/facebook';"><span><i class="fab fa-facebook-f"></i> Đăng ký với
+                    onclick="window.location='/account/login/facebook';"><span><i class="fab fa-facebook-f"></i> Đăng ký
+                        với
                         Facebook</span> </button>
             </div>
             <div class="social-login">
                 <button class="btn google-btn social-btn" type="button"
-                    onclick="window.location='/account/login/google';"><span><i class="fab fa-google-plus-g"></i> Đăng ký với
+                    onclick="window.location='/account/login/google';"><span><i class="fab fa-google-plus-g"></i> Đăng
+                        ký với
                         Google+</span> </button>
             </div>
 
@@ -75,10 +79,9 @@
                 required autofocus="">
             <input type="password" id="repeatpass" name="repeatpass" class="form-control"
                 placeholder="Nhập lại mật khẩu" required autofocus="">
-            <input type="text" id="email" name="email" class="form-control"
-                placeholder="Email" required autofocus="">
-            <input type="text" id="txtDOB" name="dob" class="form-control"
-                placeholder="Ngày sinh" required autofocus="">
+            <input type="text" id="email" name="email" class="form-control" placeholder="Email" required autofocus="">
+            <input type="text" id="txtDOB" name="dob" class="form-control" placeholder="Ngày sinh" required
+                autofocus="">
             <p id="passNotification" style="display: none;">Mật khẩu không khớp</p>
             <div id="err_signup" class="alert alert-danger mt-1" style="display:none "></div>
             <button class="btn btn-primary btn-block" type="submit" id="btnSignup"><i class="fas fa-user-plus"></i> Đăng
@@ -91,13 +94,14 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
     <script src="./login/script.js"></script>
     <script>
         $('#txtDOB').datetimepicker({
-        format: 'd/m/Y',
-        timepicker: false,
-        mask: true
+            format: 'd/m/Y',
+            timepicker: false,
+            mask: true
         });
     </script>
 </body>

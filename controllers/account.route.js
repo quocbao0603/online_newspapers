@@ -44,8 +44,8 @@ router.get("/is-available", async function (req, res) {
 
 router.get("/profile", auth, function (req, res) {
   const user = req.user;
-  user.dob = moment(user.dob, 'YYYY-MM-DD').format('DD/MM/YYYY');
-  res.render("vwAccount/profile", {infoUser: user});
+  user.dob = moment(user.dob, "YYYY-MM-DD").format("DD/MM/YYYY");
+  res.render("vwAccount/profile", { infoUser: user });
 });
 
 router.get("/login", async function (req, res) {
@@ -73,18 +73,24 @@ router.post("/login", checkNotAuthenticated, function (req, res, next) {
   })(req, res, next);
 });
 
-router.get("/login/facebook", passport.authenticate("facebook", { scope: ['email'] }));
+router.get(
+  "/login/facebook",
+  passport.authenticate("facebook", { scope: ["email"] })
+);
 
-router.get("/facebook/return",
+router.get(
+  "/facebook/return",
   passport.authenticate("facebook", { failureRedirect: "/account/login" }),
   login_with_facebook_and_google
 );
-router.get("/login/google",
-  passport.authenticate("google", { scope : ['profile', 'email'] })
+router.get(
+  "/login/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
-router.get("/google/return",
-  passport.authenticate("google", { failureRedirect: '/error' }),
+router.get(
+  "/google/return",
+  passport.authenticate("google", { failureRedirect: "/error" }),
   login_with_facebook_and_google
 );
 
@@ -98,10 +104,9 @@ router.post("/logout", (req, res) => {
   res.redirect(url);
 });
 
-
 async function Create_user_in_db(req, res) {
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
-  const dob = moment(req.body.dob, 'DD/MM/YYYY').format('YYYY-MM-DD');
+  const dob = moment(req.body.dob, "DD/MM/YYYY").format("YYYY-MM-DD");
   const new_user = {
     username: req.body.username,
     password: hashedPassword,

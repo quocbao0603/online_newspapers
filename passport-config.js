@@ -44,7 +44,9 @@ function initialize(passport) {
       profile.provider
     );
     if (check_linked_user === undefined) {
-      const check_email = await userModel.getUserIdByEmail(profile.emails[0].value);
+      const check_email = await userModel.getUserIdByEmail(
+        profile.emails[0].value
+      );
       var userId = 0;
       if (check_email === undefined) {
         console.log("insert");
@@ -54,8 +56,7 @@ function initialize(passport) {
           permission: 0,
         };
         userId = await userModel.addUser(new_user);
-      }
-      else{
+      } else {
         console.log("a");
         userId = check_email.id;
       }

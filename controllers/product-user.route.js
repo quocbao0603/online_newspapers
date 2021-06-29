@@ -12,16 +12,10 @@ router.get("/byCat/:id", async function (req, res) {
   //     break;
   //   }
   // }
-  title=''
   ls = res.locals.lcCategories
-  if(catId > 9){
-    ID1  = Math.trunc(catId/10)-1
-    ID2 = catId%10-1
-    title = ls[ID1].CatNameLv1 + ' | '+ ls[ID1].CatName[ID2].CatNameLv2
-  }
-  else {
-    title=ls[catId-1].CatNameLv1
-  }
+ 
+  title=ls[catId-1].CatNameLv1
+  
    
   console.log(title)
   
@@ -67,6 +61,10 @@ router.get("/byCat/:idLv1/:idLv2", async function (req, res) {
     }
   }
 
+  ls = res.locals.lcCategories
+  title = ls[catIdLv1-1].CatNameLv1 + ' | '+ ls[catIdLv1-1].CatName[catIdLv2-1].CatNameLv2
+  
+
   // const list = await productModel.findByCatIDLv1(catId);
   // res.render('vwProducts/byCat', {
   //   products: list,
@@ -95,6 +93,7 @@ router.get("/byCat/:idLv1/:idLv2", async function (req, res) {
     products: list,
     empty: list.length === 0,
     page_numbers,
+    title,
   });
 });
 

@@ -17,5 +17,6 @@ require("./middlewares/locals.mdw")(app);
 require("./middlewares/routes.mdw.js")(app);
 
 app.listen(process.env.PORT, function () {
+  //console.log(process.env)
   console.log(`News Web App listening at http://localhost:${process.env.PORT}`);
 });

@@ -15,11 +15,21 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="/public/lib/slick/slick.css" rel="stylesheet">
   <link href="/public/lib/slick/slick-theme.css" rel="stylesheet">
   <link href="/public/css/style.css" rel="stylesheet">
+  
   {{{_sections.css}}}
+  <style>
+    .dropdown:hover>.dropdown-menu {
+    display: block;
+  }
+
+  .dropdown>.dropdown-toggle:active {
+    /*Without this, clicking will make it sticky*/
+      pointer-events: none;
+  }
+  </style>
 </head>
 
 <body>
@@ -72,11 +82,20 @@
               <div class="navbar-nav m-auto">
                 <a href="/" class="nav-item nav-link ">Home</a>
                 {{#each lcCategories}}
-                  <a href="/products/byCat/{{CatID}}"
-                  class="nav-item nav-link {{#if IsActive}}active{{/if}}">
-                  {{CatName}}
-                  </a>
+                  <div class="dropdown">
+                    <a href="/products/byCat/{{ID}}"
+                    class="nav-item nav-link ">
+                    {{CatNameLv1}}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      {{#each CatName }}
+                      <a class="dropdown-item" href="/products/byCat/{{ID2}}">{{CatNameLv2}}</a>
+                      {{/each}}
+                    </div>
+                  </div>
                 {{/each}}
+               
+                
                   {{!-- <a href="/" class="nav-item nav-link active">Home</a>
                   <a href="#" class="nav-item nav-link">Sports</a>
                   <a href="#" class="nav-item nav-link">Tech</a>
@@ -113,7 +132,13 @@
       </li>
       {{else}}
       <li class="nav-item">
-        <a class="nav-link" style="color:white !important" href="/account/login">
+        <a class="nav-link" href="/account/register">
+          <i class="fa fa-user-plus" aria-hidden="true"></i>
+          Register
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/account/login">
           <i class="fa fa-sign-in" aria-hidden="true"></i>
           Sign In
         </a>
@@ -198,7 +223,6 @@
 
         <!-- Back to Top -->
     <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
-
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
     integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"

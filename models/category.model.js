@@ -13,12 +13,19 @@ module.exports = {
   all() {
     return db('categories');
   },
+  category(){
+    return db('chuyenmuccap1');
+  },
 
   allWithDetails() {
+    // const sql = `
+    //   select c.*, count(p.ProID) as ProductCount
+    //   from categories c left join products p on c.CatID = p.CatID
+    //   group by c.CatID, c.CatName
+    //   `;
     const sql = `
-      select c.*, count(p.ProID) as ProductCount
-      from categories c left join products p on c.CatID = p.CatID
-      group by c.CatID, c.CatName
+      select  c1.ID as ID ,c2.ID2 as ID2,c1.Name as NameLv1, c2.Name as NameLv2
+      from chuyenmuccap1 c1 left join chuyenmuccap2 c2 on c1.ID = c2.ID1
       `;
     return db.raw(sql);
   },

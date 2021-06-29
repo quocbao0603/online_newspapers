@@ -24,7 +24,7 @@ module.exports = function (app) {
     const AllCat = list.length
     const ls=[]
 
-    console.log(list)
+    //console.log(list)
     index=1
     for(i=1;i<=CatLv1;i++){
       const Cat=[]
@@ -42,7 +42,7 @@ module.exports = function (app) {
    
     // list[1].IsActive = true;
     res.locals.lcCategories = ls;
-    console.log(res.locals.lcCategories)
+    //console.log(res.locals.lcCategories)
    
     next();
   })

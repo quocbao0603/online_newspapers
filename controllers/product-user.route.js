@@ -6,13 +6,25 @@ const router = express.Router();
 router.get('/byCat/:id', async function (req, res) {
   const catId = +req.params.id || 0;
 
-  for (c of res.locals.lcCategories) {
-    if (c.CatID === catId) {
-      c.IsActive = true;
-      break;
-    }
+  // for (c of res.locals.lcCategories) {
+  //   if (c.CatID === catId) {
+  //     c.IsActive = true;
+  //     break;
+  //   }
+  // }
+  title=''
+  ls = res.locals.lcCategories
+  if(catId > 9){
+    ID1  = Math.trunc(catId/10)-1
+    ID2 = catId%10-1
+    title = ls[ID1].CatNameLv1 + ' | '+ ls[ID1].CatName[ID2].CatNameLv2
   }
-
+  else {
+    title=ls[catId-1].CatNameLv1
+  }
+   
+  console.log(title)
+  
   // const list = await productModel.findByCatID(catId);
   // res.render('vwProducts/byCat', {
   //   products: list,
@@ -40,7 +52,8 @@ router.get('/byCat/:id', async function (req, res) {
   res.render('vwProducts/byCat', {
     products: list,
     empty: list.length === 0,
-    page_numbers
+    page_numbers,
+    title
   });
 });
 

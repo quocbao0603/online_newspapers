@@ -19,17 +19,17 @@
   <link href="/public/lib/slick/slick.css" rel="stylesheet">
   <link href="/public/lib/slick/slick-theme.css" rel="stylesheet">
   <link href="/public/css/style.css" rel="stylesheet">
-  
+
   {{{_sections.css}}}
   <style>
     .dropdown:hover>.dropdown-menu {
-    display: block;
-  }
+      display: block;
+    }
 
-  .dropdown>.dropdown-toggle:active {
-    /*Without this, clicking will make it sticky*/
+    .dropdown>.dropdown-toggle:active {
+      /*Without this, clicking will make it sticky*/
       pointer-events: none;
-  }
+    }
   </style>
 </head>
 
@@ -37,187 +37,191 @@
   {{!-- header --}}
   <div class="top-header">
     <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-3 col-md-4">
-                <div class="logo">
-                    <a href="/">
-                        <img src="/public/img/logo.png" alt="Logo">
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-4">
-                <div class="search">
-                    <input type="text" placeholder="Search">
-                    <button><i class="fa fa-search"></i></button>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4">
-                <div class="social">
-                    <a href=""><i class="fab fa-twitter"></i></a>
-                    <a href=""><i class="fab fa-facebook"></i></a>
-                    <a href=""><i class="fab fa-linkedin"></i></a>
-                    <a href=""><i class="fab fa-instagram"></i></a>
-                    <a href=""><i class="fab fa-youtube"></i></a>
-                </div>
-            </div>
+      <div class="row align-items-center">
+        <div class="col-lg-3 col-md-4">
+          <div class="logo">
+            <a href="/">
+              <img src="/public/img/logo.png" alt="Logo">
+            </a>
+          </div>
         </div>
+        <div class="col-lg-6 col-md-4">
+          <div class="search">
+            <input type="text" placeholder="Tìm kiếm">
+            <button><i class="fa fa-search"></i></button>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4">
+          <div class="social">
+            <a href=""><i class="fab fa-twitter"></i></a>
+            <a href=""><i class="fab fa-facebook"></i></a>
+            <a href=""><i class="fab fa-linkedin"></i></a>
+            <a href=""><i class="fab fa-instagram"></i></a>
+            <a href=""><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="header">
     <div class="container">
       <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-          <a href="#" class="navbar-brand">MENU</a>
-          <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-              <span class="navbar-toggler-icon"></span>
-          </button>
+        <a href="#" class="navbar-brand">MENU</a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-          <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-              {{!-- icon-home --}}
-              {{!-- <a class="navbar-brand" href="#">
-                <i class="fa fa-home fa-lg" aria-hidden="true"></i>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+          {{!-- icon-home --}}
+          {{!-- <a class="navbar-brand" href="#">
+            <i class="fa fa-home fa-lg" aria-hidden="true"></i>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button> --}}
+          <div class="navbar-nav m-auto">
+            <a href="/" class="nav-item nav-link ">
+              <i class="fa fa-home" aria-hidden="true"></i>
+              Trang Chủ</a>
+            {{#each lcCategories}}
+            <div class="dropdown">
+              <a href="/products/byCat/{{ID}}" class="nav-item nav-link ">
+                {{CatNameLv1}}
               </a>
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button> --}}
-              <div class="navbar-nav m-auto">
-                <a href="/" class="nav-item nav-link ">Home</a>
-                {{#each lcCategories}}
-                  <div class="dropdown">
-                    <a href="/products/byCat/{{ID}}"
-                    class="nav-item nav-link ">
-                    {{CatNameLv1}}
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      {{#each CatName }}
-                      <a class="dropdown-item" href="/products/byCat/{{ID2}}">{{CatNameLv2}}</a>
-                      {{/each}}
-                    </div>
-                  </div>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {{#each CatName }}
+                <a class="dropdown-item" href="/products/byCat/{{ID2}}">{{CatNameLv2}}</a>
                 {{/each}}
-               
-                
-                  {{!-- <a href="/" class="nav-item nav-link active">Home</a>
-                  <a href="#" class="nav-item nav-link">Sports</a>
-                  <a href="#" class="nav-item nav-link">Tech</a>
-                  <a href="#" class="nav-item nav-link">Fashion</a>
-                  <div class="nav-item dropdown">
-                      <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dropdown</a>
-                      <div class="dropdown-menu">
-                          <a href="#" class="dropdown-item">Sub Item 1</a>
-                          <a href="#" class="dropdown-item">Sub Item 2</a>
-                      </div>
-                  </div>
-                  <a href="" class="nav-item nav-link">Single Page</a>
-                  <a href="" class="nav-item nav-link">Contact Us</a> --}}
               </div>
-              <form id="frmLogout" action="/account/logout" method="POST"></form>
-    <ul class="navbar-nav">
-      {{#if auth}}
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          Hi, <b>{{authUser.name}}</b>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/account/profile">
-            <i class="fa fa-user" aria-hidden="true"></i>
-            Profile
-          </a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="javascript: $('#frmLogout').submit();">
-            <i class="fa fa-sign-out" aria-hidden="true"></i>
-            Sign Out
-          </a>
-        </div>
-      </li>
-      {{else}}
-      <li class="nav-item">
-          <a class="nav-link" style="color:white !important" href="/account/login">
-          <i class="fa fa-sign-in" aria-hidden="true"></i>
-          Sign In
-        </a>
-      </li>
-      {{/if}}
-    </ul>
+            </div>
+            {{/each}}
+
+
+            {{!-- <a href="/" class="nav-item nav-link active">Home</a>
+            <a href="#" class="nav-item nav-link">Sports</a>
+            <a href="#" class="nav-item nav-link">Tech</a>
+            <a href="#" class="nav-item nav-link">Fashion</a>
+            <div class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dropdown</a>
+              <div class="dropdown-menu">
+                <a href="#" class="dropdown-item">Sub Item 1</a>
+                <a href="#" class="dropdown-item">Sub Item 2</a>
+              </div>
+            </div>
+            <a href="" class="nav-item nav-link">Single Page</a>
+            <a href="" class="nav-item nav-link">Contact Us</a> --}}
           </div>
+          <form id="frmLogout" action="/account/logout" method="POST"></form>
+          <ul class="navbar-nav">
+            {{#if auth}}
+            <li class="nav-item dropdown">
+
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <b>{{authUser.name}}</b>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/account/profile">
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                  Thông tin của bạn
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="javascript: $('#frmLogout').submit();">
+                  <i class="fa fa-sign-out" aria-hidden="true"></i>
+                  Đăng xuất
+                </a>
+              </div>
+            </li>
+            {{else}}
+            <li class="nav-item">
+              <a class="nav-link" style="color:white !important" href="/account/login">
+                <i class="fa fa-sign-in" aria-hidden="true"></i>
+                Đăng nhập
+              </a>
+            </li>
+            {{/if}}
+          </ul>
+        </div>
       </nav>
     </div>
   </div>
 
   {{{body}}}
-    <div class="footer">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="footer-widget">
-                        <h3 class="title">Useful Links</h3>
-                        <ul>
-                            <li><a href="#">Pellentesque</a></li>
-                            <li><a href="#">Aliquam</a></li>
-                            <li><a href="#">Fusce placerat</a></li>
-                            <li><a href="#">Nulla hendrerit</a></li>
-                            <li><a href="#">Maecenas</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="footer-widget">
-                        <h3 class="title">Quick Links</h3>
-                        <ul>
-                            <li><a href="#">Posuere egestas</a></li>
-                            <li><a href="#">Sollicitudin</a></li>
-                            <li><a href="#">Luctus non</a></li>
-                            <li><a href="#">Duis tincidunt</a></li>
-                            <li><a href="#">Elementum</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="footer-widget">
-                        <h3 class="title">Get in Touch</h3>
-                        <div class="contact-info">
-                            <p><i class="fa fa-map-marker"></i>123 Terry Lane, New York, USA</p>
-                            <p><i class="fa fa-envelope"></i>email@example.com</p>
-                            <p><i class="fa fa-phone"></i>+123-456-7890</p>
-                            <div class="social">
-                                <a href=""><i class="fab fa-twitter"></i></a>
-                                <a href=""><i class="fab fa-facebook"></i></a>
-                                <a href=""><i class="fab fa-linkedin"></i></a>
-                                <a href=""><i class="fab fa-instagram"></i></a>
-                                <a href=""><i class="fab fa-youtube"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-6">
-                    <div class="footer-widget">
-                        <h3 class="title">Newsletter</h3>
-                        <div class="newsletter">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed porta dui. Class aptent taciti sociosqu ad litora torquent per conubia nostra inceptos
-                            </p>
-                            <form>
-                                <input class="form-control" type="email" placeholder="Your email here">
-                                <button class="btn">Submit</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <div class="footer">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-3 col-md-6">
+          <div class="footer-widget">
+            <h3 class="title">Useful Links</h3>
+            <ul>
+              <li><a href="#">Pellentesque</a></li>
+              <li><a href="#">Aliquam</a></li>
+              <li><a href="#">Fusce placerat</a></li>
+              <li><a href="#">Nulla hendrerit</a></li>
+              <li><a href="#">Maecenas</a></li>
+            </ul>
+          </div>
         </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="footer-widget">
+            <h3 class="title">Quick Links</h3>
+            <ul>
+              <li><a href="#">Posuere egestas</a></li>
+              <li><a href="#">Sollicitudin</a></li>
+              <li><a href="#">Luctus non</a></li>
+              <li><a href="#">Duis tincidunt</a></li>
+              <li><a href="#">Elementum</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="footer-widget">
+            <h3 class="title">Get in Touch</h3>
+            <div class="contact-info">
+              <p><i class="fa fa-map-marker"></i>123 Terry Lane, New York, USA</p>
+              <p><i class="fa fa-envelope"></i>email@example.com</p>
+              <p><i class="fa fa-phone"></i>+123-456-7890</p>
+              <div class="social">
+                <a href=""><i class="fab fa-twitter"></i></a>
+                <a href=""><i class="fab fa-facebook"></i></a>
+                <a href=""><i class="fab fa-linkedin"></i></a>
+                <a href=""><i class="fab fa-instagram"></i></a>
+                <a href=""><i class="fab fa-youtube"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="footer-widget">
+            <h3 class="title">Newsletter</h3>
+            <div class="newsletter">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed porta dui. Class aptent taciti
+                sociosqu ad litora torquent per conubia nostra inceptos
+              </p>
+              <form>
+                <input class="form-control" type="email" placeholder="Your email here">
+                <button class="btn">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="footer-bottom">
-      
-    </div>
-        <!-- Footer Bottom End -->
+  </div>
+  <div class="footer-bottom">
+
+  </div>
+  <!-- Footer Bottom End -->
 
 
-        <!-- Back to Top -->
-    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+  <!-- Back to Top -->
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
     integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"

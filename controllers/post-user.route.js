@@ -6,18 +6,21 @@ const router = express.Router();
 router.get("/byCat/:id", async function (req, res) {
   const CatID = +req.params.id || 0;
 
-  for (c of res.locals.lcCategories) {
-    if (c.CatID === CatID) {
-      c.IsActive = true;
-      break;
-    }
-  }
+  // for (c of res.locals.lcCategories) {
+  //   if (c.CatID === CatID) {
+  //     c.IsActive = true;
+  //     break;
+  //   }
+  // }
 
   // const list = await postModel.findByCatIDLv1(CatID);
   // res.render('vwposts/byCat', {
   //   posts: list,
   //   empty: list.length === 0
   // });
+  ls = res.locals.lcCategories;
+
+  title = ls[CatID - 1].CatNameLv1;
 
   const limit = 6;
   const page = req.query.page || 1;
@@ -41,6 +44,7 @@ router.get("/byCat/:id", async function (req, res) {
     posts: list,
     empty: list.length === 0,
     page_numbers,
+    title,
   });
 });
 
@@ -49,12 +53,17 @@ router.get("/byCat/:idLv1/:idLv2", async function (req, res) {
   const catIdLv2 = +req.params.idLv2 || 0;
   console.log(catIdLv1, catIdLv2);
 
-  for (c of res.locals.lcCategories) {
-    if (c.CatID === catIdLv1) {
-      c.IsActive = true;
-      break;
-    }
-  }
+  // for (c of res.locals.lcCategories) {
+  //   if (c.CatID === catIdLv1) {
+  //     c.IsActive = true;
+  //     break;
+  //   }
+  // }
+  ls = res.locals.lcCategories;
+  title =
+    ls[catIdLv1 - 1].CatNameLv1 +
+    " | " +
+    ls[catIdLv1 - 1].CatName[catIdLv2 - 1].CatNameLv2;
 
   // const list = await postModel.findByCatIDLv1(CatID);
   // res.render('vwposts/byCat', {
@@ -84,6 +93,7 @@ router.get("/byCat/:idLv1/:idLv2", async function (req, res) {
     posts: list,
     empty: list.length === 0,
     page_numbers,
+    title,
   });
 });
 

@@ -2,18 +2,18 @@ const db = require("../utils/db");
 
 module.exports = {
   all() {
-    return db("products");
+    return db("posts");
   },
 
   // findByCatIDLv1(catId) {
-  //   return db('products').where('CatIDLv1', catId);
+  //   return db('posts').where('CatIDLv1', catId);
   // },
 
   findByCatIDLv1(catId, offset) {
-    return db("products").where("CatIDLv1", catId).limit(6).offset(offset);
+    return db("posts").where("CatIDLv1", catId).limit(6).offset(offset);
   },
   findByCatIDLv2(catIdLv1, catIDLv2, offset) {
-    return db("products")
+    return db("posts")
       .where({
         CatIDLv1: catIdLv1,
         CatIDLv2: catIDLv2,
@@ -23,14 +23,14 @@ module.exports = {
   },
 
   async countByCatIDLv1(catId) {
-    const rows = await db("products")
+    const rows = await db("posts")
       .where("CatIDLv1", catId)
       .count("*", { as: "total" });
 
     return rows[0].total;
   },
   async countByCatIDLv2(catIdLv1, catIDLv2) {
-    const rows = await db("products")
+    const rows = await db("posts")
       .where({
         CatIDLv1: catIdLv1,
         CatIDLv2: catIDLv2,
@@ -40,25 +40,25 @@ module.exports = {
     return rows[0].total;
   },
 
-  add(product) {
-    return db("products").insert(product);
+  add(post) {
+    return db("posts").insert(post);
   },
 
   async findById(id) {
-    const rows = await db("products").where("ProID", id);
+    const rows = await db("posts").where("PostID", id);
     if (rows.length === 0) return null;
 
     return rows[0];
   },
 
-  patch(product) {
-    const id = product.ProID;
-    delete product.ProID;
+  patch(post) {
+    const id = post.PostID;
+    delete post.PostID;
 
-    return db("products").where("ProID", id).update(product);
+    return db("posts").where("PostID", id).update(post);
   },
 
   del(id) {
-    return db("products").where("ProID", id).del();
+    return db("posts").where("PostID", id).del();
   },
 };

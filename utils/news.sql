@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : local
+ Source Server         : mysql-local
  Source Server Type    : MySQL
- Source Server Version : 100418
+ Source Server Version : 100419
  Source Host           : localhost:3306
- Source Schema         : qlbh
+ Source Schema         : news
 
  Target Server Type    : MySQL
- Target Server Version : 100418
+ Target Server Version : 100419
  File Encoding         : 65001
 
- Date: 30/06/2021 07:55:27
+ Date: 30/06/2021 16:09:25
 */
 
 SET NAMES utf8mb4;
@@ -201,7 +201,8 @@ CREATE TABLE `posts`  (
   `FullContent` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
   `Status` int NULL DEFAULT NULL,
   `Premium` int NULL DEFAULT NULL,
-  PRIMARY KEY (`PostID`) USING BTREE
+  PRIMARY KEY (`PostID`) USING BTREE,
+  FULLTEXT INDEX `PostName`(`PostName`, `TinyContent`, `FullContent`)
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -234,7 +235,9 @@ CREATE TABLE `products`  (
   `CatIDLv1` int NOT NULL,
   `CatIDLv2` int NOT NULL,
   `Quantity` int NOT NULL,
-  PRIMARY KEY (`ProID`) USING BTREE
+  PRIMARY KEY (`ProID`) USING BTREE,
+  FULLTEXT INDEX `ProName_2`(`ProName`, `TinyDes`),
+  FULLTEXT INDEX `ProName`(`ProName`, `TinyDes`, `FullDes`)
 ) ENGINE = MyISAM AUTO_INCREMENT = 31 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------

@@ -89,6 +89,7 @@ router.get("/byCat/:idLv1/:idLv2", async function (req, res) {
 
   const offset = (page - 1) * limit;
   const list = await postModel.findByCatIDLv2(catIdLv1, catIdLv2, offset);
+  console.log(list);
   res.render("vwposts/byCat", {
     posts: list,
     empty: list.length === 0,
@@ -114,6 +115,38 @@ router.get("/details/:id", async function (req, res) {
 
   res.render("vwposts/details", {
     post: post,
+  });
+});
+
+router.get("/search", async function (req, res) {
+  const CatID = req.query.q || "";
+
+  title = "Kết quả tìm kiếm: " + CatID;
+
+  const limit = 6;
+  const page = req.query.page || 1;
+  if (page < 1) page = 1;
+
+  const total = await postModel.countSearchByText(CatID);
+  let nPages = Math.floor(total / limit);
+  if (total % limit > 0) nPages++;
+
+  const page_numbers = [];
+  for (i = 1; i <= nPages; i++) {
+    page_numbers.push({
+      value: i,
+      isCurrent: i === +page,
+    });
+  }
+
+  const offset = (page - 1) * limit;
+  const raw_data = await postModel.searchByText(CatID, offset);
+  const list = raw_data[0];
+  res.render("vwposts/byCat", {
+    posts: list,
+    empty: list.length === 0,
+    page_numbers,
+    title,
   });
 });
 

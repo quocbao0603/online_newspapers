@@ -21,7 +21,6 @@ module.exports = {
       .limit(6)
       .offset(offset);
   },
-
   async countByCatIDLv1(catId) {
     const rows = await db("posts")
       .where("CatIDLv1", catId)
@@ -50,7 +49,22 @@ module.exports = {
 
     return rows[0];
   },
-
+  searchByText(text, offset) {
+    const sql = `
+    SELECT * FROM posts 
+    WHERE MATCH (PostName, TinyContent, FullContent) 
+    AGAINST ( '${text}' IN NATURAL LANGUAGE MODE) LIMIT 6 OFFSET ${offset};
+      `;
+    return db.raw(sql);
+  },
+  countSearchByText(text) {
+    const sql = `
+    SELECT COUNT(*) FROM posts 
+    WHERE MATCH (PostName, TinyContent, FullContent) 
+    AGAINST ( '${text}' IN NATURAL LANGUAGE MODE);
+      `;
+    return db.raw(sql);
+  },
   patch(post) {
     const id = post.PostID;
     delete post.PostID;

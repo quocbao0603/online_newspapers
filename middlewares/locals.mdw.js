@@ -16,13 +16,11 @@ module.exports = function (app) {
     const raw_data = await categoryModel.allWithDetails();
     const category = await categoryModel.category();
 
-    // const list1 = await categoryModel.category();
     const list = raw_data[0];
     const CatLv1 = category.length;
     const AllCat = list.length;
     const ls = [];
 
-    console.log(list);
     index = 1;
     for (i = 1; i <= CatLv1; i++) {
       const Cat = [];
@@ -38,7 +36,7 @@ module.exports = function (app) {
     // list[1].IsActive = true;
     res.locals.lcCategories = ls;
     //console.log(res.locals.lcCategories)
-   
+
     next();
   });
 };

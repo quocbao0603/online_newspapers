@@ -86,12 +86,12 @@
               Trang Chủ</a>
             {{#each lcCategories}}
             <div class="dropdown">
-              <a href="/posts/byCat/{{ID}}" class="nav-item nav-link ">
+              <a href="/posts/byCat/{{CatIDLv1}}" class="nav-item nav-link ">
                 {{CatNameLv1}}
               </a>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 {{#each CatName }}
-                <a class="dropdown-item" href="/posts/byCat/{{ID1}}/{{ID2}}">{{CatNameLv2}}</a>
+                <a class="dropdown-item" href="/posts/byCat/{{CatIDLv1}}/{{CatIDLv2}}">{{CatNameLv2}}</a>
                 {{/each}}
               </div>
             </div>

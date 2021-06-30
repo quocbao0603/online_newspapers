@@ -11,7 +11,7 @@
  Target Server Version : 100419
  File Encoding         : 65001
 
- Date: 30/06/2021 16:09:25
+ Date: 30/06/2021 23:51:01
 */
 
 SET NAMES utf8mb4;
@@ -54,6 +54,64 @@ INSERT INTO `categories` VALUES (7, 'Khác');
 INSERT INTO `categories` VALUES (24, 'Ti vi');
 
 -- ----------------------------
+-- Table structure for categorieslv1
+-- ----------------------------
+DROP TABLE IF EXISTS `categorieslv1`;
+CREATE TABLE `categorieslv1`  (
+  `CatIDLv1` int NOT NULL,
+  `CatNameLv1` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`CatIDLv1`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of categorieslv1
+-- ----------------------------
+INSERT INTO `categorieslv1` VALUES (1, 'Thời sự');
+INSERT INTO `categorieslv1` VALUES (2, 'Góc nhìn');
+INSERT INTO `categorieslv1` VALUES (3, 'Thế giới');
+INSERT INTO `categorieslv1` VALUES (4, 'Kinh doanh');
+INSERT INTO `categorieslv1` VALUES (5, 'Khoa học');
+INSERT INTO `categorieslv1` VALUES (6, 'Thể thao');
+INSERT INTO `categorieslv1` VALUES (7, 'Giải trí');
+
+-- ----------------------------
+-- Table structure for categorieslv2
+-- ----------------------------
+DROP TABLE IF EXISTS `categorieslv2`;
+CREATE TABLE `categorieslv2`  (
+  `CatIDLv1` int NOT NULL,
+  `CatIDLv2` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `CatNameLv2` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`CatIDLv1`, `CatIDLv2`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of categorieslv2
+-- ----------------------------
+INSERT INTO `categorieslv2` VALUES (1, '1', 'Chính trị');
+INSERT INTO `categorieslv2` VALUES (1, '2', 'Giao thông');
+INSERT INTO `categorieslv2` VALUES (1, '3', 'Dân sinh');
+INSERT INTO `categorieslv2` VALUES (2, '1', 'Tư liệu');
+INSERT INTO `categorieslv2` VALUES (2, '2', 'Phân tích');
+INSERT INTO `categorieslv2` VALUES (2, '3', 'Quân sự');
+INSERT INTO `categorieslv2` VALUES (2, '4', 'Cuộc sống đó đây');
+INSERT INTO `categorieslv2` VALUES (3, '1', 'Quốc tế');
+INSERT INTO `categorieslv2` VALUES (3, '2', 'Doanh nghiệp');
+INSERT INTO `categorieslv2` VALUES (3, '3', 'Chứng khoán');
+INSERT INTO `categorieslv2` VALUES (3, '4', 'Bất động sản');
+INSERT INTO `categorieslv2` VALUES (3, '5', 'Vĩ mô');
+INSERT INTO `categorieslv2` VALUES (4, '1', 'Tin tức');
+INSERT INTO `categorieslv2` VALUES (4, '2', 'Phát minh');
+INSERT INTO `categorieslv2` VALUES (4, '3', 'Ứng dụng');
+INSERT INTO `categorieslv2` VALUES (5, '1', 'GIới sao');
+INSERT INTO `categorieslv2` VALUES (5, '2', 'Phim');
+INSERT INTO `categorieslv2` VALUES (6, '1', 'Bóng đá');
+INSERT INTO `categorieslv2` VALUES (6, '2', 'Tenis');
+INSERT INTO `categorieslv2` VALUES (6, '3', 'Bóng bàn');
+INSERT INTO `categorieslv2` VALUES (7, '1', 'Showbiz');
+INSERT INTO `categorieslv2` VALUES (7, '2', 'Gameshow');
+
+-- ----------------------------
 -- Table structure for categorietest
 -- ----------------------------
 DROP TABLE IF EXISTS `categorietest`;
@@ -74,64 +132,6 @@ INSERT INTO `categorietest` VALUES (2, 1, 'truyen', 'truyenthieunhi');
 INSERT INTO `categorietest` VALUES (2, 2, 'truyen', 'truyentranh');
 INSERT INTO `categorietest` VALUES (3, 1, 'aoquan', NULL);
 INSERT INTO `categorietest` VALUES (4, 1, 'maytinh', NULL);
-
--- ----------------------------
--- Table structure for chuyenmuccap1
--- ----------------------------
-DROP TABLE IF EXISTS `chuyenmuccap1`;
-CREATE TABLE `chuyenmuccap1`  (
-  `ID` int NOT NULL,
-  `Name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of chuyenmuccap1
--- ----------------------------
-INSERT INTO `chuyenmuccap1` VALUES (1, 'Thời sự');
-INSERT INTO `chuyenmuccap1` VALUES (2, 'Góc nhìn');
-INSERT INTO `chuyenmuccap1` VALUES (3, 'Thế giới');
-INSERT INTO `chuyenmuccap1` VALUES (4, 'Kinh doanh');
-INSERT INTO `chuyenmuccap1` VALUES (5, 'Khoa học');
-INSERT INTO `chuyenmuccap1` VALUES (6, 'Thể thao');
-INSERT INTO `chuyenmuccap1` VALUES (7, 'Giải trí');
-
--- ----------------------------
--- Table structure for chuyenmuccap2
--- ----------------------------
-DROP TABLE IF EXISTS `chuyenmuccap2`;
-CREATE TABLE `chuyenmuccap2`  (
-  `ID1` int NOT NULL,
-  `ID2` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `Name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`ID1`, `ID2`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of chuyenmuccap2
--- ----------------------------
-INSERT INTO `chuyenmuccap2` VALUES (1, '1', 'Chính trị');
-INSERT INTO `chuyenmuccap2` VALUES (1, '2', 'Giao thông');
-INSERT INTO `chuyenmuccap2` VALUES (1, '3', 'Dân sinh');
-INSERT INTO `chuyenmuccap2` VALUES (2, '1', 'Tư liệu');
-INSERT INTO `chuyenmuccap2` VALUES (2, '2', 'Phân tích');
-INSERT INTO `chuyenmuccap2` VALUES (2, '3', 'Quân sự');
-INSERT INTO `chuyenmuccap2` VALUES (2, '4', 'Cuộc sống đó đây');
-INSERT INTO `chuyenmuccap2` VALUES (3, '1', 'Quốc tế');
-INSERT INTO `chuyenmuccap2` VALUES (3, '2', 'Doanh nghiệp');
-INSERT INTO `chuyenmuccap2` VALUES (3, '3', 'Chứng khoán');
-INSERT INTO `chuyenmuccap2` VALUES (3, '4', 'Bất động sản');
-INSERT INTO `chuyenmuccap2` VALUES (3, '5', 'Vĩ mô');
-INSERT INTO `chuyenmuccap2` VALUES (4, '1', 'Tin tức');
-INSERT INTO `chuyenmuccap2` VALUES (4, '2', 'Phát minh');
-INSERT INTO `chuyenmuccap2` VALUES (4, '3', 'Ứng dụng');
-INSERT INTO `chuyenmuccap2` VALUES (5, '1', 'GIới sao');
-INSERT INTO `chuyenmuccap2` VALUES (5, '2', 'Phim');
-INSERT INTO `chuyenmuccap2` VALUES (6, '1', 'Bóng đá');
-INSERT INTO `chuyenmuccap2` VALUES (6, '2', 'Tenis');
-INSERT INTO `chuyenmuccap2` VALUES (6, '3', 'Bóng bàn');
-INSERT INTO `chuyenmuccap2` VALUES (7, '1', 'Showbiz');
-INSERT INTO `chuyenmuccap2` VALUES (7, '2', 'Gameshow');
 
 -- ----------------------------
 -- Table structure for linkedusers
@@ -296,6 +296,48 @@ INSERT INTO `productstest` VALUES ('1', '1', '1', 'Nokia 7610', 'Độ phân gi�
 INSERT INTO `productstest` VALUES ('1', '1', '2', 'Simen AP75', 'Thiết kế tinh xảo, hiện đại', '<UL>\r\n    <LI>Hình ảnh hoàn hảo, rõ nét ở mọi góc màn hình</LI>\r\n    <LI>Giảm thiểu sự phản chiếu ánh sáng</LI>\r\n    <LI>Menu hiển thị tiếng Việt</LI>\r\n    <LI>Hệ thống hình ảnh thông minh</LI>\r\n    <LI>Âm thanh Hifi Stereo mạnh mẽ</LI>\r\n    <LI>Hệ thống ', '2800000');
 INSERT INTO `productstest` VALUES ('1', '2', '1', 'Torrini KC241', 'Nhẫn kim cương - vẻ đẹp kiêu sa', '<P>Không chỉ có kiểu dáng truyền thống chỉ có một hạt kim cương ở giữa, các nhà thiết kế đã tạo những những chiếc nhẫn vô cùng độc đáo và tinh tế. Tuy nhiên, giá của đồ trang sức này thì chỉ có dân chơi mới có thể kham được.</P>\r\n<UL>\r\n    <LI>Kiểu sản ph', '1600000000');
 INSERT INTO `productstest` VALUES ('1', '2', '2', 'Torrini KC242', 'tinh xảo và sang trọng', '<P>Để sở hữu một chiếc nhẫn kim cương lấp lánh trên tay, bạn phải là người chịu chi và sành điệu.<BR>\r\nVới sự kết hợp khéo léo và độc đáo giữa kim cương và Saphia, Ruby... những chiếc nhẫn càng trở nên giá trị.</P>\r\n<UL>\r\n    <LI>Kiểu sản phẩm: Nhẫn nam</', '42000000');
+
+-- ----------------------------
+-- Table structure for tags
+-- ----------------------------
+DROP TABLE IF EXISTS `tags`;
+CREATE TABLE `tags`  (
+  `TagID` int NOT NULL,
+  `TagName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`TagID`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tags
+-- ----------------------------
+INSERT INTO `tags` VALUES (1, 'Covid-19');
+INSERT INTO `tags` VALUES (2, 'Giãn cách xã hội');
+INSERT INTO `tags` VALUES (3, 'Việt Nam');
+INSERT INTO `tags` VALUES (4, 'Lào');
+INSERT INTO `tags` VALUES (5, 'Người lao động');
+INSERT INTO `tags` VALUES (6, 'BOT');
+
+-- ----------------------------
+-- Table structure for tags_posts
+-- ----------------------------
+DROP TABLE IF EXISTS `tags_posts`;
+CREATE TABLE `tags_posts`  (
+  `TagID` int NOT NULL,
+  `PostID` int NOT NULL,
+  PRIMARY KEY (`TagID`, `PostID`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tags_posts
+-- ----------------------------
+INSERT INTO `tags_posts` VALUES (1, 1);
+INSERT INTO `tags_posts` VALUES (1, 6);
+INSERT INTO `tags_posts` VALUES (2, 1);
+INSERT INTO `tags_posts` VALUES (3, 2);
+INSERT INTO `tags_posts` VALUES (3, 10);
+INSERT INTO `tags_posts` VALUES (4, 2);
+INSERT INTO `tags_posts` VALUES (5, 3);
+INSERT INTO `tags_posts` VALUES (6, 5);
 
 -- ----------------------------
 -- Table structure for userrefreshtokenext

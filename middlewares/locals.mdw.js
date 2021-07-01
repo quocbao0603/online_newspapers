@@ -20,6 +20,7 @@ module.exports = function (app) {
     const AllCat = list.length;
     const ls = [];
 
+    //console.log(list);
     index = 1;
     for (i = 0; i < LengthCatLv1; i++) {
       const Cat = [];

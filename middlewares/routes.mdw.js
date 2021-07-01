@@ -1,7 +1,24 @@
+const moment = require("moment");
+const { showCatNameLv1 } = require("../models/menu.model");
+const menuModel = require("../models/menu.model");
 module.exports = function (app) {
-  app.get("/", function (req, res) {
-    // res.send('<b>Hello</b> World!');
-    res.render("home");
+  app.get("/", async function (req, res) {
+    const topNews = await menuModel.topNews();
+    const news = await menuModel.news();
+    const newsWorld = await menuModel.worldNews();
+    top4News=[]
+    formatDate(topNews);formatDate(news);formatDate(newsWorld);
+    for(i=0;i<4;i++){
+      top4News.push(topNews[i])
+    }
+    
+    
+    res.render("home",{
+      topNewsRight: top4News,
+      topNewsLeft: topNews[4],
+      news: news,
+      newsWorld: newsWorld
+    });
   });
 
   app.get("/about", function (req, res) {
@@ -19,3 +36,10 @@ module.exports = function (app) {
   app.use("/posts/", require("../controllers/post-user.route"));
   app.use("/demo/", require("../controllers/demo.route"));
 };
+
+formatDate = function(list){
+  for(i=0;i<list.length;i++)
+    list[i].Date=moment(list[i].Date).format("ll")
+  return list;
+}
+ 

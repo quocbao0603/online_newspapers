@@ -1,13 +1,20 @@
 const moment = require("moment");
-const { showCatNameLv1 } = require("../models/menu.model");
+const { showCatNameLv1, sciencesNews } = require("../models/menu.model");
 const menuModel = require("../models/menu.model");
 module.exports = function (app) {
   app.get("/", async function (req, res) {
     const topNews = await menuModel.topNews();
     const news = await menuModel.news();
-    const newsWorld = await menuModel.worldNews();
+    const worldNews = await menuModel.worldNews();
+    const perspectivesNews = await menuModel.perspectivesNews();
+    const businessNews = await menuModel.businessNews();
+    const sportsNews = await menuModel.sportsNews();
+    const sciencesNews = await menuModel.sciencesNews();
+    
     top4News=[]
-    formatDate(topNews);formatDate(news);formatDate(newsWorld);
+    formatDate(topNews);formatDate(news);formatDate(worldNews);
+    formatDate(sportsNews);formatDate(sciencesNews);formatDate(businessNews);
+    formatDate(perspectivesNews);
     for(i=0;i<4;i++){
       top4News.push(topNews[i])
     }
@@ -17,7 +24,11 @@ module.exports = function (app) {
       topNewsRight: top4News,
       topNewsLeft: topNews[4],
       news: news,
-      newsWorld: newsWorld
+      worldNews: worldNews,
+      perspectivesNews: perspectivesNews,
+      businessNews:businessNews,
+      sciencesNews:sciencesNews,
+      sportsNews:sportsNews,
     });
   });
 

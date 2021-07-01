@@ -16,8 +16,9 @@
                             <div class="mb-2 ">
                                 <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
                                     href="">{{this.topNewsLeft.CatNameLv1}}|{{this.topNewsLeft.CatNameLv2}}</a>
-                                <i class="tn-date far fa-clock"style="color:white !important">{{this.topNewsLeft.Date}}</i>
-                                
+                                <i class="tn-date far fa-clock"
+                                    style="color:white !important">{{this.topNewsLeft.Date}}</i>
+
                             </div>
                             <a class="tn-title" href="">{{this.topNewsLeft.PostName}}</a>
                         </div>
@@ -28,17 +29,17 @@
                 <div class="row">
                     {{#each topNewsRight}}
                     <div class="col-md-6">
-                        <div class="tn-img">
-                            <img src="/public/img/top-news-3.jpg" />
+                        <div class="tn-img h-100">
+                            <img src="/public/imgs/posts/{{PostID}}/main_thumbs.jpg" />
                             <div class="tn-content">
                                 <div class="tn-content-inner">
                                     <div class="mb-2">
                                         <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
                                             href="">{{CatNameLv1}}|{{CatNameLv2}}</a>
-                                        <i class="far fa-clock"style="color:white !important">{{Date}}</i>
-                                        
+                                        <i class="far fa-clock" style="color:white !important">{{Date}}</i>
+
                                     </div>
-                                    <a class="tn-title" href="">{{PostName}}</a>
+                                    <a class="tn-title" href="/posts/details/{{PostID}}">{{PostName}}</a>
                                 </div>
                             </div>
                         </div>
@@ -49,7 +50,7 @@
         </div>
     </div>
 </div>
-       
+
 <div class="cat-news">
     <div class="container-fluid">
         <div class="row">
@@ -57,46 +58,46 @@
                 <h2><i class="fas fa-align-justify"></i>THỜI SỰ</h2>
                 <div class="row cn-slider">
                     {{#each news}}
-                        <div class="col-md-6">
-                            <div class="cn-img">
-                                <img src="/public/img/cat-news-2.jpg" />
-                                <div class="cn-content">
-                                    <div class="cn-content-inner">
-                                        
-                                        <div class="mb-2">
-                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                                href="">{{CatNameLv2}}</a>
-                                            <i class="far fa-clock"style="color:white !important">{{Date}}</i>
-                                        </div>
-                                        <a class="cn-title" href="">{{PostName}}</a>
+                    <div class="col-md-6">
+                        <div class="cn-img h-100">
+                            <img src="/public/imgs/posts/{{PostID}}/main_thumbs.jpg" />
+                            <div class="cn-content">
+                                <div class="cn-content-inner">
+
+                                    <div class="mb-2">
+                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
+                                            href="">{{CatNameLv2}}</a>
+                                        <i class="far fa-clock" style="color:white !important">{{Date}}</i>
                                     </div>
+                                    <a class="cn-title" href="/posts/details/{{PostID}}">{{PostName}}</a>
                                 </div>
                             </div>
                         </div>
+                    </div>
                     {{/each}}
-    
+
                 </div>
             </div>
             <div class="col-md-6">
                 <h2><i class="fas fa-align-justify"></i>GÓC NHÌN</h2>
                 <div class="row cn-slider">
                     {{#each perspectivesNews}}
-                        <div class="col-md-6">
-                            <div class="cn-img">
-                                <img src="/public/img/cat-news-2.jpg" />
-                                <div class="cn-content">
-                                    <div class="cn-content-inner">
-                                        
-                                        <div class="mb-2">
-                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                                href="">{{CatNameLv2}}</a>
-                                            <i class="far fa-clock"style="color:white !important">{{Date}}</i>
-                                        </div>
-                                        <a class="cn-title" href="">{{PostName}}</a>
+                    <div class="col-md-6">
+                        <div class="cn-img">
+                            <img src="/public/imgs/posts/{{PostID}}/main_thumbs.jpg" />
+                            <div class="cn-content">
+                                <div class="cn-content-inner">
+
+                                    <div class="mb-2">
+                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
+                                            href="">{{CatNameLv2}}</a>
+                                        <i class="far fa-clock" style="color:white !important">{{Date}}</i>
                                     </div>
+                                    <a class="cn-title" href="/posts/details/{{PostID}}">{{PostName}}</a>
                                 </div>
                             </div>
                         </div>
+                    </div>
                     {{/each}}
                 </div>
             </div>
@@ -110,23 +111,23 @@
             <div class="col-md-6">
                 <h2><i class="fas fa-align-justify"></i>THẾ GIỚI</h2>
                 <div class="row cn-slider">
-                   {{#each worldNews}}
-                        <div class="col-md-6">
-                            <div class="cn-img">
-                                <img src="/public/img/cat-news-2.jpg" />
-                                <div class="cn-content">
-                                    <div class="cn-content-inner">
-                                        
-                                        <div class="mb-2">
-                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                                href="">{{CatNameLv2}}</a>
-                                            <i class="far fa-clock"style="color:white !important">{{Date}}</i>
-                                        </div>
-                                        <a class="cn-title" href="">{{PostName}}</a>
+                    {{#each worldNews}}
+                    <div class="col-md-6">
+                        <div class="cn-img">
+                            <img src="/public/imgs/posts/{{PostID}}/main_thumbs.jpg" />
+                            <div class="cn-content">
+                                <div class="cn-content-inner">
+
+                                    <div class="mb-2">
+                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
+                                            href="">{{CatNameLv2}}</a>
+                                        <i class="far fa-clock" style="color:white !important">{{Date}}</i>
                                     </div>
+                                    <a class="cn-title" href="/posts/details/{{PostID}}">{{PostName}}</a>
                                 </div>
                             </div>
                         </div>
+                    </div>
                     {{/each}}
                 </div>
             </div>
@@ -134,24 +135,24 @@
                 <h2><i class="fas fa-align-justify"></i>KINH DOANH</h2>
                 <div class="row cn-slider">
                     {{#each businessNews}}
-                        <div class="col-md-6">
-                            <div class="cn-img">
-                                <img src="/public/img/cat-news-2.jpg" />
-                                <div class="cn-content">
-                                    <div class="cn-content-inner">
-                                        
-                                        <div class="mb-2">
-                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                                href="">{{CatNameLv2}}</a>
-                                            <i class="far fa-clock"style="color:white !important">{{Date}}</i>
-                                        </div>
-                                        <a class="cn-title" href="">{{PostName}}</a>
+                    <div class="col-md-6">
+                        <div class="cn-img">
+                            <img src="/public/imgs/posts/{{PostID}}/main_thumbs.jpg" />
+                            <div class="cn-content">
+                                <div class="cn-content-inner">
+
+                                    <div class="mb-2">
+                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
+                                            href="">{{CatNameLv2}}</a>
+                                        <i class="far fa-clock" style="color:white !important">{{Date}}</i>
                                     </div>
+                                    <a class="cn-title" href="/posts/details/{{PostID}}">{{PostName}}</a>
                                 </div>
                             </div>
                         </div>
+                    </div>
                     {{/each}}
-                   
+
                 </div>
             </div>
         </div>
@@ -164,53 +165,53 @@
             <div class="col-md-6">
                 <h2><i class="fas fa-align-justify"></i>KHOA HỌC</h2>
                 <div class="row cn-slider">
-                   {{#each sciencesNews}}
-                        <div class="col-md-6">
-                            <div class="cn-img">
-                                <img src="/public/img/cat-news-2.jpg" />
-                                <div class="cn-content">
-                                    <div class="cn-content-inner">
-                                        
-                                        <div class="mb-2">
-                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                                href="">{{CatNameLv2}}</a>
-                                            <i class="far fa-clock"style="color:white !important">{{Date}}</i>
-                                        </div>
-                                        <a class="cn-title" href="">{{PostName}}</a>
+                    {{#each sciencesNews}}
+                    <div class="col-md-6">
+                        <div class="cn-img">
+                            <img src="/public/imgs/posts/{{PostID}}/main_thumbs.jpg" />
+                            <div class="cn-content">
+                                <div class="cn-content-inner">
+
+                                    <div class="mb-2">
+                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
+                                            href="">{{CatNameLv2}}</a>
+                                        <i class="far fa-clock" style="color:white !important">{{Date}}</i>
                                     </div>
+                                    <a class="cn-title" href="/posts/details/{{PostID}}">{{PostName}}</a>
                                 </div>
                             </div>
                         </div>
+                    </div>
                     {{/each}}
                 </div>
             </div>
             <div class="col-md-6">
                 <h2><i class="fas fa-align-justify"></i>THỂ THAO</h2>
                 <div class="row cn-slider">
-                      {{#each sportsNews}}
-                        <div class="col-md-6">
-                            <div class="cn-img">
-                                <img src="/public/img/cat-news-2.jpg" />
-                                <div class="cn-content">
-                                    <div class="cn-content-inner">
-                                        
-                                        <div class="mb-2">
-                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                                href="">{{CatNameLv2}}</a>
-                                            <i class="far fa-clock"style="color:white !important">{{Date}}</i>
-                                        </div>
-                                        <a class="cn-title" href="">{{PostName}}</a>
+                    {{#each sportsNews}}
+                    <div class="col-md-6">
+                        <div class="cn-img">
+                            <img src="/public/imgs/posts/{{PostID}}/main_thumbs.jpg" />
+                            <div class="cn-content">
+                                <div class="cn-content-inner">
+
+                                    <div class="mb-2">
+                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
+                                            href="">{{CatNameLv2}}</a>
+                                        <i class="far fa-clock" style="color:white !important">{{Date}}</i>
                                     </div>
+                                    <a class="cn-title" href="/posts/details/{{PostID}}">{{PostName}}</a>
                                 </div>
                             </div>
                         </div>
+                    </div>
                     {{/each}}
                 </div>
             </div>
         </div>
     </div>
 </div>
-        
+
 <div class="main-news">
     <div class="container-fluid">
         <div class="row">
@@ -231,7 +232,8 @@
                                             href="">Business</a>
                                     </div>
                                     <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed porta dui. Class aptent taciti sociosqu ad litora torquent per conubia nostra inceptos...
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed porta dui.
+                                        Class aptent taciti sociosqu ad litora torquent per conubia nostra inceptos...
                                     </p>
                                 </div>
                             </div>
@@ -311,7 +313,8 @@
                                             href="">Business</a>
                                     </div>
                                     <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed porta dui. Class aptent taciti sociosqu ad litora torquent per conubia nostra inceptos...
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed porta dui.
+                                        Class aptent taciti sociosqu ad litora torquent per conubia nostra inceptos...
                                     </p>
                                 </div>
                             </div>
@@ -389,4 +392,3 @@
         </div>
     </div>
 </div>
-        

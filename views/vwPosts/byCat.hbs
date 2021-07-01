@@ -18,7 +18,8 @@
               <a class="text-primary" href="/posts/details/{{PostID}}">{{PostName}}</a>
             </h3>
             <h5><span class="badge badge-secondary">{{CatNameLv1}} | {{CatNameLv2}}</span></h5>
-            <div class="mb-1 text-muted">{{Date}}</div>
+            <div class="mb-1 text-muted">
+              <i class="far fa-clock"></i>{{Date}}</div>
             <div class="mb-1 text-muted">
               {{#each tag}}
               <a href="/posts/tags/{{TagID}}" class="badge badge-primary">{{TagName}}</a>

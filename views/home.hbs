@@ -10,16 +10,16 @@
         <div class="row">
             <div class="col-md-6 tn-left">
                 <div class="tn-img">
-                    <img src="/public/img/top-news-1.jpg" />
+                    <img src="/public/imgs/posts/{{this.topNewsLeft.PostID}}/main_thumbs.jpg" style="width:900px;height:600px;">
                     <div class="tn-content">
                         <div class="tn-content-inner">
                             <div class="mb-2 ">
                                 <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                    href="">{{this.topNewsLeft.CatNameLv1}}|{{this.topNewsLeft.CatNameLv2}}</a>
+                                    href="posts/byCat/{{this.topNewsLeft.CatIDLv1}}/{{this.topNewsLeft.CatIDLv2}}">{{this.topNewsLeft.CatNameLv1}}|{{this.topNewsLeft.CatNameLv2}}</a>
                                 <i class="tn-date far fa-clock"style="color:white !important">{{this.topNewsLeft.Date}}</i>
                                 
                             </div>
-                            <a class="tn-title" href="">{{this.topNewsLeft.PostName}}</a>
+                            <a class="tn-title" href="/posts/details/{{this.topNewsLeft.PostID}}">{{this.topNewsLeft.PostName}}</a>
                         </div>
                     </div>
                 </div>
@@ -29,16 +29,16 @@
                     {{#each topNewsRight}}
                     <div class="col-md-6">
                         <div class="tn-img">
-                            <img src="/public/img/top-news-3.jpg" />
+                            <img src="/public/imgs/posts/{{PostID}}/main_thumbs.jpg" style="width:450px;height:292px;"/>
                             <div class="tn-content">
                                 <div class="tn-content-inner">
                                     <div class="mb-2">
                                         <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                            href="">{{CatNameLv1}}|{{CatNameLv2}}</a>
+                                            href="posts/byCat/{{CatIDLv1}}/{{CatIDLv2}}">{{CatNameLv1}}|{{CatNameLv2}}</a>
                                         <i class="far fa-clock"style="color:white !important">{{Date}}</i>
                                         
                                     </div>
-                                    <a class="tn-title" href="">{{PostName}}</a>
+                                    <a class="tn-title" href="/posts/details/{{PostID}}">{{PostName}}</a>
                                 </div>
                             </div>
                         </div>
@@ -59,16 +59,16 @@
                     {{#each news}}
                         <div class="col-md-6">
                             <div class="cn-img">
-                                <img src="/public/img/cat-news-2.jpg" />
+                                <img src="/public/imgs/posts/{{PostID}}/main_thumbs.jpg" style="width:450px;height:292px;"/>
                                 <div class="cn-content">
                                     <div class="cn-content-inner">
                                         
                                         <div class="mb-2">
                                             <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                                href="">{{CatNameLv2}}</a>
+                                                href="posts/byCat/{{CatIDLv1}}/{{CatIDLv2}}">{{CatNameLv2}}</a>
                                             <i class="far fa-clock"style="color:white !important">{{Date}}</i>
                                         </div>
-                                        <a class="cn-title" href="">{{PostName}}</a>
+                                        <a class="cn-title" href="/posts/details/{{PostID}}">{{PostName}}</a>
                                     </div>
                                 </div>
                             </div>
@@ -83,16 +83,16 @@
                     {{#each perspectivesNews}}
                         <div class="col-md-6">
                             <div class="cn-img">
-                                <img src="/public/img/cat-news-2.jpg" />
+                                <img src="/public/imgs/posts/{{PostID}}/main_thumbs.jpg" style="width:450px;height:292px;"/>
                                 <div class="cn-content">
                                     <div class="cn-content-inner">
                                         
                                         <div class="mb-2">
                                             <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                                href="">{{CatNameLv2}}</a>
+                                                href="posts/byCat/{{CatIDLv1}}/{{CatIDLv2}}">{{CatNameLv2}}</a>
                                             <i class="far fa-clock"style="color:white !important">{{Date}}</i>
                                         </div>
-                                        <a class="cn-title" href="">{{PostName}}</a>
+                                        <a class="cn-title" href="/posts/details/{{PostID}}">{{PostName}}</a>
                                     </div>
                                 </div>
                             </div>
@@ -113,16 +113,16 @@
                    {{#each worldNews}}
                         <div class="col-md-6">
                             <div class="cn-img">
-                                <img src="/public/img/cat-news-2.jpg" />
+                                <img src="/public/imgs/posts/{{PostID}}/main_thumbs.jpg" style="width:450px;height:292px;"/>
                                 <div class="cn-content">
                                     <div class="cn-content-inner">
                                         
                                         <div class="mb-2">
                                             <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                                href="">{{CatNameLv2}}</a>
+                                                href="posts/byCat/{{CatIDLv1}}/{{CatIDLv2}}">{{CatNameLv2}}</a>
                                             <i class="far fa-clock"style="color:white !important">{{Date}}</i>
                                         </div>
-                                        <a class="cn-title" href="">{{PostName}}</a>
+                                        <a class="cn-title" href="/posts/details/{{PostID}}">{{PostName}}</a>
                                     </div>
                                 </div>
                             </div>
@@ -136,16 +136,16 @@
                     {{#each businessNews}}
                         <div class="col-md-6">
                             <div class="cn-img">
-                                <img src="/public/img/cat-news-2.jpg" />
+                                <img src="/public/imgs/posts/{{PostID}}/main_thumbs.jpg" style="width:450px;height:292px;"/>
                                 <div class="cn-content">
                                     <div class="cn-content-inner">
                                         
                                         <div class="mb-2">
                                             <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                                href="">{{CatNameLv2}}</a>
+                                                href="posts/byCat/{{CatIDLv1}}/{{CatIDLv2}}">{{CatNameLv2}}</a>
                                             <i class="far fa-clock"style="color:white !important">{{Date}}</i>
                                         </div>
-                                        <a class="cn-title" href="">{{PostName}}</a>
+                                        <a class="cn-title" href="/posts/details/{{PostID}}">{{PostName}}</a>
                                     </div>
                                 </div>
                             </div>
@@ -167,16 +167,16 @@
                    {{#each sciencesNews}}
                         <div class="col-md-6">
                             <div class="cn-img">
-                                <img src="/public/img/cat-news-2.jpg" />
+                                <img src="/public/imgs/posts/{{PostID}}/main_thumbs.jpg" style="width:450px;height:292px;"/>
                                 <div class="cn-content">
                                     <div class="cn-content-inner">
                                         
                                         <div class="mb-2">
                                             <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                                href="">{{CatNameLv2}}</a>
+                                                href="posts/byCat/{{CatIDLv1}}/{{CatIDLv2}}">{{CatNameLv2}}</a>
                                             <i class="far fa-clock"style="color:white !important">{{Date}}</i>
                                         </div>
-                                        <a class="cn-title" href="">{{PostName}}</a>
+                                        <a class="cn-title" href="/posts/details/{{PostID}}">{{PostName}}</a>
                                     </div>
                                 </div>
                             </div>
@@ -190,16 +190,16 @@
                       {{#each sportsNews}}
                         <div class="col-md-6">
                             <div class="cn-img">
-                                <img src="/public/img/cat-news-2.jpg" />
+                              <img src="/public/imgs/posts/{{PostID}}/main_thumbs.jpg" style="width:450px;height:292px;"/>
                                 <div class="cn-content">
                                     <div class="cn-content-inner">
                                         
                                         <div class="mb-2">
                                             <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                                href="">{{CatNameLv2}}</a>
+                                                href="posts/byCat/{{CatIDLv1}}/{{CatIDLv2}}">{{CatNameLv2}}</a>
                                             <i class="far fa-clock"style="color:white !important">{{Date}}</i>
                                         </div>
-                                        <a class="cn-title" href="">{{PostName}}</a>
+                                        <a class="cn-title" href="/posts/details/{{PostID}}">{{PostName}}</a>
                                     </div>
                                 </div>
                             </div>

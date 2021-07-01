@@ -47,7 +47,7 @@ router.get("/byCat/:id", async function (req, res) {
 router.get("/byCat/:idLv1/:idLv2", async function (req, res) {
   const catIdLv1 = +req.params.idLv1 || 0;
   const catIdLv2 = +req.params.idLv2 || 0;
-  console.log(catIdLv1, catIdLv2);
+  //console.log(catIdLv1, catIdLv2);
 
   for (c of res.locals.lcCategories) {
     if (c.CatID === catIdLv1) {

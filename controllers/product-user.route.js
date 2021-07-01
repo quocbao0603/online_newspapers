@@ -17,7 +17,7 @@ router.get("/byCat/:id", async function (req, res) {
   title=ls[catId-1].CatNameLv1
   
    
-  console.log(title)
+  //console.log(title)
   
   // const list = await productModel.findByCatID(catId);
   // res.render('vwProducts/byCat', {

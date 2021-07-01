@@ -1,5 +1,7 @@
 const db = require("../utils/db");
 const tagModel = require("../models/tag.model");
+const cmtModel = require("../models/comments.model")
+
 module.exports = {
   all() {},
 
@@ -131,4 +133,13 @@ module.exports = {
   del(id) {
     return db("posts").where("PostID", id).del();
   },
+  getCmtsByPostID(PostID){
+    return cmtModel.commentsOfPost(PostID);
+  },
+  getCmtID(){
+    return cmtModel.countAllCmts();
+  },
+  addNewCmt(newCmt){
+    return cmtModel.addComment(newCmt);
+  }
 };

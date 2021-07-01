@@ -1,6 +1,8 @@
 const express = require("express");
 const postModel = require("../models/post.model");
 
+const moment = require("moment");
+const auth = require("../middlewares/auth.mdw");
 const router = express.Router();
 
 router.get("/byCat/:id", async function (req, res) {
@@ -96,10 +98,25 @@ router.get("/byCat/:idLv1/:idLv2", async function (req, res) {
     title,
   });
 });
+router.post("/details/:id",auth,async function(req,res){
+  const user = res.locals.authUser;
+  const CatID = +req.params.id || 0;
+  cmtID = await postModel.getCmtID();
+  newCmt = {
+    CmtID: +cmtID+1,
+    PostsID: CatID,
+    UserID: user.id,
+    Date: moment(moment().format("DD/MM/YYYY"), "DD/MM/YYYY").format("YYYY-MM-DD"),
+    Content: req.body.message
+  }
 
+  await postModel.addNewCmt(newCmt);
+  const url = req.headers.referer || "/";
+  res.redirect(url);
+});
 router.get("/details/:id", async function (req, res) {
   const CatID = +req.params.id || 0;
-
+  
   // for (c of res.locals.lcCategories) {
   //   if (c.CatID === CatID) {
   //     c.IsActive = true;
@@ -111,9 +128,12 @@ router.get("/details/:id", async function (req, res) {
   if (post === null) {
     return res.redirect("/");
   }
-
+ 
+  const cmts = await postModel.getCmtsByPostID(CatID);
+  formatDate(cmts)
   res.render("vwposts/details", {
     post: post,
+    comments: cmts,
   });
 });
 
@@ -181,3 +201,8 @@ router.get("/search", async function (req, res) {
 });
 
 module.exports = router;
+formatDate = function(list){
+  for(i=0;i<list.length;i++)
+    list[i].Date=moment(list[i].Date).format("LL")
+  return list;
+}

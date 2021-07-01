@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : mysql-local
+ Source Server         : localhost_3306
  Source Server Type    : MySQL
- Source Server Version : 100419
+ Source Server Version : 100418
  Source Host           : localhost:3306
- Source Schema         : news
+ Source Schema         : ec
 
  Target Server Type    : MySQL
- Target Server Version : 100419
+ Target Server Version : 100418
  File Encoding         : 65001
 
- Date: 30/06/2021 23:51:01
+ Date: 01/07/2021 17:40:53
 */
 
 SET NAMES utf8mb4;
@@ -134,6 +134,101 @@ INSERT INTO `categorietest` VALUES (3, 1, 'aoquan', NULL);
 INSERT INTO `categorietest` VALUES (4, 1, 'maytinh', NULL);
 
 -- ----------------------------
+-- Table structure for chuyenmuccap1
+-- ----------------------------
+DROP TABLE IF EXISTS `chuyenmuccap1`;
+CREATE TABLE `chuyenmuccap1`  (
+  `ID` int NOT NULL,
+  `CatNameLv1` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`ID`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of chuyenmuccap1
+-- ----------------------------
+INSERT INTO `chuyenmuccap1` VALUES (1, 'Thời sự');
+INSERT INTO `chuyenmuccap1` VALUES (2, 'Góc nhìn');
+INSERT INTO `chuyenmuccap1` VALUES (3, 'Thế giới');
+INSERT INTO `chuyenmuccap1` VALUES (4, 'Kinh doanh');
+INSERT INTO `chuyenmuccap1` VALUES (5, 'Khoa học');
+INSERT INTO `chuyenmuccap1` VALUES (6, 'Thể thao');
+
+-- ----------------------------
+-- Table structure for chuyenmuccap2
+-- ----------------------------
+DROP TABLE IF EXISTS `chuyenmuccap2`;
+CREATE TABLE `chuyenmuccap2`  (
+  `ID1` int NOT NULL,
+  `ID2` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `CatNameLv2` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`ID1`, `ID2`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of chuyenmuccap2
+-- ----------------------------
+INSERT INTO `chuyenmuccap2` VALUES (1, '1', 'Chính trị');
+INSERT INTO `chuyenmuccap2` VALUES (1, '2', 'Giao thông');
+INSERT INTO `chuyenmuccap2` VALUES (1, '3', 'Dân sinh');
+INSERT INTO `chuyenmuccap2` VALUES (2, '1', 'Tư liệu');
+INSERT INTO `chuyenmuccap2` VALUES (2, '2', 'Phân tích');
+INSERT INTO `chuyenmuccap2` VALUES (2, '3', 'Quân sự');
+INSERT INTO `chuyenmuccap2` VALUES (2, '4', 'Cuộc sống đó đây');
+INSERT INTO `chuyenmuccap2` VALUES (3, '1', 'Quốc tế');
+INSERT INTO `chuyenmuccap2` VALUES (3, '2', 'Doanh nghiệp');
+INSERT INTO `chuyenmuccap2` VALUES (3, '3', 'Chứng khoán');
+INSERT INTO `chuyenmuccap2` VALUES (3, '4', 'Bất động sản');
+INSERT INTO `chuyenmuccap2` VALUES (3, '5', 'Vĩ mô');
+INSERT INTO `chuyenmuccap2` VALUES (4, '1', 'Tin tức');
+INSERT INTO `chuyenmuccap2` VALUES (4, '2', 'Phát minh');
+INSERT INTO `chuyenmuccap2` VALUES (4, '3', 'Ứng dụng');
+INSERT INTO `chuyenmuccap2` VALUES (5, '1', 'GIới sao');
+INSERT INTO `chuyenmuccap2` VALUES (5, '2', 'Phim');
+INSERT INTO `chuyenmuccap2` VALUES (6, '1', 'Bóng đá');
+INSERT INTO `chuyenmuccap2` VALUES (6, '2', 'Tenis');
+INSERT INTO `chuyenmuccap2` VALUES (6, '3', 'Bóng bàn');
+INSERT INTO `chuyenmuccap2` VALUES (7, '1', 'Showbiz');
+INSERT INTO `chuyenmuccap2` VALUES (7, '2', 'Gameshow');
+
+-- ----------------------------
+-- Table structure for comments
+-- ----------------------------
+DROP TABLE IF EXISTS `comments`;
+CREATE TABLE `comments`  (
+  `CmtID` int NOT NULL,
+  `PostsID` int NULL DEFAULT NULL,
+  `UserID` int NULL DEFAULT NULL,
+  `Date` datetime(0) NULL DEFAULT NULL,
+  `Content` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`CmtID`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of comments
+-- ----------------------------
+INSERT INTO `comments` VALUES (1, 1, 2, '2021-07-01 15:19:26', 'bai viet hay lam');
+INSERT INTO `comments` VALUES (2, 1, 4, '2021-07-01 15:19:48', 'tuyet voi');
+INSERT INTO `comments` VALUES (3, 1, 1, '0000-00-00 00:00:00', 'abc');
+INSERT INTO `comments` VALUES (4, 1, 1, '0000-00-00 00:00:00', 'man');
+INSERT INTO `comments` VALUES (5, 1, 1, '0000-00-00 00:00:00', '');
+INSERT INTO `comments` VALUES (6, 1, 1, '0000-00-00 00:00:00', '123');
+INSERT INTO `comments` VALUES (7, 2, 1, '0000-00-00 00:00:00', 'bai viet qua hay');
+INSERT INTO `comments` VALUES (8, 2, 1, '0000-00-00 00:00:00', 'abc');
+INSERT INTO `comments` VALUES (9, 2, 1, '0000-00-00 00:00:00', 'asd');
+INSERT INTO `comments` VALUES (10, 2, 1, '2021-07-01 00:00:00', 'dang cap\r\n');
+INSERT INTO `comments` VALUES (11, 1, 1, '2021-07-01 00:00:00', 'dinh qua');
+INSERT INTO `comments` VALUES (12, 11, 1, '2021-07-01 00:00:00', 'hay the nhi');
+INSERT INTO `comments` VALUES (13, 7, 1, '2021-07-01 00:00:00', 'hay the nhi');
+INSERT INTO `comments` VALUES (14, 7, 1, '2021-07-01 00:00:00', 'asd');
+INSERT INTO `comments` VALUES (15, 7, 1, '2021-07-01 00:00:00', 'nasd');
+INSERT INTO `comments` VALUES (16, 7, 1, '2021-07-01 00:00:00', '123');
+INSERT INTO `comments` VALUES (17, 7, 1, '2021-07-01 00:00:00', 'sdfs');
+INSERT INTO `comments` VALUES (18, 10, 1, '2021-07-01 00:00:00', 'wfwfhweofwffe');
+INSERT INTO `comments` VALUES (19, 11, 1, '2021-07-01 00:00:00', 'huofwhfe');
+INSERT INTO `comments` VALUES (20, 11, 1, '2021-07-01 00:00:00', '1');
+INSERT INTO `comments` VALUES (21, 9, 1, '2021-07-01 00:00:00', 'qưdhiq');
+
+-- ----------------------------
 -- Table structure for linkedusers
 -- ----------------------------
 DROP TABLE IF EXISTS `linkedusers`;
@@ -148,6 +243,7 @@ CREATE TABLE `linkedusers`  (
 -- Records of linkedusers
 -- ----------------------------
 INSERT INTO `linkedusers` VALUES ('113633649691543279771', 4, 'google');
+INSERT INTO `linkedusers` VALUES ('117662512301572403486', 2, 'google');
 INSERT INTO `linkedusers` VALUES ('1441636862837274', 4, 'facebook');
 INSERT INTO `linkedusers` VALUES ('2911418309080008', 2, 'facebook');
 
@@ -175,7 +271,7 @@ CREATE TABLE `orderdetails`  (
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders`  (
   `OrderID` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `OrderDate` datetime NOT NULL,
+  `OrderDate` datetime(0) NOT NULL,
   `UserID` int NOT NULL,
   `Total` bigint NOT NULL,
   PRIMARY KEY (`OrderID`) USING BTREE
@@ -195,7 +291,7 @@ CREATE TABLE `posts`  (
   `CatIDLv2` int NULL DEFAULT NULL,
   `Author` int NULL DEFAULT NULL,
   `PostName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Date` datetime NULL DEFAULT NULL,
+  `Date` datetime(0) NULL DEFAULT NULL,
   `Avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `TinyContent` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `FullContent` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
@@ -305,7 +401,7 @@ CREATE TABLE `tags`  (
   `TagID` int NOT NULL,
   `TagName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`TagID`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tags
@@ -325,7 +421,7 @@ CREATE TABLE `tags_posts`  (
   `TagID` int NOT NULL,
   `PostID` int NOT NULL,
   PRIMARY KEY (`TagID`, `PostID`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tags_posts

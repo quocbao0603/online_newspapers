@@ -14,31 +14,35 @@ module.exports = function (app) {
 
   app.use(async function (req, res, next) {
     const raw_data = await categoryModel.allWithDetails();
-    const category = await categoryModel.category();
-
-    // const list1 = await categoryModel.category();
+    const category = await categoryModel.categoryLv1();
     const list = raw_data[0];
-    const CatLv1 = category.length;
+    const LengthCatLv1 = category.length;
     const AllCat = list.length;
     const ls = [];
 
     //console.log(list);
     index = 1;
-    for (i = 1; i <= CatLv1; i++) {
+    for (i = 0; i < LengthCatLv1; i++) {
       const Cat = [];
       for (j = 0; j < AllCat; j++) {
-        if (list[j].ID === i) {
+        if (list[j].CatIDLv1 === category[i].CatIDLv1) {
           index = j;
-          Cat.push({ ID1: i, ID2: list[j].ID2, CatNameLv2: list[j].NameLv2 });
+          Cat.push({
+            CatIDLv1: list[j].CatIDLv1,
+            CatIDLv2: list[j].CatIDLv2,
+            CatNameLv2: list[j].CatNameLv2,
+          });
         }
       }
-      ls.push({ ID: i, CatNameLv1: list[index].NameLv1, CatName: Cat });
+      ls.push({
+        CatIDLv1: category[i].CatIDLv1,
+        CatNameLv1: list[index].CatNameLv1,
+        CatName: Cat,
+      });
     }
-
     // list[1].IsActive = true;
     res.locals.lcCategories = ls;
-    //console.log(res.locals.lcCategories)
-   
+
     next();
   });
 };

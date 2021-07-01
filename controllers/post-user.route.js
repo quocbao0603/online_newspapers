@@ -6,18 +6,21 @@ const router = express.Router();
 router.get("/byCat/:id", async function (req, res) {
   const CatID = +req.params.id || 0;
 
-  for (c of res.locals.lcCategories) {
-    if (c.CatID === CatID) {
-      c.IsActive = true;
-      break;
-    }
-  }
+  // for (c of res.locals.lcCategories) {
+  //   if (c.CatID === CatID) {
+  //     c.IsActive = true;
+  //     break;
+  //   }
+  // }
 
   // const list = await postModel.findByCatIDLv1(CatID);
   // res.render('vwposts/byCat', {
   //   posts: list,
   //   empty: list.length === 0
   // });
+  ls = res.locals.lcCategories;
+
+  title = ls[CatID - 1].CatNameLv1;
 
   const limit = 6;
   const page = req.query.page || 1;
@@ -37,24 +40,30 @@ router.get("/byCat/:id", async function (req, res) {
 
   const offset = (page - 1) * limit;
   const list = await postModel.findByCatIDLv1(CatID, offset);
+
   res.render("vwposts/byCat", {
     posts: list,
     empty: list.length === 0,
     page_numbers,
+    title,
   });
 });
 
 router.get("/byCat/:idLv1/:idLv2", async function (req, res) {
   const catIdLv1 = +req.params.idLv1 || 0;
   const catIdLv2 = +req.params.idLv2 || 0;
-  //console.log(catIdLv1, catIdLv2);
 
-  for (c of res.locals.lcCategories) {
-    if (c.CatID === catIdLv1) {
-      c.IsActive = true;
-      break;
-    }
-  }
+  // for (c of res.locals.lcCategories) {
+  //   if (c.CatID === catIdLv1) {
+  //     c.IsActive = true;
+  //     break;
+  //   }
+  // }
+  ls = res.locals.lcCategories;
+  title =
+    ls[catIdLv1 - 1].CatNameLv1 +
+    " | " +
+    ls[catIdLv1 - 1].CatName[catIdLv2 - 1].CatNameLv2;
 
   // const list = await postModel.findByCatIDLv1(CatID);
   // res.render('vwposts/byCat', {
@@ -84,6 +93,7 @@ router.get("/byCat/:idLv1/:idLv2", async function (req, res) {
     posts: list,
     empty: list.length === 0,
     page_numbers,
+    title,
   });
 });
 
@@ -104,6 +114,69 @@ router.get("/details/:id", async function (req, res) {
 
   res.render("vwposts/details", {
     post: post,
+  });
+});
+
+router.get("/tags/:id", async function (req, res) {
+  const TagID = +req.params.id || 0;
+
+  const title = "Tag id: " + TagID;
+
+  const limit = 6;
+  const page = req.query.page || 1;
+  if (page < 1) page = 1;
+
+  const total = await postModel.countByTagID(TagID);
+  let nPages = Math.floor(total / limit);
+  if (total % limit > 0) nPages++;
+
+  const page_numbers = [];
+  for (i = 1; i <= nPages; i++) {
+    page_numbers.push({
+      value: i,
+      isCurrent: i === +page,
+    });
+  }
+
+  const offset = (page - 1) * limit;
+  const list = await postModel.findByTagID(TagID, offset);
+
+  res.render("vwposts/byCat", {
+    posts: list,
+    empty: list.length === 0,
+    page_numbers,
+    title,
+  });
+});
+
+router.get("/search", async function (req, res) {
+  const CatID = req.query.q || "";
+
+  title = "Kết quả tìm kiếm: " + CatID;
+
+  const limit = 6;
+  const page = req.query.page || 1;
+  if (page < 1) page = 1;
+
+  const total = await postModel.countSearchByText(CatID);
+  let nPages = Math.floor(total / limit);
+  if (total % limit > 0) nPages++;
+
+  const page_numbers = [];
+  for (i = 1; i <= nPages; i++) {
+    page_numbers.push({
+      value: i,
+      isCurrent: i === +page,
+    });
+  }
+
+  const offset = (page - 1) * limit;
+  const list = await postModel.searchByText(CatID, offset);
+  res.render("vwposts/byCat", {
+    posts: list,
+    empty: list.length === 0,
+    page_numbers,
+    title,
   });
 });
 

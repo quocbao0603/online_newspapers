@@ -1,0 +1,51 @@
+{{#section 'js'}}
+<script>
+  function validate() {
+      if(document.getElementById('10').checked) {
+        
+        return true;
+      }else if(document.getElementById('30').checked) {
+        return true;
+      }
+      else if(document.getElementById('120').checked){
+        return true;
+      }
+        alert('Yeu cau lua chon truoc khi dang ki!')
+        return false;
+    }
+</script>
+{{/section}}
+
+<div class="card">
+  <h4 class="card-header">
+    Đăng kí tài khoản Premium
+  </h4>
+  <div class="card-body">
+    {{#if infoUser}}
+    <form method="POST">
+      <div class="form-group row">
+        <label for="name" class="col-sm-2 col-form-label">Tên người dùng</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control-plaintext" id="name" value="{{infoUser.name}}">
+        </div>
+      </div>
+      <p>Chọn thời gian:</p>
+      <input type="radio" id="10" name="times" value="10000">
+      <label for="html">10s</label><br>
+      <input type="radio" id="30" name="times" value="30000">
+      <label for="css">30s</label><br>
+      <input type="radio" id="120" name="times" value="120000">
+      <label for="javascript">120s</label>
+      <div class="form-group row">
+        <label for="premium" class="col-sm-2 col-form-label">Thời hạn</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control-plaintext" id="premium" name="premium" value={{infoUser.premium}}>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-block" type="submit" id="btnSignup" onclick="return validate();">Đăng kí</button> 
+      <a href="/" ><i class="fas fa-angle-left"></i> Trang chủ</a>
+    </form>
+    {{/if}}
+  </div>
+</div>
+

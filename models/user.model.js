@@ -28,5 +28,11 @@ module.exports = {
   addUser(new_user) {
     return db("users").insert(new_user);
   },
-  
+  updatePremium(id,time){
+    return db("users")
+    .where("id", id)
+    .update({
+      premium: time,
+    });
+  }
 };

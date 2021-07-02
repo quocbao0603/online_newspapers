@@ -6,6 +6,7 @@ const passport = require("passport");
 const userModel = require("../models/user.model");
 const auth = require("../middlewares/auth.mdw");
 
+
 const initializePassport = require("../passport-config");
 initializePassport(passport);
 
@@ -45,8 +46,25 @@ router.get("/is-available", async function (req, res) {
 router.get("/profile", auth, function (req, res) {
   const user = req.user;
   user.dob = moment(user.dob, "YYYY-MM-DD").format("DD/MM/YYYY");
+
+  //console.log(user)
   res.render("vwAccount/profile", { infoUser: user });
 });
+
+router.post("/resPremium",auth,async function(req,res){
+  //console.log(req.body.premium)
+  console.log(req.body.times)
+  await userModel.updatePremium(req.user.id,+req.body.times)
+  const url = req.session.retUrl || "/";
+  console.log(url)
+  res.redirect(url);
+});
+
+router.get("/resPremium",function(req,res){
+  const user = req.user;
+  user.dob = moment(user.dob, "YYYY-MM-DD").format("DD/MM/YYYY");
+  res.render("vwAccount/resPremium", { infoUser: user });
+})
 
 router.get("/login", async function (req, res) {
   res.render("vwAccount/login", {

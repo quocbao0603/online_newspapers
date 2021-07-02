@@ -128,6 +128,19 @@ router.get("/details/:id", async function (req, res) {
   if (post === null) {
     return res.redirect("/");
   }
+  
+  if(post.Premium){
+    if(!res.locals.auth){
+      req.session.retUrl = req.originalUrl;
+      res.redirect('/account/login');
+    }
+    if(!res.locals.premium){
+      //alert("Ban phai dang ky tai khoan premium");
+      req.session.retUrl = req.originalUrl;
+      res.redirect('/account/resPremium');
+      
+    }
+  }
  
   const cmts = await postModel.getCmtsByPostID(CatID);
   formatDate(cmts)

@@ -45,6 +45,7 @@ module.exports = function (app) {
   app.use("/admin/categories/", require("../controllers/category.route"));
   app.use("/products/", require("../controllers/product-user.route"));
   app.use("/posts/", require("../controllers/post-user.route"));
+  app.use("/writer/", require("../controllers/post-writer.route"));
   app.use("/demo/", require("../controllers/demo.route"));
 };
 

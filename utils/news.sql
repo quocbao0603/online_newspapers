@@ -1,14 +1,14 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost_3306
+ Source Server         : mysql-local
  Source Server Type    : MySQL
- Source Server Version : 100418
+ Source Server Version : 100419
  Source Host           : localhost:3306
- Source Schema         : ec
+ Source Schema         : news
 
  Target Server Type    : MySQL
- Target Server Version : 100418
+ Target Server Version : 100419
  File Encoding         : 65001
 
  Date: 02/07/2021 16:23:47
@@ -198,10 +198,10 @@ CREATE TABLE `comments`  (
   `CmtID` int NOT NULL,
   `PostsID` int NULL DEFAULT NULL,
   `UserID` int NULL DEFAULT NULL,
-  `Date` datetime(0) NULL DEFAULT NULL,
+  `Date` datetime NULL DEFAULT NULL,
   `Content` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`CmtID`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of comments
@@ -227,8 +227,7 @@ INSERT INTO `comments` VALUES (18, 10, 1, '2021-07-01 00:00:00', 'wfwfhweofwffe'
 INSERT INTO `comments` VALUES (19, 11, 1, '2021-07-01 00:00:00', 'huofwhfe');
 INSERT INTO `comments` VALUES (20, 11, 1, '2021-07-01 00:00:00', '1');
 INSERT INTO `comments` VALUES (21, 9, 1, '2021-07-01 00:00:00', 'qưdhiq');
-INSERT INTO `comments` VALUES (22, 4, 1, '2021-07-02 00:00:00', 'dang cap tu duy');
-INSERT INTO `comments` VALUES (23, 1, 1, '2021-07-02 00:00:00', 'tai khoan vip');
+INSERT INTO `comments` VALUES (22, 1, 3, '2021-07-01 00:00:00', '1');
 
 -- ----------------------------
 -- Table structure for linkedusers
@@ -273,7 +272,7 @@ CREATE TABLE `orderdetails`  (
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders`  (
   `OrderID` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `OrderDate` datetime(0) NOT NULL,
+  `OrderDate` datetime NOT NULL,
   `UserID` int NOT NULL,
   `Total` bigint NOT NULL,
   PRIMARY KEY (`OrderID`) USING BTREE
@@ -293,7 +292,7 @@ CREATE TABLE `posts`  (
   `CatIDLv2` int NULL DEFAULT NULL,
   `Author` int NULL DEFAULT NULL,
   `PostName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Date` datetime(0) NULL DEFAULT NULL,
+  `Date` datetime NULL DEFAULT NULL,
   `Avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `TinyContent` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `FullContent` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,

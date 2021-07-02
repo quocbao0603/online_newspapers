@@ -2,6 +2,14 @@ const db = require("../utils/db");
 const tagModel = require("../models/tag.model");
 const cmtModel = require("../models/comments.model")
 
+
+const addTag = async function(list){
+  for (let i = 0; i < list.length; i++) {
+    const tag = await tagModel.getTagByPostID(list[i].PostID);
+    list[i]["tag"] = tag;
+  }
+  return list;
+}
 module.exports = {
   all() {},
 
@@ -19,10 +27,7 @@ module.exports = {
     `;
     const raw_data = await db.raw(sql);
     const list = raw_data[0];
-    for (let i = 0; i < list.length; i++) {
-      const tag = await tagModel.getTagByPostID(list[i].PostID);
-      list[i]["tag"] = tag;
-    }
+    await addTag(list)
     return list;
   },
   async findByCatIDLv2(catIdLv1, catIDLv2, offset) {
@@ -35,10 +40,7 @@ module.exports = {
     `;
     const raw_data = await db.raw(sql);
     const list = raw_data[0];
-    for (let i = 0; i < list.length; i++) {
-      const tag = await tagModel.getTagByPostID(list[i].PostID);
-      list[i]["tag"] = tag;
-    }
+    await addTag(list)
     return list;
   },
   async findByTagID(TagID, offset) {
@@ -51,10 +53,31 @@ module.exports = {
     `;
     const raw_data = await db.raw(sql);
     const list = raw_data[0];
-    for (let i = 0; i < list.length; i++) {
-      const tag = await tagModel.getTagByPostID(list[i].PostID);
-      list[i]["tag"] = tag;
-    }
+    await addTag(list)
+    return list;
+  },
+  async findByAuthor(userID, offset) {
+    const sql = `
+    select p.*, c1.CatNameLv1 as CatNameLv1, c2.CatNameLv2 as CatNameLv2
+    from posts p join CategoriesLv1 c1 join CategoriesLv2 c2 on c1.CatIDLv1 = c2.CatIDLv1 
+    AND c2.CatIDLv1 = p.CatIDLv1 AND c2.CatIDLv2 = p.CatIDLv2
+    where p.Author = ${userID}
+    LIMIT 6 OFFSET ${offset}
+    `;
+    const raw_data = await db.raw(sql);
+    const list = raw_data[0];
+    await addTag(list)
+    return list;
+  },
+
+  async countByAuthor(userID) {
+    const sql = `
+    select COUNT(*)
+    from posts
+    where Author = ${userID}
+    `;
+    const raw_data = await db.raw(sql);
+    const list = raw_data[0];
     return list;
   },
   async countByTagID(TagID) {
@@ -109,10 +132,7 @@ module.exports = {
       `;
     const raw_data = await db.raw(sql);
     const list = raw_data[0];
-    for (let i = 0; i < list.length; i++) {
-      const tag = await tagModel.getTagByPostID(list[i].PostID);
-      list[i]["tag"] = tag;
-    }
+    await addTag(list)
     return list;
   },
   countSearchByText(text) {

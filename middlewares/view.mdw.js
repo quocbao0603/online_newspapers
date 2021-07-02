@@ -10,6 +10,12 @@ module.exports = function (app) {
       section: hbs_sections(),
       format_number(val) {
         return numeral(val).format('0,0');
+      },
+      format_index(val) {
+        return parseInt(val) + 1;
+      },
+      ifEquals(arg1, arg2, options) {
+        return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
       }
     }
   }));

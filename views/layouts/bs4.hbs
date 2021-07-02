@@ -19,7 +19,6 @@
   <link href="/public/lib/slick/slick.css" rel="stylesheet">
   <link href="/public/lib/slick/slick-theme.css" rel="stylesheet">
   <link href="/public/css/style.css" rel="stylesheet">
-
   {{{_sections.css}}}
   <style>
     .dropdown:hover>.dropdown-menu {
@@ -127,6 +126,13 @@
                   <i class="fa fa-user" aria-hidden="true"></i>
                   Thông tin của bạn
                 </a>
+                {{#ifEquals authUser.permission "1"}}
+                <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="/writer/myposts">
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                  Bài viết của tôi
+                </a>
+                {{/ifEquals}}
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="javascript: $('#frmLogout').submit();">
                   <i class="fa fa-sign-out" aria-hidden="true"></i>

@@ -10,7 +10,6 @@ module.exports = function (app) {
     const businessNews = await menuModel.businessNews();
     const sportsNews = await menuModel.sportsNews();
     const sciencesNews = await menuModel.sciencesNews();
-    
     top4News=[]
     formatDate(topNews);formatDate(news);formatDate(worldNews);
     formatDate(sportsNews);formatDate(sciencesNews);formatDate(businessNews);
@@ -18,8 +17,6 @@ module.exports = function (app) {
     for(i=0;i<4;i++){
       top4News.push(topNews[i])
     }
-    
-    
     res.render("home",{
       topNewsRight: top4News,
       topNewsLeft: topNews[4],

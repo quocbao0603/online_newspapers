@@ -1,13 +1,23 @@
 const categoryModel = require("../models/category.model");
-
+const userModel = require("../models/user.model")
 module.exports = function (app) {
-  app.use(function (req, res, next) {
+  app.use( function (req, res, next) {
+    res.locals.premium=0;
     if (typeof req.user === "undefined") {
       res.locals.auth = false;
       res.locals.authUser = null;
+      
     } else {
       res.locals.auth = true;
       res.locals.authUser = req.user;
+      user = req.user;
+      id = user.id;
+      res.locals.premium = user.premium;
+      setTimeout(async function(){
+        console.log("Tai khoan het han premium");
+        await userModel.updatePremium(id,0);
+        res.locals.premium = 0;
+      },+user.premium,id)
     }
     next();
   });

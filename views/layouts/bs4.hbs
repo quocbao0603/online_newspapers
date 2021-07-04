@@ -140,6 +140,13 @@
                   Bài viết của tôi
                 </a>
                 {{/ifEquals}}
+                {{#ifEquals authUser.permission "2"}}
+                <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="/editor/myposts">
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                  Duyệt bài viết
+                </a>
+                {{/ifEquals}}
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="javascript: $('#frmLogout').submit();">
                   <i class="fa fa-sign-out" aria-hidden="true"></i>

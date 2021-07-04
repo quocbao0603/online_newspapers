@@ -116,7 +116,6 @@ router.post("/details/:id",auth,async function(req,res){
 });
 router.get("/details/:id", async function (req, res) {
   const CatID = +req.params.id || 0;
-  
   // for (c of res.locals.lcCategories) {
   //   if (c.CatID === CatID) {
   //     c.IsActive = true;

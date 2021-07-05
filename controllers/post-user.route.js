@@ -3,6 +3,7 @@ const postModel = require("../models/post.model");
 
 const moment = require("moment");
 const auth = require("../middlewares/auth.mdw");
+const { updateViewsPostByPostID } = require("../models/post.model");
 const router = express.Router();
 
 router.get("/byCat/:id", async function (req, res) {
@@ -116,12 +117,7 @@ router.post("/details/:id",auth,async function(req,res){
 });
 router.get("/details/:id", async function (req, res) {
   const CatID = +req.params.id || 0;
-  // for (c of res.locals.lcCategories) {
-  //   if (c.CatID === CatID) {
-  //     c.IsActive = true;
-  //     break;
-  //   }
-  // }
+
 
   const post = await postModel.findById(CatID);
   if (post === null) {
@@ -140,7 +136,7 @@ router.get("/details/:id", async function (req, res) {
       
     }
   }
- 
+  await postModel.updateViewsPostByPostID(CatID)
   const cmts = await postModel.getCmtsByPostID(CatID);
   formatDate(cmts)
   res.render("vwposts/details", {

@@ -143,13 +143,33 @@ module.exports = {
       `;
     return db.raw(sql);
   },
+  getPostsWaitUp(){
+    return db('posts')
+    .where("Status","0")
+  },
+  updatePostStatusByPostID(postID,postStatus){
+    return db("posts")
+    .where("PostID", postID)
+    .update({
+        Status: postStatus,
+    });
+  },
+
+
   patch(post) {
     const id = post.PostID;
     delete post.PostID;
 
     return db("posts").where("PostID", id).update(post);
   },
-
+  getViewsPostByPostID(PostID){
+    return db("posts").select("Views").where("PostID", PostID);
+  },
+  async updateViewsPostByPostID(PostID){
+      const views = await this.getViewsPostByPostID(PostID);
+      const updateViews = views[0].Views+1;      
+      return db("posts").where("PostID", PostID).update({Views:updateViews});
+  },
   del(id) {
     return db("posts").where("PostID", id).del();
   },

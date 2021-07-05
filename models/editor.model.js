@@ -40,12 +40,20 @@ module.exports ={
             Status: postStatus,
         });
     },
-    updatePostAfterCheck(postID,notice,postStatus){
+    updatePostAfterCheck(postID,notice,postStatus,premium){
         return db("posts")
         .where("PostID", postID)
         .update({
             Status: postStatus,
             Notice: notice,
+            Premium: premium,
+        });
+    },
+    setDatePost(postID,datePost){
+        return db("posts")
+        .where("PostID", postID)
+        .update({
+            Date: datePost,
         });
     }
 }

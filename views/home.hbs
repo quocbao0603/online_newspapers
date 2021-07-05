@@ -22,7 +22,7 @@ function myFunction(postPremium) {
         <div class="row">
             <div class="col-md-6 tn-left">
                 <div class="tn-img">
-                    <img src="/public/imgs/posts/{{this.topNewsLeft.PostID}}/main_thumbs.jpg" style="width:900px;height:600px;">
+                    <img src="/public/imgs/posts/{{this.topNewsLeft.PostID}}/main_thumbs.jpg" style="width:900px;height:615px;">
                     <div class="tn-content">
                         <div class="tn-content-inner">
                             <div class="mb-2 ">
@@ -259,78 +259,43 @@ function myFunction(postPremium) {
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="mn-img">
-                                    <img src="/public/img/latest-news.jpg" />
+                                    <img src="/public/imgs/posts/{{topPopularNewsMain.PostID}}/main_thumbs.jpg" style="width:450px;height:292px;"/>
                                 </div>
                                 <div class="mn-content">
-                                    <a class="mn-title" href="">Cras commodo sem ut porta laoreet</a>
-                                    <a class="mn-date" href=""><i class="far fa-clock"></i>05-Feb-2020</a>
+                                    <a class="mn-title" href="/posts/details/{{topPopularNewsMain.PostID}}" onclick="return myFunction({{this.Premium}})">{{topPopularNewsMain.PostName}}</a>
+                                    <a class="mn-date" href=""><i class="far fa-clock"></i>{{topPopularNewsMain.Date}}</a>
                                     <div class="mb-2">
                                         <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                            href="">Business</a>
+                                            href="posts/byCat/{{topPopularNewsMain.CatIDLv1}}/{{topPopularNewsMain.CatIDLv2}}">{{topPopularNewsMain.CatNameLv1}}|{{topPopularNewsMain.CatNameLv2}}</a>
+                                        {{#if this.Premium}}
+                                            <span class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2" style="background-color:coral"><i class="fa fa-diamond" aria-hidden="true"></i>Premium</span>
+                                        {{/if}}
                                     </div>
                                     <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed porta dui. Class aptent taciti sociosqu ad litora torquent per conubia nostra inceptos...
+                                        {{topPopularNewsMain.TinyContent}}
                                     </p>
                                 </div>
                             </div>
                             <div class="col-lg-6">
+                                {{#each topPopularNews}}
                                 <div class="mn-list">
                                     <div class="mn-img">
-                                        <img src="/public/img/latest-news.jpg" />
+                                        <img src="/public/imgs/posts/{{PostID}}/main_thumbs.jpg" style="width: 100px;height: 90px;"/>
                                     </div>
                                     <div class="mn-content">
-                                        <a class="mn-title" href="">Pellentesque sit amet rutrum lacus</a>
-                                        <a class="mn-date" href=""><i class="far fa-clock"></i>05-Feb-2020</a>
-                                    </div>
-                                </div>
-                                <div class="mn-list">
-                                    <div class="mn-img">
-                                        <img src="/public/img/latest-news.jpg" />
-                                    </div>
-                                    <div class="mn-content">
-                                        <a class="mn-title" href="">Proin id pretium orci, quis rhoncus eros</a>
-                                        <a class="mn-date" href=""><i class="far fa-clock"></i>05-Feb-2020</a>
-                                    </div>
-                                </div>
-                                <div class="mn-list">
-                                    <div class="mn-img">
-                                        <img src="/public/img/latest-news.jpg" />
-                                    </div>
-                                    <div class="mn-content">
-                                        <a class="mn-title" href="">Curabitur viverra scelerisque tempor</a>
-                                        <a class="mn-date" href=""><i class="far fa-clock"></i>05-Feb-2020</a>
+                                        <a class="mn-title" href="/posts/details/{{PostID}}" onclick="return myFunction({{this.Premium}})">{{PostName}}</a>
+                                        <a class="mn-date" href=""><i class="far fa-clock"></i>{{Date}}</a>
                                         <div class="mb-2">
-                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                                href="">Business</a>
+                                            <a class="badge badge-primary"
+                                                href="posts/byCat/{{CatIDLv1}}/{{CatIDLv2}}">{{CatNameLv1}}|{{CatNameLv2}}</a>
+                                                
+                                            {{#if this.Premium}}
+                                            <span class="badge badge-primary" style="background-color:coral"><i class="fa fa-diamond" aria-hidden="true"></i>Premium</span>
+                                            {{/if}}
                                         </div>
                                     </div>
                                 </div>
-                                <div class="mn-list">
-                                    <div class="mn-img">
-                                        <img src="/public/img/latest-news.jpg" />
-                                    </div>
-                                    <div class="mn-content">
-                                        <a class="mn-title" href="">Integer nec lorem facilisis interdum lorem non</a>
-                                        <a class="mn-date" href=""><i class="far fa-clock"></i>05-Feb-2020</a>
-                                        <div class="mb-2">
-                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                                href="">Business</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mn-list">
-                                    <div class="mn-img">
-                                        <img src="/public/img/latest-news.jpg" />
-                                    </div>
-                                    <div class="mn-content">
-                                        <a class="mn-title" href="">Interdum et malesuada fames</a>
-                                        <a class="mn-date" href=""><i class="far fa-clock"></i>05-Feb-2020</a>
-                                        <div class="mb-2">
-                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                                href="">Business</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                {{/each}}
                             </div>
                         </div>
                     </div>
@@ -339,86 +304,42 @@ function myFunction(postPremium) {
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="mn-img">
-                                    <img src="/public/img/popular-news.jpg" />
+                                    <img src="/public/imgs/posts/{{topViewsNewsMain.PostID}}/main_thumbs.jpg" style="width:450px;height:292px;"/>
                                 </div>
                                 <div class="mn-content">
-                                    <a class="mn-title" href="">Phasellus gravida metus vitae laoreet aliquam</a>
-                                    <a class="mn-date" href=""><i class="far fa-clock"></i>05-Feb-2020</a>
+                                    <a class="mn-title" href="/posts/details/{{topViewsNewsMain.PostID}}" onclick="return myFunction({{this.Premium}})">{{topViewsNewsMain.PostName}}</a>
+                                    <a class="mn-date" href=""><i class="far fa-clock"></i>{{topViewsNewsMain.Date}}</a>
                                     <div class="mb-2">
                                         <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                            href="">Business</a>
+                                            href="posts/byCat/{{topViewsNewsMain.CatIDLv1}}/{{topViewsNewsMain.CatIDLv2}}">{{topViewsNewsMain.CatNameLv1}}|{{topViewsNewsMain.CatNameLv2}}</a>
+                                        {{#if this.Premium}}
+                                            <span class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2" style="background-color:coral"><i class="fa fa-diamond" aria-hidden="true"></i>Premium</span>
+                                        {{/if}}
                                     </div>
                                     <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed porta dui. Class aptent taciti sociosqu ad litora torquent per conubia nostra inceptos...
+                                        {{topViewsNewsMain.TinyContent}}
                                     </p>
                                 </div>
                             </div>
                             <div class="col-lg-6">
+                                {{#each topViewsNews}}
                                 <div class="mn-list">
                                     <div class="mn-img">
-                                        <img src="/public/img/popular-news.jpg" />
+                                        <img src="/public/imgs/posts/{{PostID}}/main_thumbs.jpg" style="width: 100px;height: 90px;"/>
                                     </div>
                                     <div class="mn-content">
-                                        <a class="mn-title" href="">Nullam risus ante sempe</a>
-                                        <a class="mn-date" href=""><i class="far fa-clock"></i>05-Feb-2020</a>
+                                        <a class="mn-title" href="/posts/details/{{PostID}}" onclick="return myFunction({{this.Premium}})">{{PostName}}</a>
+                                        <a class="mn-date" href=""><i class="far fa-clock"></i>{{Date}}</a>
                                         <div class="mb-2">
-                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                                href="">Business</a>
+                                            <a class="badge badge-primary"
+                                                href="posts/byCat/{{CatIDLv1}}/{{CatIDLv2}}">{{CatNameLv1}}|{{CatNameLv2}}</a>
+                                            {{#if this.Premium}}
+                                            <span class="badge badge-primary" style="background-color:coral"><i class="fa fa-diamond" aria-hidden="true"></i>Premium</span>
+                                            {{/if}}
                                         </div>
                                     </div>
                                 </div>
-                                <div class="mn-list">
-                                    <div class="mn-img">
-                                        <img src="/public/img/popular-news.jpg" />
-                                    </div>
-                                    <div class="mn-content">
-                                        <a class="mn-title" href="">Pellentesque ultrices quam id ipsum tempor</a>
-                                        <a class="mn-date" href=""><i class="far fa-clock"></i>05-Feb-2020</a>
-                                        <div class="mb-2">
-                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                                href="">Business</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mn-list">
-                                    <div class="mn-img">
-                                        <img src="/public/img/popular-news.jpg" />
-                                    </div>
-                                    <div class="mn-content">
-                                        <a class="mn-title" href="">Nam ex magna, commodo sed turpis rutrum</a>
-                                        <a class="mn-date" href=""><i class="far fa-clock"></i>05-Feb-2020</a>
-                                        <div class="mb-2">
-                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                                href="">Business</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mn-list">
-                                    <div class="mn-img">
-                                        <img src="/public/img/popular-news.jpg" />
-                                    </div>
-                                    <div class="mn-content">
-                                        <a class="mn-title" href="">Aliquam condimentum metus</a>
-                                        <a class="mn-date" href=""><i class="far fa-clock"></i>05-Feb-2020</a>
-                                        <div class="mb-2">
-                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                                href="">Business</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mn-list">
-                                    <div class="mn-img">
-                                        <img src="/public/img/popular-news.jpg" />
-                                    </div>
-                                    <div class="mn-content">
-                                        <a class="mn-title" href="">Ut ornare rutrum ligula erat volutpat</a>
-                                        <a class="mn-date" href=""><i class="far fa-clock"></i>05-Feb-2020</a>
-                                        <div class="mb-2">
-                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                                href="">Business</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                {{/each}}
                             </div>
                         </div>
                     </div>

@@ -10,10 +10,15 @@ module.exports = function (app) {
     const businessNews = await menuModel.businessNews();
     const sportsNews = await menuModel.sportsNews();
     const sciencesNews = await menuModel.sciencesNews();
+    const topViewsNews = await menuModel.topViewsNews();
+    const topPopularNews = await menuModel.topPopularNews(); 
     top4News=[]
     formatDate(topNews);formatDate(news);formatDate(worldNews);
     formatDate(sportsNews);formatDate(sciencesNews);formatDate(businessNews);
-    formatDate(perspectivesNews);
+    formatDate(perspectivesNews);formatDate(topPopularNews);//formatDate(topViewsNews);
+    const topViewsNewsMain = topViewsNews.pop();
+    const topPopularNewsMain = topPopularNews.pop();
+    console.log(topViewsNews);
     for(i=0;i<4;i++){
       top4News.push(topNews[i])
     }
@@ -26,6 +31,10 @@ module.exports = function (app) {
       businessNews:businessNews,
       sciencesNews:sciencesNews,
       sportsNews:sportsNews,
+      topViewsNews:topViewsNews,
+      topPopularNews:topPopularNews,
+      topPopularNewsMain: topPopularNewsMain,
+      topViewsNewsMain: topViewsNewsMain,
     });
   });
 

@@ -6,6 +6,7 @@ const passport = require("passport");
 const userModel = require("../models/user.model");
 const auth = require("../middlewares/auth.mdw");
 
+
 const initializePassport = require("../passport-config");
 initializePassport(passport);
 
@@ -42,18 +43,6 @@ router.get("/is-available", async function(req, res) {
     res.json(false);
 });
 
-<<<<<<< Updated upstream
-router.get("/profile", auth, function (req, res) {
-  const user = req.user;
-  user.dob = moment(user.dob, "YYYY-MM-DD").format("DD/MM/YYYY");
-  res.render("vwAccount/profile", { infoUser: user });
-});
-
-router.get("/login", async function (req, res) {
-  res.render("vwAccount/login", {
-    layout: false,
-  });
-=======
 router.get("/profile", auth, function(req, res) {
     const user = req.user;
     user.dob = moment(user.dob, "YYYY-MM-DD").format("MM/DD/YYYY");
@@ -77,7 +66,7 @@ router.post("/profile/patch", auth, async function(req, res) {
     //const url = "/account/profile/patch";
     //console.log("TEST URL patch: ");
     //console.log(url);
-    res.render("vwAccount/profile", { infoUser: user });
+    res.render("vwAccount/profile", { infoUser: user_update });
 });
 
 router.post("/resPremium", auth, async function(req, res) {
@@ -99,7 +88,6 @@ router.get("/login", async function(req, res) {
     res.render("vwAccount/login", {
         layout: false,
     });
->>>>>>> Stashed changes
 });
 
 router.post("/login", checkNotAuthenticated, function(req, res, next) {

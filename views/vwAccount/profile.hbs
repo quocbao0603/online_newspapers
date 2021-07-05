@@ -1,35 +1,90 @@
+{{#section 'js'}}
+<script>
+  function checkEmail(email) {
+    var filter = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (!filter.test(email.value)) {
+        //alert('Please provide a valid email address');
+        //email.focus;
+        return false;
+    }
+    return true;
+  }
+    function checkFunction(){
+      var Flag = true;
+      const email = document.getElementById("email");
+      //console.log(email);
+      if (!checkEmail(email)){
+        alert('Please provide a valid email address');
+        //email.focus;
+        Flag = false;
+      }
+      if (Flag){
+        alert('Cập nhật thông tin thành công!');
+      }
+      return Flag;
+    }
+</script>
+{{/section}}
+
 <div class="card">
   <h4 class="card-header">
     Thông tin cá nhân
   </h4>
   <div class="card-body">
     {{#if infoUser}}
+<<<<<<< Updated upstream
     <form>
+=======
+    <form method="POST">
+
+>>>>>>> Stashed changes
       <div class="form-group row">
         <label for="name" class="col-sm-2 col-form-label">Tên người dùng</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control-plaintext" id="name" value="{{infoUser.name}}">
+          <input type="text" class="form-control-plaintext" id="name" name = "name" value="{{infoUser.name}}">
         </div>
       </div>
       <div class="form-group row">
         <label for="email" class="col-sm-2 col-form-label">Email</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control-plaintext" id="email" value={{infoUser.email}}>
+          <input type="text" class="form-control-plaintext" id="email" name = "email" value={{infoUser.email}}>
         </div>
       </div>
+
       <div class="form-group row">
         <label for="dob" class="col-sm-2 col-form-label">Ngày sinh</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control-plaintext" id="dob" value={{infoUser.dob}}>
+          {{!-- <input type="date" id="birthday" name="birthday"> --}}
+          <input type="text" class="form-control-plaintext"  placeholder="MM/DD/YYYY" onfocus="this.type = 'date'" onblur="this.type = 'text'"
+          !-- id="dob" name = "dob"  value={{infoUser.dob}}>
+          
         </div>
       </div>
+
       <div class="form-group row">
         <label for="permission" class="col-sm-2 col-form-label">Quyền truy cập</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control-plaintext" id="permission" value={{infoUser.permission}}>
+          <input type="text" readonly class="form-control-plaintext" id="permission" value={{infoUser.permission}}>
         </div>
       </div>
+<<<<<<< Updated upstream
+=======
+      <div class="form-group row">
+        <label for="premium" class="col-sm-2 col-form-label">Premium</label>
+        <div class="col-sm-10">
+          <input type="text" readonly class="form-control-plaintext" id="premium" value={{infoUser.premium}}>
+        </div>
+      </div>
+
+      
+      <button type="submit" class="btn btn-success" onclick="return checkFunction()" formaction="/account/profile/patch">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        Save
+      </button>
+>>>>>>> Stashed changes
     </form>
     {{/if}}
+    
   </div>
+  
 </div>

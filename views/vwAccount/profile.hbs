@@ -9,20 +9,35 @@
     }
     return true;
   }
-    function checkFunction(){
-      var Flag = true;
-      const email = document.getElementById("email");
-      //console.log(email);
-      if (!checkEmail(email)){
-        alert('Please provide a valid email address');
-        //email.focus;
-        Flag = false;
-      }
-      if (Flag){
-        alert('Cập nhật thông tin thành công!');
-      }
-      return Flag;
+  function checkDateChange(element) {
+    var date = Date.parse(element.value.toString());
+    console.log(element.value.toString());
+    if (isNaN(date))
+        return false
+    else
+        return true;
+  }
+  function checkFunction(){
+    var Flag = true;
+    const email = document.getElementById("email");
+    const date = dob;
+    console.log(date.value.toString());
+    if (!checkEmail(email)){
+      alert('Vui lòng cung cấp email hợp lệ!');
+      //email.focus;
+      Flag = false;
     }
+    if (!checkDateChange(date)){
+      alert('Vui lòng cung cấp ngày sinh hợp lệ!');
+      //email.focus;
+      Flag = false;
+    }
+
+    if (Flag){
+      alert('Cập nhật thông tin thành công!');
+    }
+    return Flag;
+  }
 </script>
 {{/section}}
 
@@ -70,7 +85,7 @@
       </div>
 
       
-      <button type="submit" class="btn btn-success" onclick="return checkFunction()" formaction="/account/profile/patch">
+      <button type="submit" class="btn btn-success" onclick="return checkFunction()" formaction="/account/profile/">
         <i class="fa fa-check" aria-hidden="true"></i>
         Save
       </button>

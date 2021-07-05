@@ -43,7 +43,6 @@ router.get("/is-available", async function(req, res) {
     res.json(false);
 });
 
-<<<<<<< HEAD
 router.get("/profile", auth, function(req, res) {
     const user = req.user;
     user.dob = moment(user.dob, "YYYY-MM-DD").format("MM/DD/YYYY");
@@ -52,51 +51,24 @@ router.get("/profile", auth, function(req, res) {
     res.render("vwAccount/profile", { infoUser: user });
 });
 
-router.post("/profile/patch", auth, async function(req, res) {
+router.post("/profile/", auth, async function(req, res) {
     //console.log(req.body.premium)
     const user_update = req.user;
     //update nhung j?
     user_update.name = req.body.name;
     user_update.email = req.body.email;
     user_update.dob = req.body.dob;
-    //console.log("Test user:");
-    //console.log(user_update);
-    //console.log(req.user);
+    user_update.dob = moment(user_update.dob).format("YYYY-MM-DD");
+    console.log("Test user:");
+    console.log(user_update);
+    console.log(req.body);
     await userModel.patch(user_update);
-    //const url = req.session.retUrl || "/account/profile/patch";
+    const url = "/";
+    res.redirect(url);
     //const url = "/account/profile/patch";
     //console.log("TEST URL patch: ");
     //console.log(url);
-    res.render("vwAccount/profile", { infoUser: user_update });
-=======
-router.get("/profile", auth, function (req, res) {
-  const user = req.user;
-  user.dob = moment(user.dob, "YYYY-MM-DD").format("DD/MM/YYYY");
-
-  //console.log(user)
-  res.render("vwAccount/profile", { infoUser: user });
-});
-
-router.post("/resPremium",auth,async function(req,res){
-  //console.log(req.body.premium)
-  console.log(req.body.times)
-  await userModel.updatePremium(req.user.id,+req.body.times)
-  const url = req.session.retUrl || "/";
-  console.log(url)
-  res.redirect(url);
-});
-
-router.get("/resPremium",function(req,res){
-  const user = req.user;
-  user.dob = moment(user.dob, "YYYY-MM-DD").format("DD/MM/YYYY");
-  res.render("vwAccount/resPremium", { infoUser: user });
-})
-
-router.get("/login", async function (req, res) {
-  res.render("vwAccount/login", {
-    layout: false,
-  });
->>>>>>> main
+    //res.render("vwAccount/profile", { infoUser: user_update });
 });
 
 router.post("/resPremium", auth, async function(req, res) {

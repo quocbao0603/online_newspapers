@@ -1,7 +1,32 @@
+const moment = require("moment");
+const { showCatNameLv1, sciencesNews } = require("../models/menu.model");
+const menuModel = require("../models/menu.model");
 module.exports = function (app) {
-  app.get("/", function (req, res) {
-    // res.send('<b>Hello</b> World!');
-    res.render("home");
+  app.get("/", async function (req, res) {
+    const topNews = await menuModel.topNews();
+    const news = await menuModel.news();
+    const worldNews = await menuModel.worldNews();
+    const perspectivesNews = await menuModel.perspectivesNews();
+    const businessNews = await menuModel.businessNews();
+    const sportsNews = await menuModel.sportsNews();
+    const sciencesNews = await menuModel.sciencesNews();
+    top4News=[]
+    formatDate(topNews);formatDate(news);formatDate(worldNews);
+    formatDate(sportsNews);formatDate(sciencesNews);formatDate(businessNews);
+    formatDate(perspectivesNews);
+    for(i=0;i<4;i++){
+      top4News.push(topNews[i])
+    }
+    res.render("home",{
+      topNewsRight: top4News,
+      topNewsLeft: topNews[4],
+      news: news,
+      worldNews: worldNews,
+      perspectivesNews: perspectivesNews,
+      businessNews:businessNews,
+      sciencesNews:sciencesNews,
+      sportsNews:sportsNews,
+    });
   });
 
   app.get("/about", function (req, res) {
@@ -17,5 +42,14 @@ module.exports = function (app) {
   app.use("/admin/categories/", require("../controllers/category.route"));
   app.use("/products/", require("../controllers/product-user.route"));
   app.use("/posts/", require("../controllers/post-user.route"));
+  app.use("/writer/", require("../controllers/post-writer.route"));
   app.use("/demo/", require("../controllers/demo.route"));
+  app.use("/editor/",require("../controllers/post-editor.route"));
 };
+
+formatDate = function(list){
+  for(i=0;i<list.length;i++)
+    list[i].Date=moment(list[i].Date).format("ll")
+  return list;
+}
+ 

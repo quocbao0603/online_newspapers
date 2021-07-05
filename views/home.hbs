@@ -10,81 +10,40 @@
         <div class="row">
             <div class="col-md-6 tn-left">
                 <div class="tn-img">
-                    <img src="/public/img/top-news-1.jpg" />
+                    <img src="/public/imgs/posts/{{this.topNewsLeft.PostID}}/main_thumbs.jpg" style="width:900px;height:600px;">
                     <div class="tn-content">
                         <div class="tn-content-inner">
-                            <a class="tn-date" href=""><i class="far fa-clock"></i>05-Feb-2020</a>
-                            <div class="mb-2">
+                            <div class="mb-2 ">
                                 <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                    href="">Business</a>
+                                    href="posts/byCat/{{this.topNewsLeft.CatIDLv1}}/{{this.topNewsLeft.CatIDLv2}}">{{this.topNewsLeft.CatNameLv1}}|{{this.topNewsLeft.CatNameLv2}}</a>
+                                <i class="tn-date far fa-clock"style="color:white !important">{{this.topNewsLeft.Date}}</i>
+                                
                             </div>
-                            <a class="tn-title" href="">Lorem ipsum dolor sit amet adipiscing elit</a>
+                            <a class="tn-title" href="/posts/details/{{this.topNewsLeft.PostID}}">{{this.topNewsLeft.PostName}}</a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-6 tn-right">
                 <div class="row">
+                    {{#each topNewsRight}}
                     <div class="col-md-6">
                         <div class="tn-img">
-                            <img src="/public/img/top-news-2.jpg" />
+                            <img src="/public/imgs/posts/{{PostID}}/main_thumbs.jpg" style="width:450px;height:292px;"/>
                             <div class="tn-content">
                                 <div class="tn-content-inner">
-                                    <a class="tn-date" href=""><i class="far fa-clock"></i>05-Feb-2020</a>
                                     <div class="mb-2">
                                         <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                        href="">Business</a>
+                                            href="posts/byCat/{{CatIDLv1}}/{{CatIDLv2}}">{{CatNameLv1}}|{{CatNameLv2}}</a>
+                                        <i class="far fa-clock"style="color:white !important">{{Date}}</i>
+                                        
                                     </div>
-                                    <a class="tn-title" href="">Integer faucibus pharetra odio</a>
+                                    <a class="tn-title" href="/posts/details/{{PostID}}">{{PostName}}</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="tn-img">
-                            <img src="/public/img/top-news-3.jpg" />
-                            <div class="tn-content">
-                                <div class="tn-content-inner">
-                                    <a class="tn-date" href=""><i class="far fa-clock"></i>05-Feb-2020</a>
-                                    <div class="mb-2">
-                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                            href="">Business</a>
-                                    </div>
-                                    <a class="tn-title" href="">Nulla vitae pharetra ligula</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="tn-img">
-                            <img src="/public/img/top-news-4.jpg" />
-                            <div class="tn-content">
-                                <div class="tn-content-inner">
-                                    <a class="tn-date" href=""><i class="far fa-clock"></i>05-Feb-2020</a>
-                                    <div class="mb-2">
-                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                            href="">Business</a>
-                                    </div>
-                                    <a class="tn-title" href="">Ut ac euismod tellus a blandit</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="tn-img">
-                            <img src="/public/img/top-news-5.jpg" />
-                            <div class="tn-content">
-                                <div class="tn-content-inner">
-                                    <a class="tn-date" href=""><i class="far fa-clock"></i>05-Feb-2020</a>
-                                    <div class="mb-2">
-                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                            href="">Business</a>
-                                    </div>
-                                    <a class="tn-title" href="">Cras ac egestas sem nec euismod</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {{/each}}
                 </div>
             </div>
         </div>
@@ -95,103 +54,50 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
-                <h2><i class="fas fa-align-justify"></i>Sports</h2>
+                <h2><i class="fas fa-align-justify"></i>THỜI SỰ</h2>
                 <div class="row cn-slider">
-                    <div class="col-md-6">
-                        <div class="cn-img">
-                            <img src="/public/img/cat-news-1.jpg" />
-                            <div class="cn-content">
-                                <div class="cn-content-inner">
-                                    <a class="cn-date" href=""><i class="far fa-clock"></i>05-Feb-2020</a>
-                                    <div class="mb-2">
-                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                            href="">Business</a>
+                    {{#each news}}
+                        <div class="col-md-6">
+                            <div class="cn-img">
+                                <img src="/public/imgs/posts/{{PostID}}/main_thumbs.jpg" style="width:450px;height:292px;"/>
+                                <div class="cn-content">
+                                    <div class="cn-content-inner">
+                                        
+                                        <div class="mb-2">
+                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
+                                                href="posts/byCat/{{CatIDLv1}}/{{CatIDLv2}}">{{CatNameLv2}}</a>
+                                            <i class="far fa-clock"style="color:white !important">{{Date}}</i>
+                                        </div>
+                                        <a class="cn-title" href="/posts/details/{{PostID}}">{{PostName}}</a>
                                     </div>
-                                    <a class="cn-title" href="">Cras sed semper puru vitae lobortis velit</a>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="cn-img">
-                            <img src="/public/img/cat-news-2.jpg" />
-                            <div class="cn-content">
-                                <div class="cn-content-inner">
-                                    <a class="cn-date" href=""><i class="far fa-clock"></i>05-Feb-2020</a>
-                                    <div class="mb-2">
-                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                            href="">Business</a>
-                                    </div>
-                                    <a class="cn-title" href="">Vestibulum ante ipsum primis</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="cn-img">
-                            <img src="/public/img/cat-news-3.jpg" />
-                            <div class="cn-content">
-                                <div class="cn-content-inner">
-                                    <a class="cn-date" href=""><i class="far fa-clock"></i>05-Feb-2020</a>
-                                    <div class="mb-2">
-                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                            href="">Business</a>
-                                    </div>
-                                    <a class="cn-title" href="">Sed quis convallis lacus</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {{/each}}
+    
                 </div>
             </div>
             <div class="col-md-6">
-                <h2><i class="fas fa-align-justify"></i>Technology</h2>
+                <h2><i class="fas fa-align-justify"></i>GÓC NHÌN</h2>
                 <div class="row cn-slider">
-                    <div class="col-md-6">
-                        <div class="cn-img">
-                            <img src="/public/img/cat-news-4.jpg" />
-                            <div class="cn-content">
-                                <div class="cn-content-inner">
-                                    <a class="cn-date" href=""><i class="far fa-clock"></i>05-Feb-2020</a>
-                                    <div class="mb-2">
-                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                            href="">Business</a>
+                    {{#each perspectivesNews}}
+                        <div class="col-md-6">
+                            <div class="cn-img">
+                                <img src="/public/imgs/posts/{{PostID}}/main_thumbs.jpg" style="width:450px;height:292px;"/>
+                                <div class="cn-content">
+                                    <div class="cn-content-inner">
+                                        
+                                        <div class="mb-2">
+                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
+                                                href="posts/byCat/{{CatIDLv1}}/{{CatIDLv2}}">{{CatNameLv2}}</a>
+                                            <i class="far fa-clock"style="color:white !important">{{Date}}</i>
+                                        </div>
+                                        <a class="cn-title" href="/posts/details/{{PostID}}">{{PostName}}</a>
                                     </div>
-                                    <a class="cn-title" href="">Vivamus vel felis nec magna</a>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="cn-img">
-                            <img src="/public/img/cat-news-5.jpg" />
-                            <div class="cn-content">
-                                <div class="cn-content-inner">
-                                    <a class="cn-date" href=""><i class="far fa-clock"></i>05-Feb-2020</a>
-                                    <div class="mb-2">
-                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                            href="">Business</a>
-                                    </div>
-                                    <a class="cn-title" href="">Phasellus vitae fermentum est</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="cn-img">
-                            <img src="/public/img/cat-news-6.jpg" />
-                            <div class="cn-content">
-                                <div class="cn-content-inner">
-                                    <a class="cn-date" href=""><i class="far fa-clock"></i>05-Feb-2020</a>
-                                    <div class="mb-2">
-                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                            href="">Business</a>
-                                    </div>
-                                    <a class="cn-title" href="">Aenean ut varius dui</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {{/each}}
                 </div>
             </div>
         </div>
@@ -202,103 +108,103 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
-                <h2><i class="fas fa-align-justify"></i>Business</h2>
+                <h2><i class="fas fa-align-justify"></i>THẾ GIỚI</h2>
                 <div class="row cn-slider">
-                    <div class="col-md-6">
-                        <div class="cn-img">
-                            <img src="/public/img/cat-news-7.jpg" />
-                            <div class="cn-content">
-                                <div class="cn-content-inner">
-                                    <a class="cn-date" href=""><i class="far fa-clock"></i>05-Feb-2020</a>
-                                    <div class="mb-2">
-                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                            href="">Business</a>
+                   {{#each worldNews}}
+                        <div class="col-md-6">
+                            <div class="cn-img">
+                                <img src="/public/imgs/posts/{{PostID}}/main_thumbs.jpg" style="width:450px;height:292px;"/>
+                                <div class="cn-content">
+                                    <div class="cn-content-inner">
+                                        
+                                        <div class="mb-2">
+                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
+                                                href="posts/byCat/{{CatIDLv1}}/{{CatIDLv2}}">{{CatNameLv2}}</a>
+                                            <i class="far fa-clock"style="color:white !important">{{Date}}</i>
+                                        </div>
+                                        <a class="cn-title" href="/posts/details/{{PostID}}">{{PostName}}</a>
                                     </div>
-                                    <a class="cn-title" href="">Interdum et malesuada fames ac ante</a>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="cn-img">
-                            <img src="/public/img/cat-news-8.jpg" />
-                            <div class="cn-content">
-                                <div class="cn-content-inner">
-                                    <a class="cn-date" href=""><i class="far fa-clock"></i>05-Feb-2020</a>
-                                    <div class="mb-2">
-                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                            href="">Business</a>
-                                    </div>
-                                    <a class="cn-title" href="">Mauris non ligula eget ante sagittis</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="cn-img">
-                            <img src="/public/img/cat-news-9.jpg" />
-                            <div class="cn-content">
-                                <div class="cn-content-inner">
-                                    <a class="cn-date" href=""><i class="far fa-clock"></i>05-Feb-2020</a>
-                                    <div class="mb-2">
-                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                            href="">Business</a>
-                                    </div>
-                                    <a class="cn-title" href="">Integer non nunc nec nulla aliquet</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {{/each}}
                 </div>
             </div>
             <div class="col-md-6">
-                <h2><i class="fas fa-align-justify"></i>Entertainment</h2>
+                <h2><i class="fas fa-align-justify"></i>KINH DOANH</h2>
                 <div class="row cn-slider">
-                    <div class="col-md-6">
-                        <div class="cn-img">
-                            <img src="/public/img/cat-news-10.jpg" />
-                            <div class="cn-content">
-                                <div class="cn-content-inner">
-                                    <a class="cn-date" href=""><i class="far fa-clock"></i>05-Feb-2020</a>
-                                    <div class="mb-2">
-                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                            href="">Business</a>
+                    {{#each businessNews}}
+                        <div class="col-md-6">
+                            <div class="cn-img">
+                                <img src="/public/imgs/posts/{{PostID}}/main_thumbs.jpg" style="width:450px;height:292px;"/>
+                                <div class="cn-content">
+                                    <div class="cn-content-inner">
+                                        
+                                        <div class="mb-2">
+                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
+                                                href="posts/byCat/{{CatIDLv1}}/{{CatIDLv2}}">{{CatNameLv2}}</a>
+                                            <i class="far fa-clock"style="color:white !important">{{Date}}</i>
+                                        </div>
+                                        <a class="cn-title" href="/posts/details/{{PostID}}">{{PostName}}</a>
                                     </div>
-                                    <a class="cn-title" href="">Ut laoreet justo non ornare</a>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="cn-img">
-                            <img src="/public/img/cat-news-11.jpg" />
-                            <div class="cn-content">
-                                <div class="cn-content-inner">
-                                    <a class="cn-date" href=""><i class="far fa-clock"></i>05-Feb-2020</a>
-                                    <div class="mb-2">
-                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                            href="">Business</a>
+                    {{/each}}
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="cat-news">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <h2><i class="fas fa-align-justify"></i>KHOA HỌC</h2>
+                <div class="row cn-slider">
+                   {{#each sciencesNews}}
+                        <div class="col-md-6">
+                            <div class="cn-img">
+                                <img src="/public/imgs/posts/{{PostID}}/main_thumbs.jpg" style="width:450px;height:292px;"/>
+                                <div class="cn-content">
+                                    <div class="cn-content-inner">
+                                        
+                                        <div class="mb-2">
+                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
+                                                href="posts/byCat/{{CatIDLv1}}/{{CatIDLv2}}">{{CatNameLv2}}</a>
+                                            <i class="far fa-clock"style="color:white !important">{{Date}}</i>
+                                        </div>
+                                        <a class="cn-title" href="/posts/details/{{PostID}}">{{PostName}}</a>
                                     </div>
-                                    <a class="cn-title" href="">Proin a nulla ut enim feugiat</a>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="cn-img">
-                            <img src="/public/img/cat-news-12.jpg" />
-                            <div class="cn-content">
-                                <div class="cn-content-inner">
-                                    <a class="cn-date" href=""><i class="far fa-clock"></i>05-Feb-2020</a>
-                                    <div class="mb-2">
-                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                            href="">Business</a>
+                    {{/each}}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h2><i class="fas fa-align-justify"></i>THỂ THAO</h2>
+                <div class="row cn-slider">
+                      {{#each sportsNews}}
+                        <div class="col-md-6">
+                            <div class="cn-img">
+                              <img src="/public/imgs/posts/{{PostID}}/main_thumbs.jpg" style="width:450px;height:292px;"/>
+                                <div class="cn-content">
+                                    <div class="cn-content-inner">
+                                        
+                                        <div class="mb-2">
+                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
+                                                href="posts/byCat/{{CatIDLv1}}/{{CatIDLv2}}">{{CatNameLv2}}</a>
+                                            <i class="far fa-clock"style="color:white !important">{{Date}}</i>
+                                        </div>
+                                        <a class="cn-title" href="/posts/details/{{PostID}}">{{PostName}}</a>
                                     </div>
-                                    <a class="cn-title" href="">Sed mauris sem sollicitudin at neque</a>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    {{/each}}
                 </div>
             </div>
         </div>
@@ -311,7 +217,7 @@
             <div class="col-md-8">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2><i class="fas fa-align-justify"></i>Latest News</h2>
+                        <h2><i class="fas fa-align-justify"></i>TIN TỨC NỔI BẬT</h2>
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="mn-img">
@@ -391,7 +297,7 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <h2><i class="fas fa-align-justify"></i>Popular News</h2>
+                        <h2><i class="fas fa-align-justify"></i>ĐƯỢC XEM NHIỀU</h2>
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="mn-img">
@@ -478,6 +384,44 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="sidebar">
+                    <div class="sidebar-widget">
+                        <h2><i class="fas fa-align-justify"></i>Category</h2>
+                        <div class="category">
+                            <ul class="fa-ul">
+                                <li><span class="fa-li"><i class="far fa-arrow-alt-circle-right"></i></span><a href="">National</a></li>
+                                <li><span class="fa-li"><i class="far fa-arrow-alt-circle-right"></i></span><a href="">International</a></li>
+                                <li><span class="fa-li"><i class="far fa-arrow-alt-circle-right"></i></span><a href="">Economics</a></li>
+                                <li><span class="fa-li"><i class="far fa-arrow-alt-circle-right"></i></span><a href="">Politics</a></li>
+                                <li><span class="fa-li"><i class="far fa-arrow-alt-circle-right"></i></span><a href="">Lifestyle</a></li>
+                                <li><span class="fa-li"><i class="far fa-arrow-alt-circle-right"></i></span><a href="">Technology</a></li>
+                                <li><span class="fa-li"><i class="far fa-arrow-alt-circle-right"></i></span><a href="">Trades</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h2><i class="fas fa-align-justify"></i>Tags</h2>
+                        <div class="tags">
+                            <a href="">National</a>
+                            <a href="">International</a>
+                            <a href="">Economics</a>
+                            <a href="">Politics</a>
+                            <a href="">Lifestyle</a>
+                            <a href="">Technology</a>
+                            <a href="">Trades</a>
+                            <a href="">National</a>
+                            <a href="">International</a>
+                            <a href="">Economics</a>
+                            <a href="">Politics</a>
+                            <a href="">Lifestyle</a>
+                            <a href="">Technology</a>
+                            <a href="">Trades</a>
+                        </div>
+                    </div> 
                 </div>
             </div>
         </div>

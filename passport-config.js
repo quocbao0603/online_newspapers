@@ -36,9 +36,6 @@ function initialize(passport) {
   };
 
   const login_with_linked = async function (profile, cb) {
-    console.log(profile);
-    console.log(profile.emails[0].value);
-    console.log(profile.provider);
     const check_linked_user = await userModel.getIdByUIdAndProvider(
       profile.id,
       profile.provider
@@ -49,7 +46,6 @@ function initialize(passport) {
       );
       var userId = 0;
       if (check_email === undefined) {
-        console.log("insert");
         const new_user = {
           name: profile.displayName,
           email: profile.emails[0].value,
@@ -57,16 +53,13 @@ function initialize(passport) {
         };
         userId = await userModel.addUser(new_user);
       } else {
-        console.log("a");
         userId = check_email.id;
       }
-      console.log(userId);
       const new_linkedUser = {
         uId: profile.id,
         userId: userId,
         provider: profile.provider,
       };
-      console.log(new_linkedUser);
       await userModel.addLinkedUser(new_linkedUser);
       return cb(null, await userModel.getUserById(userId));
     }
@@ -106,7 +99,6 @@ function initialize(passport) {
     )
   );
   passport.serializeUser((user, done) => {
-    console.log(user.id);
     done(null, user.id);
   });
   passport.deserializeUser(async (id, done) => {

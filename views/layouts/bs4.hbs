@@ -19,7 +19,6 @@
   <link href="/public/lib/slick/slick.css" rel="stylesheet">
   <link href="/public/lib/slick/slick-theme.css" rel="stylesheet">
   <link href="/public/css/style.css" rel="stylesheet">
-
   {{{_sections.css}}}
   <style>
     .dropdown:hover>.dropdown-menu {
@@ -46,10 +45,10 @@
           </div>
         </div>
         <div class="col-lg-6 col-md-4">
-          <div class="search">
-            <input type="text" placeholder="Tìm kiếm">
-            <button><i class="fa fa-search"></i></button>
-          </div>
+          <form class="search" action="/posts/search">
+            <input type="text" id="txtSearch" name="q" placeholder="Tìm kiếm">
+            <button type="submit"><i class="fa fa-search"></i></button>
+          </form>
         </div>
         <div class="col-lg-3 col-md-4">
           <div class="social">
@@ -86,12 +85,12 @@
               Trang Chủ</a>
             {{#each lcCategories}}
             <div class="dropdown">
-              <a href="/posts/byCat/{{ID}}" class="nav-item nav-link ">
+              <a href="/posts/byCat/{{CatIDLv1}}" class="nav-item nav-link ">
                 {{CatNameLv1}}
               </a>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 {{#each CatName }}
-                <a class="dropdown-item" href="/posts/byCat/{{ID1}}/{{ID2}}">{{CatNameLv2}}</a>
+                <a class="dropdown-item" href="/posts/byCat/{{CatIDLv1}}/{{CatIDLv2}}">{{CatNameLv2}}</a>
                 {{/each}}
               </div>
             </div>
@@ -119,14 +118,35 @@
 
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                <i class="fa fa-user" aria-hidden="true"></i>
+                {{#if premium}}
+                  <i class="fa fa-diamond"></i>
+                {{else}}
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                {{/if}}
+                
+                
                 <b>{{authUser.name}}</b>
+
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="/account/profile">
                   <i class="fa fa-user" aria-hidden="true"></i>
                   Thông tin của bạn
                 </a>
+                {{#ifEquals authUser.permission "1"}}
+                <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="/writer/myposts">
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                  Bài viết của tôi
+                </a>
+                {{/ifEquals}}
+                {{#ifEquals authUser.permission "2"}}
+                <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="/editor/myposts">
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                  Duyệt bài viết
+                </a>
+                {{/ifEquals}}
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="javascript: $('#frmLogout').submit();">
                   <i class="fa fa-sign-out" aria-hidden="true"></i>

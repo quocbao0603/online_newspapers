@@ -1,3 +1,30 @@
+{{#section 'js'}}
+<script>
+function myFunction(postPremium) {
+  alerResPremium=0;
+  
+  //console.log(postPremium)
+  if(postPremium){
+    var r = confirm("Bạn phải đăng ký tài khoản Premium để xem được bài viết này!!!");
+    if (r == true) {
+      alerResPremium=1;
+    } else {
+      alerResPremium=0;
+    } 
+  }
+  
+  
+}
+</script>
+<script>
+  document.querySelector('#test').addEventListener('click', function (e) {
+    if (alerResPremium === 0) {
+      e.preventDefault();
+    }
+  })
+</script>
+{{/section}}
+
 <div class="card">
   <h4 class="card-header">
     {{this.title}}
@@ -9,36 +36,32 @@
     {{else}}
     <div class="row">
       {{#each this.posts}}
-      <!-- <div  class="col-sm-4 mb-3">
-        <div class="card h-100">
-          <img src="/public/imgs/posts/{{PostID}}/main_thumbs.jpg" class="card-img-top" alt="{{PostName}}"
-            title="{{PostName}}">
-          <div class="card-body">
-            <h5 class="card-title">{{PostName}}</h5>
-            <h5 class="card-title text-danger">{{Date}}</h5>
-            <p class="card-text">{{TinyContent}}</p>
-          </div>
-          <div class="card-footer">
-            <a class="btn btn-outline-primary btn-sm" href="/posts/details/{{PostID}}" role="button">
-              <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
-              Xem thêm
-            </a>
-          </div>
-        </div>
-      </div> -->
 
       <div class="col-md-12">
         <div class="card flex-md-row mb-4 box-shadow h-md-250">
           <div class="card-body d-flex flex-column align-items-start">
-            <strong class="d-inline-block mb-2 text-primary">{{PostName}}</strong>
+            {{!-- <strong class="d-inline-block mb-2 text-primary">{{PostName}}</strong> --}}
             <h3 class="mb-0">
-              <a class="text-dark" href="#">{{PostName}}</a>
+              <a class="text-primary" href="/posts/details/{{PostID}}" onclick="myFunction({{this.Premium}})" id="test">{{PostName}}</a>
             </h3>
-            <div class="mb-1 text-muted">{{Date}}</div>
+            <h5><a href="/posts/byCat/{{CatIDLv1}}/{{CatIDLv2}}" class="badge badge-secondary">{{CatNameLv1}} | {{CatNameLv2}}</a>
+              {{#if this.Premium}}
+                <span class="badge badge-secondary" style="background-color:coral"><i class="fa fa-diamond" aria-hidden="true"></i>Premium</span>
+              {{/if}}
+              
+            </h5>
+            <div class="mb-1 text-muted">
+              <i class="far fa-clock"></i>{{Date}}</div>
+            <div class="mb-1 text-muted">
+              {{#each tag}}
+              <a href="/posts/tags/{{TagID}}" class="badge badge-primary">{{TagName}}</a>
+              {{/each}}
+            </div>
             <p class="card-text mb-auto">{{TinyContent}}</p>
             <a href="/posts/details/{{PostID}}">Xem thêm</a>
           </div>
-          <img class="card-img-right flex-auto d-none d-md-block"  style="width: 300px;" src="/public/imgs/posts/{{PostID}}/main_thumbs.jpg">
+          <img class="card-img-right flex-auto d-none d-md-block" style="width: 300px;"
+            src="/public/imgs/posts/{{PostID}}/main_thumbs.jpg">
         </div>
       </div>
       {{/each}}

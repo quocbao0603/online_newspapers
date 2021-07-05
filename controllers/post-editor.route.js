@@ -51,8 +51,8 @@ page_numbers=0;
 router.get("/reviewPost/:id",async function(req,res){
     const postID = +req.params.id || 0;
     const post = await postModel.findById(postID);
-    CatNameLv1 = res.locals.lcCategories[post.CatIDLv1].CatNameLv1;
-    CatNameLv2 = res.locals.lcCategories[post.CatIDLv1].CatName[post.CatIDLv2].CatNameLv2;
+    CatNameLv1 = res.locals.lcCategories[post.CatIDLv1-1].CatNameLv1;
+    CatNameLv2 = res.locals.lcCategories[post.CatIDLv1-1].CatName[post.CatIDLv2-1].CatNameLv2;
     //post.push({CatNameLv1: CatNameLv1,CatNameLv2: CatNameLv2})
     //console.log(post);
     res.render("vwposts/reviewPost",{
@@ -66,7 +66,19 @@ router.post("/reviewPost/:id",async function(req,res){
   const postID = +req.params.id || 0;
   const postStatus = req.body.postStatus;
   const cmt = req.body.txtComments;
-  await editorModel.updatePostAfterCheck(postID,cmt,postStatus);
+  const postPremium = req.body.postPremium;
+  const now =  moment().format("YYYY-MM-DD h:m:s");
+  DatePost = req.body.datePost;
+  DatePost = moment(DatePost, "YYYY-MM-DDTh:m").format("YYYY-MM-DD h:m:s");
+  console.log(DatePost)
+  if(postStatus == 1 ){
+    if(now<DatePost){
+      postStatus=0
+    }
+    await editorModel.setDatePost(postID,DatePost);
+  }
+  await editorModel.updatePostAfterCheck(postID,cmt,postStatus,postPremium);
+  
   res.redirect("/editor/myposts")
 
 });

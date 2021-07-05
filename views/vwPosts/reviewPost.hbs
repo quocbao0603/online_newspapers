@@ -5,7 +5,7 @@
   var $cat = $(this).find('option:selected');
   var $subCat = $('#subcategory').find('.' + $cat.attr('class'));
   $('#subcategory').find('optgroup').not("'"+ '.' + $cat.attr('class') + "'").hide(); // hide other optgroup
-  $subCat.show();
+  $subCat.show(); 
   $subCat.find('option').first().attr('selected', 'selected');
   });
 </script>
@@ -14,15 +14,21 @@
     var opt = document.querySelector('#postStatus').value;
     if(opt=== "2"){
       var cmts = document.querySelector('#txtComments').value;
+     
       if( cmts.length === 0){
         alert('Yêu cầu viết chú thích trước khi từ chối bài viết');
         e.preventDefault();
       }
       
     }
-
-  })
-
+    else if(opt==="1"||opt==="0"){
+      var datetime = document.querySelector('#datePost').value;
+      if( datetime.length === 0){
+        alert('Yêu cầu chọn ngày xuất bản!!');
+        e.preventDefault();
+      }  
+    }
+  });
 </script>
 
 {{/section}}
@@ -37,15 +43,16 @@
             <p class="text-primary">{{post.PostName}}</p>
         </div>
         <p>Duyệt bài viết</p> 
-        <select class="form-control col-sm-3" id="postStatus" name="postStatus" required>
-              
-              <option value="1">Xuất bản</option>
-              <option value="2">Từ chối</option>
+        <select class="form-control col-sm-3" id="postStatus" name="postStatus" required>  
+          <option value="1">Xuất bản</option>
+          <option value="2">Từ chối</option>
         </select>
         <div class="form-group">
         <label for="txtCat">Chuyên mục</label>
         <br>
-        <div class="">
+        <p class="text-primary" style="color:crimson !important">{{CatNameLv1}}</p>
+        <p class="text-primary" style="color:crimson !important">{{CatNameLv2}}</p>
+        {{!-- <div class="">
           <select class="form-control col-sm-3" id="category" required>
               <option value="">Chọn chuyên mục cấp 1</option>
               {{#each lcCategories}}
@@ -62,8 +69,19 @@
             </optgroup>
             {{/each}}
           </select>
-        </div> 
+        </div>  --}}
       </div>
+      <label for="postPremium">Loại bài viết</label><br>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="postPremium" id="exampleRadios1" value="0" checked>
+        <label class="form-check-label" for="exampleRadios1">Public</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="postPremium" id="exampleRadios2" value="1">
+        <label class="form-check-label" for="exampleRadios2">Premium</label>
+      </div>
+      <label for="datePost">Ngày xuất bản</label><br>
+      <input type="datetime-local" id="datePost" name="datePost">
    
       <div class="form-group">
         <label for="txtTags">Nhãn</label>

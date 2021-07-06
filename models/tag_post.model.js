@@ -5,14 +5,26 @@ module.exports = {
     return db("tags_posts");
   },
 
-  add(tags, post) {
-    tags.forEach(tag =>{
-      tag_post = {
-        TagID: tag,
-        PostID: post
+  async add(tags, post) {
+    if (tags === undefined) return;
+    else if (tags.length == 1) {
+      const tag_post = {
+        TagID: tags,
+        PostID: post[0],
       };
-      db("tags_posts").insert(tag_post);
-    });
-    return true;
+      await db("tags_posts").insert(tag_post);
+      return;
+    } 
+    else {
+      tags.forEach(async (tag) => {
+        const tag_post = {
+          TagID: tag,
+          PostID: post[0],
+        };
+        console.log(tag_post);
+        await db("tags_posts").insert(tag_post);
+      });
+      return;
+    }
   },
 };

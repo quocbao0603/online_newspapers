@@ -72,24 +72,24 @@ module.exports = {
 
   async countByAuthor(userID) {
     const sql = `
-    select COUNT(*)
+    select COUNT(*) as total
     from posts
     where Author = ${userID}
     `;
     const raw_data = await db.raw(sql);
-    const list = raw_data[0];
-    return list;
+    const rows = raw_data[0];
+    return rows[0].total;
   },
   async countByTagID(TagID) {
     const sql = `
-    select COUNT(*)
+    select COUNT(*) as total
     from posts p join CategoriesLv1 c1 join CategoriesLv2 c2 join tags_posts tp on c1.CatIDLv1 = c2.CatIDLv1 
     AND c2.CatIDLv1 = p.CatIDLv1 AND c2.CatIDLv2 = p.CatIDLv2 AND tp.PostID = p.PostID
     where tp.TagID = ${TagID}
     `;
     const raw_data = await db.raw(sql);
-    const list = raw_data[0];
-    return list;
+    const rows = raw_data[0];
+    return rows[0].total;
   },
   async countByCatIDLv1(catId) {
     const rows = await db("posts")

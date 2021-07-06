@@ -51,7 +51,7 @@ function myFunction(postPremium) {
                                 <div class="tn-content-inner">
                                     <div class="mb-2">
                                         <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                            href="posts/byCat/{{CatIDLv1}}/{{CatIDLv2}}">{{CatNameLv1}}|{{CatNameLv2}}</a>
+                                            href="/posts/byCat/{{CatIDLv1}}/{{CatIDLv2}}">{{CatNameLv1}}|{{CatNameLv2}}</a>
                                         {{#if this.Premium}}
                                             <span class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2" style="background-color:coral"><i class="fa fa-diamond" aria-hidden="true"></i>Premium</span>
                                         {{/if}}
@@ -361,20 +361,15 @@ function myFunction(postPremium) {
                     <div class="sidebar-widget">
                         <h2><i class="fas fa-align-justify"></i>Tags</h2>
                         <div class="tags">
-                            <a href="">National</a>
-                            <a href="">International</a>
-                            <a href="">Economics</a>
-                            <a href="">Politics</a>
-                            <a href="">Lifestyle</a>
-                            <a href="">Technology</a>
-                            <a href="">Trades</a>
-                            <a href="">National</a>
-                            <a href="">International</a>
-                            <a href="">Economics</a>
-                            <a href="">Politics</a>
-                            <a href="">Lifestyle</a>
-                            <a href="">Technology</a>
-                            <a href="">Trades</a>
+                            {{#each tags}}
+                                <a href="/posts/tags/{{TagID}}" class="btn btn-sm btn-outline-secondary m-1">{{TagName}}</a>
+                            {{/each}}
+                            <a href=""  class="btn btn-sm btn-outline-secondary m-1">National</a>
+                            <a href=""  class="btn btn-sm btn-outline-secondary m-1">International</a>
+                            <a href=""  class="btn btn-sm btn-outline-secondary m-1">Economics</a>
+                            <a href=""  class="btn btn-sm btn-outline-secondary m-1">Politics</a>
+                            <a href=""  class="btn btn-sm btn-outline-secondary m-1">Lifestyle</a>
+                            
                         </div>
                     </div> 
                 </div>

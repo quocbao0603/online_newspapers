@@ -43,13 +43,13 @@
         <label for="txtCat">Chuyên mục</label>
         <br>
         <div class="">
-          <select class="form-control col-sm-3" id="category" required>
+          <select class="form-control col-sm-3" name="CatIDLv1" id="category" required>
               <option value="">Chọn chuyên mục cấp 1</option>
               {{#each lcCategories}}
                  <option class="Category-{{CatIDLv1}}" value="{{CatIDLv1}}">{{CatNameLv1}}</option>
               {{/each}}
           </select>
-          <select class="form-control col-sm-3" id="subcategory">
+          <select class="form-control col-sm-3" name="CatIDLv2"  id="subcategory">
             {{#each lcCategories}}
               <optgroup class="Category-{{CatIDLv1}}" required>
               <option value="">Chọn chuyên mục cấp 2</option>
@@ -63,7 +63,13 @@
       </div>
       <div class="form-group">
         <label for="txtTags">Nhãn</label>
-        <input type="text" class="form-control" id="txtTags" name="txtTags" >
+        <br>
+        {{#each tags}}
+          <div class="form-check form-check-inline" >
+            <input class="form-check-input" type="checkbox" name="TagID" id="tagCheckbox{{TagID}}" value="{{TagID}}">
+            <label class="form-check-label" for="tagCheckbox{{TagID}}">{{TagName}}</label>
+          </div>
+        {{/each}}
       </div>
       <a class="btn btn-primary" href="/writer/myposts" role="button">
         <i class="fa fa-backward" aria-hidden="true"></i>

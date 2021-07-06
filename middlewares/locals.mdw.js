@@ -1,5 +1,8 @@
 const categoryModel = require("../models/category.model");
-const userModel = require("../models/user.model")
+const userModel = require("../models/user.model");
+const postModel = require("../models/post.model");
+
+const moment = require("moment");
 module.exports = function (app) {
   app.use( function (req, res, next) {
     res.locals.premium=0;
@@ -21,6 +24,18 @@ module.exports = function (app) {
     }
     next();
   });
+  app.use(async function(req,res,next){
+    const posts = await postModel.getPostsWaitUp();
+    const now =  moment().format("YYYY-MM-DD h:m:s");
+    for(i=0;i<posts.length;i++){
+      const timeUp = moment(posts[i].Date, "YYYY-MM-DDTh:m").format("YYYY-MM-DD h:m:s");
+      if(now>timeUp){
+        await postModel.updatePostStatusByPostID(posts[i].PostID,1)
+      }
+    }
+    next();
+  });
+
 
   app.use(async function (req, res, next) {
     const raw_data = await categoryModel.allWithDetails();

@@ -72,24 +72,24 @@ module.exports = {
 
   async countByAuthor(userID) {
     const sql = `
-    select COUNT(*)
+    select COUNT(*) as total
     from posts
     where Author = ${userID}
     `;
     const raw_data = await db.raw(sql);
-    const list = raw_data[0];
-    return list;
+    const rows = raw_data[0];
+    return rows[0].total;
   },
   async countByTagID(TagID) {
     const sql = `
-    select COUNT(*)
+    select COUNT(*) as total
     from posts p join CategoriesLv1 c1 join CategoriesLv2 c2 join tags_posts tp on c1.CatIDLv1 = c2.CatIDLv1 
     AND c2.CatIDLv1 = p.CatIDLv1 AND c2.CatIDLv2 = p.CatIDLv2 AND tp.PostID = p.PostID
     where tp.TagID = ${TagID}
     `;
     const raw_data = await db.raw(sql);
-    const list = raw_data[0];
-    return list;
+    const rows = raw_data[0];
+    return rows[0].total;
   },
   async countByCatIDLv1(catId) {
     const rows = await db("posts")
@@ -143,13 +143,33 @@ module.exports = {
       `;
     return db.raw(sql);
   },
+  getPostsWaitUp(){
+    return db('posts')
+    .where("Status","0")
+  },
+  updatePostStatusByPostID(postID,postStatus){
+    return db("posts")
+    .where("PostID", postID)
+    .update({
+        Status: postStatus,
+    });
+  },
+
+
   patch(post) {
     const id = post.PostID;
     delete post.PostID;
 
     return db("posts").where("PostID", id).update(post);
   },
-
+  getViewsPostByPostID(PostID){
+    return db("posts").select("Views").where("PostID", PostID);
+  },
+  async updateViewsPostByPostID(PostID){
+      const views = await this.getViewsPostByPostID(PostID);
+      const updateViews = views[0].Views+1;      
+      return db("posts").where("PostID", PostID).update({Views:updateViews});
+  },
   del(id) {
     return db("posts").where("PostID", id).del();
   },

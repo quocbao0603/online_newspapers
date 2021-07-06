@@ -1,6 +1,7 @@
 const moment = require("moment");
 const { showCatNameLv1, sciencesNews } = require("../models/menu.model");
 const menuModel = require("../models/menu.model");
+const tagModel = require("../models/tag.model");
 module.exports = function (app) {
   app.get("/", async function (req, res) {
     const topNews = await menuModel.topNews();
@@ -12,6 +13,7 @@ module.exports = function (app) {
     const sciencesNews = await menuModel.sciencesNews();
     const topViewsNews = await menuModel.topViewsNews();
     const topPopularNews = await menuModel.topPopularNews(); 
+    const tags = await tagModel.all();
     top4News=[]
     formatDate(topNews);formatDate(news);formatDate(worldNews);
     formatDate(sportsNews);formatDate(sciencesNews);formatDate(businessNews);
@@ -35,6 +37,7 @@ module.exports = function (app) {
       topPopularNews:topPopularNews,
       topPopularNewsMain: topPopularNewsMain,
       topViewsNewsMain: topViewsNewsMain,
+      tags:tags,
     });
   });
 

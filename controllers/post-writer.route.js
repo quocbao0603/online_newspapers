@@ -1,6 +1,6 @@
 const express = require("express");
 const postModel = require("../models/post.model");
-
+const tagModel =require("../models/tag.model");
 const moment = require("moment");
 const authWriter = require("../middlewares/auth-writer.mdw");
 const router = express.Router();
@@ -38,7 +38,18 @@ router.get("/myposts", authWriter, async function (req, res) {
 });
 
 router.get("/posts/add",authWriter, async function (req, res) {
+  const allTag = await tagModel.all();
+  console.log(allTag);
   res.render("vwposts/addPost", {
+    tags: allTag
+  });
+});
+
+router.post("/posts/add",authWriter, async function (req, res) {
+  const allTag = await tagModel.all();
+  console.log(req.body);
+  res.render("vwposts/addPost", {
+    tags: allTag
   });
 });
 

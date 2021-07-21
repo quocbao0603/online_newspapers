@@ -10,7 +10,7 @@ https://drive.google.com/drive/folders/1YnATiuTw05Du-PRqdTZO8gGfL5q4MTzz?usp=sha
 
 
 Quyền user:
-0 - user
-1 - 
-2 - 
+0 - user  
+1 - writer  
+2 - editor  
 3 - admin

@@ -22,17 +22,21 @@
       <tbody>
         {{#each this.categories}}
         <tr>
-          <th scope="row">{{CatIDLv1}}</th>
-          <td><a href="/admin/categories/indexLv2?id={{CatIDLv1}}">{{CatNameLv1}}</a></td>
+          <th scope="row">{{CatIDLv2}}</th>
+          <td><a>{{CatNameLv2}}</a></td>
           <td class="text-right">
-            <a class="btn btn-primary btn-sm" href="/admin/categories/edit?id={{CatIDLv1}}" role="button" title="Edit">
+            <a class="btn btn-primary btn-sm" href="/admin/categories/editCatLv2?idlv1={{CatIDLv1}}&idlv2={{CatIDLv2}}" role="button" title="Edit">
               <i class="fa fa-pencil" aria-hidden="true"></i>
             </a>
-          </td>
+          </td> 
         </tr>
         {{/each}}
       </tbody>
     </table>
     {{/if}}
   </div>
+  <a class="btn btn-primary" href="/admin/categories/" role="button">
+    <i class="fa fa-backward" aria-hidden="true"></i>
+    Back to List
+  </a>
 </div>

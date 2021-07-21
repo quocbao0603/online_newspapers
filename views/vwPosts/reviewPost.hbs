@@ -50,8 +50,18 @@
         <div class="form-group">
         <label for="txtCat">Chuyên mục</label>
         <br>
-        <p class="text-primary" style="color:crimson !important">{{CatNameLv1}}</p>
-        <p class="text-primary" style="color:crimson !important">{{CatNameLv2}}</p>
+        <table class="table" style="border: hidden;">
+          <tr>
+            <td><p class="text-primary" style="color:crimson !important">{{CatNameLv1}}|{{CatNameLv2}}</p></td>
+            <td class="text-right">
+            
+              <a class="btn btn-primary btn-sm" href="" role="button" title="Edit">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+              </a>
+            </td>
+          </tr>
+        </table>
+        
         {{!-- <div class="">
           <select class="form-control col-sm-3" id="category" required>
               <option value="">Chọn chuyên mục cấp 1</option>

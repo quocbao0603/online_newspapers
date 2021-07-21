@@ -42,4 +42,5 @@ module.exports = {
             .where('id', ID)
             .update(new_user)
     }
+    
 };

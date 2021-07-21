@@ -12,6 +12,32 @@ function myFunction(user) {
   return true;
 }
 </script>
+<script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+
+<script>
+    function downloadAsPDF(userPremium) {
+        if(!userPremium){
+            alert("Bạn phải đăng ký tài khoản Premium để tải bài viết này!!!");
+        }
+        else{
+            const element = document.querySelector('#contentPost');
+            var opt = {
+            margin: [15, 0, 15, 0],
+            filename: `CV-${name}.pdf`,
+            image: { type: 'jpeg', quality: 1 },
+                html2canvas: {
+                    dpi: 192,
+                    scale:4,
+                    letterRendering: true,
+                    useCORS: true
+            },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(element).save();
+        }
+     
+    }
+</script>
 <script>
 function checkPostPremium(postPremium) {
   if(postPremium){
@@ -37,13 +63,13 @@ function checkPostPremium(postPremium) {
       <div class="row">
           <div class="col-lg-8">
               <!-- News Detail Start -->
-              <div class="position-relative mb-3">
-                  <img class="img-fluid w-100" src="/public/img/cat-news-1.jpg" style="object-fit: cover;">
+              <div class="position-relative mb-3" id="contentPost">
+                  <img class="img-fluid w-100" src="/public/imgs/posts/{{this.post.PostID}}/main_thumbs.jpg" style="object-fit: cover;">
                   <div class="bg-white border border-top-0 p-4">
                       <div class="mb-3">
                           <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                              href="">Business</a>
-                          <a class="text-body" href="">Jan 01, 2045</a>
+                              href="/posts/byCat/{{this.post.CatIDLv1}}/{{this.post.CatIDLv2}}">{{this.post.CatNameLv1}}|{{this.post.CatNameLv2}}</a>
+                          <a class="text-body" href="">{{this.post.Date}}</a>
                       </div>
                       <h1 class="mb-3 text-secondary text-uppercase font-weight-bold">{{this.post.PostName}}</h1>
                       <p class="card-text">
@@ -53,12 +79,14 @@ function checkPostPremium(postPremium) {
                   </div>
                   <div class="d-flex justify-content-between bg-white border border-top-0 p-4">
                       <div class="d-flex align-items-center">
-                          <img class="rounded-circle mr-2" src="img/user.jpg" width="25" height="25" alt="">
-                          <span>John Doe</span>
+                          <img class="rounded-circle mr-2" src="/public/img/avatar.jpg" width="25" height="25" alt="">
+                          <span>{{author}}</span>
                       </div>
                       <div class="d-flex align-items-center">
-                          <span class="ml-3"><i class="far fa-eye mr-2"></i>12345</span>
-                          <span class="ml-3"><i class="far fa-comment mr-2"></i>123</span>
+                          <span class="ml-3"><i class="far fa-eye mr-1 "></i>{{this.post.Views}}</span>
+                          <span class="ml-3"><i class="far fa-comment mr-1 "></i>{{totalCmts}}</span>
+                          <span class="ml-3"><i class="fa fa-download mr-1 fa-2x" aria-hidden="true" onclick="downloadAsPDF({{premium}})"></i></span>
+                          
                       </div>
                   </div>
               </div>
@@ -108,7 +136,7 @@ function checkPostPremium(postPremium) {
               <!-- Social Follow Start -->
               <div class="mb-3">
                   <div class="section-title mb-0">
-                      <h4 class="card-header text-uppercase font-weight-bold">Follow Us</h4>
+                      <h4 class="card-header text-uppercase font-weight-bold">Follow Us </h4>
                   </div>
                   <div class="bg-white border border-top-0 p-3">
                       <a href="" class="d-block w-100 text-white text-decoration-none mb-3" style="background: #39569E;">
@@ -142,7 +170,7 @@ function checkPostPremium(postPremium) {
               <!-- Ads Start -->
               <div class="mb-3">
                   <div class="section-title mb-0">
-                      <h4 class="card-header text-uppercase font-weight-bold">Advertisement</h4>
+                      <h4 class="card-header text-uppercase font-weight-bold">Quảng cáo</h4>
                   </div>
                   <div class="bg-white text-center border border-top-0 p-3">
                       <a href=""><img class="img-fluid" src="img/news-800x500-2.jpg" alt=""></a>
@@ -153,22 +181,22 @@ function checkPostPremium(postPremium) {
               <!-- Popular News Start -->
               <div class="mb-3">
                   <div class="section-title mb-0">
-                      <h4 class="card-header text-uppercase font-weight-bold">Tranding News</h4>
+                      <h4 class="card-header text-uppercase font-weight-bold">Tin liên quan</h4>
                   </div>
                   <div class="bg-white border border-top-0 p-3">
                         {{#each postsSameCat}}
                             <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
-                                <img class="img-fluid" src="img/news-110x110-1.jpg" alt="">
+                                <img class="img-fluid" src="/public/imgs/posts/{{PostID}}/main_thumbs.jpg" width="110px" height="110px" alt="">
                                 <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
                                     <div class="mb-2">
-                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" 
+                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" style="font-size: 10px;"
                                         href="/posts/byCat/{{CatIDLv1}}/{{CatIDLv2}}">{{CatNameLv1}}|{{CatNameLv2}}</a>
                                         {{#if this.Premium}}
                                             <span class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" style="background-color:coral"><i class="fa fa-diamond" aria-hidden="true"></i>Premium</span>
                                         {{/if}}
                                         <a class="text-body" href=""><small{{Date}}</small></a>
                                     </div>
-                                    <a class="h6 m-0 text-secondary text-uppercase font-weight-bold"  
+                                    <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" style="font-size: 13px;"
                                     href="/posts/details/{{PostID}}" onclick="return checkPostPremium({{this.Premium}})">{{PostName}}</a>
                                 </div>
                             </div>    

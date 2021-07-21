@@ -10,12 +10,28 @@
 const db = require("../utils/db");
 
 module.exports = {
-  all() {
-    return db("categories");
+  allCatLv1() {
+    return db("CategoriesLv1");
   },
   categoryLv1() {
     return db("CategoriesLv1");
   },
+  async allCatLv2ByCatLv1(id) {
+    const rows = await db("CategoriesLv2").where("CatIDLv1", id);
+    if (rows.length === 0) return null;
+
+    return rows;
+  },
+
+  async findCatLv2ByCatLv1AndCatLv2(idlv1,idlv2) {
+    const rows = await db("CategoriesLv2").where("CatIDLv1", idlv1)
+    .where("CatIDLv2",idlv2);
+    if (rows.length === 0) return null;
+
+    return rows[0];
+  },
+
+
 
   allWithDetails() {
     // const sql = `
@@ -34,21 +50,21 @@ module.exports = {
     return db("categories").insert(category);
   },
 
-  async findById(id) {
-    const rows = await db("categories").where("CatID", id);
+  async findByIdCatLv1(id) {
+    const rows = await db("CategoriesLv1").where("CatIDLv1", id);
     if (rows.length === 0) return null;
 
     return rows[0];
   },
 
   patch(category) {
-    const id = category.CatID;
-    delete category.CatID;
+    const id = category.CatIDLv1;
+    delete category.CatIDLv1;
 
-    return db("categories").where("CatID", id).update(category);
+    return db("CategoriesLv1").where("CatIDLv1", id).update(category);
   },
 
   del(id) {
-    return db("categories").where("CatID", id).del();
+    return db("CategoriesLv1").where("CatIDLv1", id).del();
   },
 };

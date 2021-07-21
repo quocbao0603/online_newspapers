@@ -5,6 +5,7 @@ const moment = require("moment");
 const auth = require("../middlewares/auth.mdw");
 const { updateViewsPostByPostID } = require("../models/post.model");
 const tagModel = require("../models/tag.model");
+const commentsModel = require("../models/comments.model");
 const router = express.Router();
 
 router.get("/byCat/:id", async function (req, res) {
@@ -143,12 +144,17 @@ router.get("/details/:id", async function (req, res) {
   const postsSameCat =await postModel.findByCatIDLv1(post.CatIDLv1,0);
   postsSameCat.pop();
   const tags = await tagModel.getTagByPostID(post.PostID);
-  console.log(tags)
+  const totalCmts = await commentsModel.countCmtsByPostID(post.PostID);
+  const Author = await postModel.getAuthorByPostID(post.PostID);
+  console.log(Author)
+  
   res.render("vwposts/details", {
     post: post,
     comments: cmts,
     postsSameCat:postsSameCat,
     tags:tags,
+    totalCmts:totalCmts,
+    author:Author,
   });
 });
 

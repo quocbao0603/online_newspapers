@@ -15,5 +15,12 @@ module.exports  ={
         .count("*", { as: "total" });
 
     return rows[0].total;
+    },
+    async countCmtsByPostID(postID){
+        const rows = await db("comments")
+            .where("PostsID",postID)
+            .count("*", { as: "total" });
+    
+        return rows[0].total;
     }
 }

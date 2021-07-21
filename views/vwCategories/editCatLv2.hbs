@@ -1,19 +1,27 @@
+{{#section 'js'}}
+<script>
+function product(postPremium) {
+  alert(postPremium)
+}
+</script>
+{{/section}}
 <div class="card">
   <h4 class="card-header">
-    Category
+    Categories
   </h4>
+  
   <div class="card-body">
     <form method="POST">
       <div class="form-group">
         <label for="txtCatID">#</label>
-        <input type="text" readonly class="form-control" id="txtCatID" name="CatID" value="{{this.category.CatIDLv1}}">
+        <input type="text" readonly class="form-control" id="txtCatID" name="CatID" value="{{this.category.CatIDLv2}}">
       </div>
       <div class="form-group">
         <label for="txtCatName">Category</label>
         <input type="text" class="form-control" id="txtCatName" name="CatName" autofocus
-          value="{{this.category.CatNameLv1}}">
+          value="{{this.category.CatNameLv2}}">
       </div>
-      <a class="btn btn-primary" href="/admin/categories/" role="button">
+      <a class="btn btn-primary" href="/admin/categories/indexLv2" role="button">
         <i class="fa fa-backward" aria-hidden="true"></i>
         Back to List
       </a>

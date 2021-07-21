@@ -108,6 +108,15 @@ module.exports = {
 
     return rows[0].total;
   },
+  async getAuthorByPostID(PostID){
+    const rows = await db("posts")
+    .where("PostID",PostID)
+    .join("users",{"id":"Author"})
+
+    return rows[0].name;
+    
+
+  },
 
   getPostByTagID(TagID) {
     return db("tags").where("TagID", TagID);
@@ -118,7 +127,10 @@ module.exports = {
   },
 
   async findById(id) {
-    const rows = await db("posts").where("PostID", id);
+    const rows = await db("posts")
+                        .where("PostID", id)
+                        .join("categorieslv2",{"categorieslv2.CatIDLv1":"posts.CatIDLv1","categorieslv2.CatIDLv2":"posts.CatIDLv2"})
+                        .join("categorieslv1",{"categorieslv1.CatIDLv1":"posts.CatIDLv1"})
     if (rows.length === 0) return null;
 
     return rows[0];

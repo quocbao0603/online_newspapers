@@ -1,0 +1,99 @@
+{{#section 'js'}}
+<script src="https://cdn.tiny.cloud/1/5wzancut12fwbdpepoigav775mmcbx0kimb9x4fkw2d9o7c8/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+  tinymce.init({
+    selector: '#txtContent',
+    plugins: 'paste image link autolink lists table media',
+    menubar: false,
+    toolbar: [
+      'undo redo | bold italic underline strikethrough | numlist bullist | alignleft aligncenter alignright | forecolor backcolor | table link image media',
+    ],
+  });
+</script>
+<script>
+  $('#subcategory')
+  .find('optgroup').hide(); // initialize
+  /*$('#formPostAdmin'){
+    var $curLv1 = $(this).find(class="Category-{{CatIDLv1}}");
+    attr('selected', 'selected');  
+  } */
+  $('#category')
+  .change(function() {
+    var $cat = $(this).find('option:selected');
+    var $subCat = $('#subcategory').find('.' + $cat.attr('class'));
+    $('#subcategory').find('optgroup').not("'"+ '.' + $cat.attr('class') + "'").hide(); // hide other optgroup
+    $subCat.show();
+    $subCat.find('option').first().attr('selected', 'selected');
+  });
+  console.log("'"+ '.' + cat.attr('class') + "'");
+  console.log(cat.value.toString());
+</script>
+{{/section}}
+<div class="card">
+  <h4 class="card-header">
+    Bài viết mới
+  </h4>
+  <div class="card-body">
+    <form method="POST">
+      <div class="form-group">
+        <label for="txtID">ID Bài viết</label>
+        <input type="text" readonly class="form-control" id="txtID" name="txtID" value= "{{post.PostID}}"> 
+      </div>
+      <div class="form-group">
+        <label for="txtPostName">Tên bài viết</label>
+        <input type="text" class="form-control" id="txtPostName" name="txtPostName" value= "{{post.PostName}}"> 
+      </div>
+      <div class="form-group">
+        <label for="txtTinyContent">Nội dung tóm tắt</label>
+        <input type="text" class="form-control" id="txtTinyContent" name="txtTinyContent" value = "{{post.TinyContent}}">
+      </div>
+      <div class="form-group">
+        <label for="txtContent">Nội dung đầy đủ</label>
+        <textarea id="txtContent" name="txtContent" rows="20" value = {{{post.FullContent}}}></textarea>
+      </div>
+      <div class="form-group">
+        <label for="txtCat">Chuyên mục</label>
+        <br>
+        <div class="" id = "formPostAdmin">
+          <select class="form-control col-sm-3" name="CatIDLv1" id="category" required>
+              <option value="">Chọn chuyên mục cấp 1</option>
+              {{#each lcCategories}}
+                 <option class="Category-{{CatIDLv1}}" value="{{CatIDLv1}}">{{CatNameLv1}}</option>
+              {{/each}}
+          </select>
+          <select class="form-control col-sm-3" name="CatIDLv2"  id="subcategory">
+            {{#each lcCategories}}
+              <optgroup class="Category-{{CatIDLv1}}" required>
+              <option value="">Chọn chuyên mục cấp 2</option>
+              {{#each CatName}}
+                <option value="{{CatIDLv2}}">{{CatNameLv2}}</option>
+              {{/each}}
+            </optgroup>
+            {{/each}}
+          </select>
+        </div> 
+      </div>
+      <div class="form-group">
+        <label for="txtTags">Nhãn</label>
+        <br>
+        {{#each tags}}
+          <div class="form-check form-check-inline" >
+            <input class="form-check-input" type="checkbox" name="TagID" id="tagCheckbox{{TagID}}" value="{{TagID}}">
+            <label class="form-check-label" for="tagCheckbox{{TagID}}">{{TagName}}</label>
+          </div>
+        {{/each}}
+      </div>
+      <a class="btn btn-primary" href="/admin/posts/" role="button">
+        <i class="fa fa-backward" aria-hidden="true"></i>
+        Quay trở lại
+      </a>
+      <button type="submit" class="btn btn-success">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        Lưu
+      </button>
+      <button type="submit" class="btn btn-danger">
+        <i class="fa fa-trash-o" aria-hidden="true">Delete</i>
+      </button>
+    </form>
+  </div>
+</div>

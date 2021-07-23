@@ -1,6 +1,6 @@
 <div class="card">
   <h4 class="card-header d-flex justify-content-end">
-    <a class="btn btn-outline-success" style="margin-right: 10px;" href="/admin/categories/addCatLv1" role="button">
+    <a class="btn btn-outline-success" style="margin-right: 10px;" href="/administrator/tags/add" role="button">
       <i class="fa fa-plus" aria-hidden="true"></i>
       Thêm
     </a>
@@ -18,17 +18,17 @@
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Category</th>
+          <th scope="col">Tag</th>
           <th scope="col">&nbsp;</th>
         </tr>
       </thead>
       <tbody>
-        {{#each this.categories}}
+        {{#each this.tags}}
         <tr>
-          <th scope="row">{{CatIDLv1}}</th>
-          <td><a href="/admin/categories/indexLv2?id={{CatIDLv1}}">{{CatNameLv1}}</a></td>
+          <th scope="row">{{TagID}}</th>
+          <td>{{TagName}}</td>
           <td class="text-right">
-            <a class="btn btn-primary btn-sm" href="/admin/categories/edit?id={{CatIDLv1}}" role="button" title="Edit">
+            <a class="btn btn-primary btn-sm" href="/administrator/tags/edit?id={{TagID}}" role="button" title="Edit">
               <i class="fa fa-pencil" aria-hidden="true"></i>
             </a>
           </td>

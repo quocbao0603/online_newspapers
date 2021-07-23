@@ -1,4 +1,4 @@
-module.exports = function authWriter(req, res, next) {
+module.exports = function authEditor(req, res, next) {
   if (req.isAuthenticated()) {
     
     if(req.user.permission == "2"){

@@ -1,0 +1,44 @@
+{{#section 'js'}}
+<script>
+  $(document).ready(function(){
+    $("#myInput").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+</script>
+{{/section}}
+<div class="card">
+  <h4 class="card-header d-flex justify-content-between">
+    {{this.title}}
+  </h4>
+   <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">STT</th>
+          <th scope="col">Danh mục quản lý</th>
+        </tr>
+      </thead>
+      <tbody id="myTable">
+        <tr>
+          <th scope="row">1</th>
+          <td><a href="/admin/categories/">Quản lý chuyên mục</a></td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td><a href="/administrator/tags/">Quản lý tag</a></td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td><a href="/admin/posts/">Quản lý bài viết</a></td>
+        </tr>
+        <tr>
+          <th scope="row">4</th>
+          <td><a href="/admin/users/">Quản lý người dùng</a></td>
+        </tr>
+      </tbody>
+    </table>
+  
+</div>

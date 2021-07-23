@@ -48,7 +48,7 @@ page_numbers=0;
   });
 });
 
-router.get("/reviewPost/:id",async function(req,res){
+router.get("/reviewPost/:id",authEditor,async function(req,res){
     const postID = +req.params.id || 0;
     const post = await postModel.findById(postID);
     CatNameLv1 = res.locals.lcCategories[post.CatIDLv1-1].CatNameLv1;
@@ -62,7 +62,7 @@ router.get("/reviewPost/:id",async function(req,res){
     })
 });
 
-router.post("/reviewPost/:id",async function(req,res){
+router.post("/reviewPost/:id",authEditor,async function(req,res){
   const postID = +req.params.id || 0;
   const postStatus = req.body.postStatus;
   const cmt = req.body.txtComments;

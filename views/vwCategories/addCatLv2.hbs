@@ -3,12 +3,16 @@
     New Category
   </h4>
   <div class="card-body">
-    <form method="POST" action="/admin/categories/addCatLv1">
+    <form method="POST" action="/admin/categories/addCatLv2">
+    <div class="form-group">
+        <label for="txtCatID">#CatIDLv1</label>
+        <input type="text" readonly class="form-control" id="txtCatID" name="CatIDLv1" value="{{idlv1}}">
+      </div>
       <div class="form-group">
         <label for="txtCatName">Category</label>
         <input type="text" class="form-control" id="txtCatName" name="txtCatName" autofocus>
       </div>
-      <a class="btn btn-primary" href="/admin/categories/" role="button">
+      <a class="btn btn-primary" href="/admin/categories/indexLv2?id={{idlv1}}" role="button">
         <i class="fa fa-backward" aria-hidden="true"></i>
         Back to List
       </a>

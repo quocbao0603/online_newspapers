@@ -6,22 +6,22 @@
     <form method="POST">
       <div class="form-group">
         <label for="txtCatID">#</label>
-        <input type="text" readonly class="form-control" id="txtCatID" name="CatID" value="{{this.category.CatIDLv1}}">
+        <input type="text" readonly class="form-control" id="txtCatID" name="CatIDLv1" value="{{this.category.CatIDLv1}}">
       </div>
       <div class="form-group">
         <label for="txtCatName">Category</label>
-        <input type="text" class="form-control" id="txtCatName" name="CatName" autofocus
+        <input type="text" class="form-control" id="txtCatName" name="CatNameLv1" autofocus
           value="{{this.category.CatNameLv1}}">
       </div>
       <a class="btn btn-primary" href="/admin/categories/" role="button">
         <i class="fa fa-backward" aria-hidden="true"></i>
         Back to List
       </a>
-      <button type="submit" class="btn btn-danger" formaction="/admin/categories/del">
+      <button type="submit" class="btn btn-danger" formaction="/admin/categories/delCatLv1">
         <i class="fa fa-trash-o" aria-hidden="true"></i>
         Delete
       </button>
-      <button type="submit" class="btn btn-success" formaction="/admin/categories/patch">
+      <button type="submit" class="btn btn-success" formaction="/admin/categories/patchCatLv1">
         <i class="fa fa-check" aria-hidden="true"></i>
         Save
       </button>

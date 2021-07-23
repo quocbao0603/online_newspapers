@@ -57,6 +57,7 @@ module.exports = function (app) {
   app.use("/writer/", require("../controllers/post-writer.route"));
   app.use("/demo/", require("../controllers/demo.route"));
   app.use("/editor/",require("../controllers/post-editor.route"));
+  app.use("/administrator/", require("../controllers/post-administrator.route"));
 };
 
 formatDate = function(list){

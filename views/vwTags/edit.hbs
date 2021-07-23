@@ -1,0 +1,30 @@
+<div class="card">
+  <h4 class="card-header">
+    Tags
+  </h4>
+  <div class="card-body">
+    <form method="POST">
+      <div class="form-group">
+        <label for="txtTagID">#</label>
+        <input type="text" readonly class="form-control" id="txtTagID" name="TagID" value="{{tag.TagID}}">
+      </div>
+      <div class="form-group">
+        <label for="txtTagName">TagName</label>
+        <input type="text" class="form-control" id="txtTagName" name="TagName" autofocus
+          value="{{tag.TagName}}">
+      </div>
+      <a class="btn btn-primary" href="/administrator/tags/" role="button">
+        <i class="fa fa-backward" aria-hidden="true"></i>
+        Back to List
+      </a>
+      <button type="submit" class="btn btn-danger" formaction="/administrator/tags/del">
+        <i class="fa fa-trash-o" aria-hidden="true"></i>
+        Delete
+      </button>
+      <button type="submit" class="btn btn-success" formaction="/administrator/tags/patch">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        Save
+      </button>
+    </form>
+  </div>
+</div>

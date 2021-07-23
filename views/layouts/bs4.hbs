@@ -147,6 +147,13 @@
                   Duyệt bài viết
                 </a>
                 {{/ifEquals}}
+                {{#ifEquals authUser.permission "3"}}
+                <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="/administrator/">
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                  Danh mục quản lý
+                </a>
+                {{/ifEquals}}
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="javascript: $('#frmLogout').submit();">
                   <i class="fa fa-sign-out" aria-hidden="true"></i>

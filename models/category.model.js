@@ -16,11 +16,8 @@ module.exports = {
   categoryLv1() {
     return db("CategoriesLv1");
   },
-  async allCatLv2ByCatLv1(id) {
-    const rows = await db("CategoriesLv2").where("CatIDLv1", id);
-    if (rows.length === 0) return null;
-
-    return rows;
+  allCatLv2ByCatLv1(id) {
+    return db("CategoriesLv2").where("CatIDLv1", id);
   },
 
   async findCatLv2ByCatLv1AndCatLv2(idlv1,idlv2) {
@@ -31,7 +28,15 @@ module.exports = {
     return rows[0];
   },
 
-
+  async getToTalCatLv2(CatIDLv1){
+    const rows = await db("CategoriesLv2").where("CatIDLv1", CatIDLv1)
+    .count("*", { as: "total" });
+    return rows[0].total;
+  },
+  async getPosCatLv2(CatIDLv1){
+    const rows = await this.allCatLv2ByCatLv1(CatIDLv1).orderBy("CatIDLv2","desc").first();
+    return rows;
+  },
 
   allWithDetails() {
     // const sql = `
@@ -46,8 +51,11 @@ module.exports = {
     return db.raw(sql);
   },
 
-  add(category) {
-    return db("categories").insert(category);
+  addCatLv1(category) {
+    return db("categorieslv1").insert(category);
+  },
+  addCatLv2(category){
+    return db("categorieslv2").insert(category);
   },
 
   async findByIdCatLv1(id) {
@@ -66,5 +74,17 @@ module.exports = {
 
   del(id) {
     return db("CategoriesLv1").where("CatIDLv1", id).del();
+  },
+  patchCatLv2(category) {
+    const idlv1 = category.CatIDLv1;
+    const idlv2 =category.CatIDLv2;
+    delete category.CatIDLv1;
+    delete category.CatIDLv2;
+
+    return db("CategoriesLv2").where({"CatIDLv1":idlv1,"CatIDLv2":idlv2}).update(category);
+  },
+
+  delCatLv2(CatIDLv1,CatIDLv2) {
+    return db("CategoriesLv2").where({"CatIDLv1":CatIDLv1,"CatIDLv2":CatIDLv2}).del();
   },
 };

@@ -26,6 +26,30 @@ module.exports ={
         return db('editors')
         .where("userID",UserID) 
     },
+    checkExistUser(userID){
+        return db('editors')
+        .where("userID",userID)
+        .first()
+    },
+    add(new_user){
+        return db("editors").insert(new_user)
+    },
+    updateManageCatByUserID(userID,catIDLv1,catIDLv2){
+        return db("editors")
+            .where("userID", userID)
+            .update({
+                catIDLv1: catIDLv1,
+                CatIDLv2:catIDLv2
+            });
+    },
+
+    setCatManageByUserID(new_user){
+        const ID = new_user.id;
+        delete new_user.id;
+        return db('editors')
+            .where('id', ID)
+            .update(new_user)
+    },
     updateCmtsPostRefuse(postID,notice){
         return db("posts")
         .where("PostID", postID)

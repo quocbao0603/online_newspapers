@@ -1,0 +1,104 @@
+{{#section 'js'}}
+<script>
+  $('#subcategory')
+  .find('optgroup').hide(); // initialize
+  /*$('#formPostAdmin'){
+    var $curLv1 = $(this).find(class="Category-{{CatIDLv1}}");
+    attr('selected', 'selected');  
+  } */
+  $('#category')
+  .change(function() {
+    var $cat = $(this).find('option:selected');
+    var $subCat = $('#subcategory').find('.' + $cat.attr('class'));
+    $('#subcategory').find('optgroup').not("'"+ '.' + $cat.attr('class') + "'").hide(); // hide other optgroup
+    $subCat.show();
+    $subCat.find('option').first().attr('selected', 'selected');
+  });
+  console.log("'"+ '.' + cat.attr('class') + "'");
+  console.log(cat.value.toString());
+</script>
+<script>
+  function validate() {
+      if(document.getElementById('10').checked) {
+        
+        return true;
+      }else if(document.getElementById('30').checked) {
+        return true;
+      }
+      else if(document.getElementById('120').checked){
+        return true;
+      }
+        alert('Yêu cầu lựa chọn trước khi đăng ký!')
+        return false;
+    }
+</script>
+{{/section}}
+<div class="card">
+  <h4 class="card-header">
+    User
+  </h4>
+  <div class="card-body">
+    <form method="POST">
+      <div class="form-group">
+        <label for="txtID">#</label>
+        <input type="text" readonly class="form-control" id="txtID" name="id" value="{{user.id}}">
+      </div>
+      <div class="form-group">
+        <label for="txtName">Name</label>
+        <input type="text" readonly class="form-control" id="txtName" name="name" autofocus
+          value="{{user.name}}">
+      </div>
+      {{#ifEquals user.permission "0"}}
+      <div class="form-group">
+        <p>Chọn thời gian:</p>
+        <input type="radio" id="10" name="times" value="10000">
+        <label for="html">10s</label><br>
+        <input type="radio" id="30" name="times" value="30000">
+        <label for="css">30s</label><br>
+        <input type="radio" id="120" name="times" value="120000">
+        <label for="javascript">120s</label>
+      </div>
+      {{/ifEquals}}
+      {{#ifEquals user.permission "1"}}
+        <p>Phóng viên</p>
+      {{/ifEquals}}
+      {{#ifEquals user.permission "2"}}
+        <div class="" id = "formPostAdmin">
+          <select class="form-control col-sm-3" name="CatIDLv1" id="category" required>
+              <option value="">Chọn chuyên mục cấp 1</option>
+              {{#each lcCategories}}
+                 <option class="Category-{{CatIDLv1}}" value="{{CatIDLv1}}">{{CatNameLv1}}</option>
+              {{/each}}
+          </select>
+          <select class="form-control col-sm-3" name="CatIDLv2"  id="subcategory">
+            {{#each lcCategories}}
+              <optgroup class="Category-{{CatIDLv1}}" required>
+              <option value="">Chọn chuyên mục cấp 2</option>
+              {{#each CatName}}
+                <option value="{{CatIDLv2}}">{{CatNameLv2}}</option>
+              {{/each}}
+            </optgroup>
+            {{/each}}
+          </select>
+        </div> 
+      {{/ifEquals}}
+      {{#ifEquals user.permission "3"}}
+        <p>Quản trị viên</p>
+      {{/ifEquals}}
+      
+      <a class="btn btn-primary" href="/administrator/users/" role="button">
+        <i class="fa fa-backward" aria-hidden="true"></i>
+        Back to List
+      </a>
+      <button type="submit" class="btn btn-danger" formaction="/administrator/users/del">
+        <i class="fa fa-trash-o" aria-hidden="true"></i>
+        Delete
+      </button>
+      <button type="submit" class="btn btn-success" formaction="/administrator/users/patch">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        Save
+      </button>
+    </form>
+  </div>
+</div>
+

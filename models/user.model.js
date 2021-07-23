@@ -1,4 +1,5 @@
 const db = require("../utils/db");
+const { del } = require("./tag.model");
 
 module.exports = {
     all() {
@@ -41,6 +42,9 @@ module.exports = {
         return db('users')
             .where('id', ID)
             .update(new_user)
+    },
+    del(userID){
+        return db("users").where("id", userID).del();
     }
     
 };

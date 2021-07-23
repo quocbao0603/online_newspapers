@@ -1,0 +1,57 @@
+<div class="card">
+  <h4 class="card-header d-flex justify-content-end">
+    <a class="btn btn-outline-success" style="margin-right: 10px;" href="" role="button">
+      <i class="fa fa-plus" aria-hidden="true"></i>
+      Thêm
+    </a>
+    <a class="btn btn-outline-danger" href="/administrator/" role="button">
+      <i class="fa fa-minus" aria-hidden="true"></i>
+      Thoát
+    </a>
+  </h4>
+  <div class="card-body">
+    {{#if this.empty}}
+    <h5 class="card-title">Không có dữ liệu!</h5>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    {{else}}
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Permission</th>
+          <th scope="col">&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each this.users}}
+        <tr>
+          <th scope="row">{{id}}</th>
+          <td>{{name}}</td>
+          <td>
+            {{#ifEquals permission "0"}}
+              Độc giả
+             {{/ifEquals}}
+            {{#ifEquals permission "1"}}
+              Phóng viên
+            {{/ifEquals}}
+            {{#ifEquals permission "2"}}
+              Biên tập viên
+            {{/ifEquals}}
+            {{#ifEquals permission "3"}}
+              Quản trị viên
+            {{/ifEquals}}
+          </td>
+          <td class="text-right">
+            <a class="btn btn-primary btn-sm" href="/administrator/users/edit?id={{id}}" role="button" title="Edit">
+              <i class="fa fa-pencil" aria-hidden="true"></i>
+            </a>
+          </td>
+          
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    {{/if}}
+  </div>
+</div>

@@ -59,11 +59,11 @@ router.post("/profile/", auth, async function(req, res) {
     user_update.email = req.body.email;
     user_update.dob = req.body.dob;
     user_update.dob = moment(user_update.dob).format("YYYY-MM-DD");
-    console.log("Test user:");
-    console.log(user_update);
-    console.log(req.body);
+    //console.log("Test user:");
+    //console.log(user_update);
+    //console.log(req.body);
     await userModel.patch(user_update);
-    const url = "/";
+    const url = req.session.retUrl || "/";
     res.redirect(url);
     //const url = "/account/profile/patch";
     //console.log("TEST URL patch: ");

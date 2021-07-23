@@ -1,0 +1,111 @@
+{{#section 'js'}}
+<script>
+  $(document).ready(function(){
+    $("#myInput").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+</script>
+{{/section}}
+<div class="card">
+  <h4 class="card-header d-flex justify-content-between">
+    {{this.title}}
+    <a class="btn btn-outline-success" href="/writer/posts/add" role="button">
+      <i class="fa fa-plus" aria-hidden="true"></i>
+      Bài viết mới
+    </a>
+  </h4>
+  <div class="card-body">
+    {{#if this.empty}}
+    <h5 class="card-title">Không có dữ liệu!</h5>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    {{else}}
+    <input class="form-control" id="myInput" type="text" placeholder="Tìm kiếm..">
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">STT</th>
+          <th scope="col">Tên bài viết</th>
+          <th scope="col">Chuyên mục</th>
+          <th scope="col">Nhãn</th>
+          <th scope="col">Trạng thái</th>
+          <th scope="col">Người đăng</th>
+          <th scope="col">Cập nhật</i> </th>
+          {{!-- <th scope="col">Xoá</th> --}}
+        </tr>
+      </thead>
+      <tbody id="myTable">
+      {{#each this.posts}}
+      <tr>
+      <th scope="row">{{format_index @index}}</th>
+      <td><a class="text-primary" href="/posts/details/{{PostID}}">{{PostName}}</a></td>
+      <td><a href="/posts/byCat/{{CatIDLv1}}/{{CatIDLv2}}" class="badge badge-secondary">{{CatNameLv1}} | {{CatNameLv2}}</a></td>
+      <td>{{#each tag}}
+        <a href="/posts/tags/{{TagID}}" class="badge badge-primary">{{TagName}}</a>
+          {{/each}}
+      </td>
+      <td>
+        {{#ifEquals Status "0"}}
+          Đã được duyệt & chờ xuất bản
+        {{/ifEquals}}
+        {{#ifEquals Status "1"}}
+          Đã xuất bản
+        {{/ifEquals}}
+        {{#ifEquals Status "2"}}
+          <a href="" class="text-danger">Bị từ chối</a> 
+        {{/ifEquals}}
+        {{#ifEquals Status "3"}}
+          <a href="" class="text-danger">Chưa được duyệt</a> 
+        {{/ifEquals}}
+      </td>
+      <td>
+        <a href="#" class="text-capitalize">{{name_author}}</a>
+      </td>
+      <td>
+        <a href="/admin/posts/edit?id={{PostID}}">
+          <button type="button" class="btn btn-danger">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+          </button>
+        </a>
+      </td>
+      {{!-- <td>
+        <a href="#">
+          <button type="button" class="btn btn-danger">
+            <i class="fa fa-trash" style="color: red" aria-hidden="true"></i>
+          </button>
+        </a>
+      </td> --}}
+     
+    </tr>
+      
+      {{/each}}
+      </tbody>
+    </table>
+    <nav aria-label="...">
+      <ul class="pagination">
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+        </li>
+        {{#each this.page_numbers}}
+        {{#if isCurrent}}
+        <li class="page-item active">
+          <a class="page-link" href="javascript:;">{{value}}</a>
+        </li>
+        {{else}}
+        <li class="page-item">
+          <a class="page-link" href="?page={{value}}">{{value}}</a>
+        </li>
+        {{/if}}
+        {{/each}}
+        <li class="page-item">
+          <a class="page-link" href="?page=">Next</a>
+        </li>
+      </ul>
+    </nav>
+    {{/if}}
+  </div>
+</div>

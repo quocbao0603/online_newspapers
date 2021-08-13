@@ -27,10 +27,6 @@ module.exports = {
         return db("posts");
     },
 
-    // findByCatIDLv1(catId) {
-    //   return db('posts').where('CatIDLv1', catId);
-    // },
-
     async findByCatIDLv1(catId, offset) {
         const sql = `
     select p.*, c1.CatNameLv1 as CatNameLv1, c2.CatNameLv2 as CatNameLv2

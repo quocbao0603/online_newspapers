@@ -10,7 +10,7 @@ module.exports = {
     else if (tags.length == 1) {
       const tag_post = {
         TagID: tags,
-        PostID: post[0],
+        PostID: post,
       };
       await db("tags_posts").insert(tag_post);
       return;
@@ -19,7 +19,7 @@ module.exports = {
       tags.forEach(async (tag) => {
         const tag_post = {
           TagID: tag,
-          PostID: post[0],
+          PostID: post,
         };
         console.log(tag_post);
         await db("tags_posts").insert(tag_post);
@@ -27,4 +27,11 @@ module.exports = {
       return;
     }
   },
+  async patch(tags, post) {
+    await db("tags_posts").where('PostID', post).del();
+    this.add(tags, post);
+  },
+  del(post){
+    return db("tags_posts").where('PostID', post).del();
+  }
 };

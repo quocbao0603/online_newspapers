@@ -33,6 +33,7 @@
           <th scope="col">Chuyên mục</th>
           <th scope="col">Nhãn</th>
           <th scope="col">Trạng thái</th>
+          <th scope="col">Cập nhật</i> </th>
         </tr>
       </thead>
       <tbody id="myTable">
@@ -53,12 +54,28 @@
           Đã xuất bản
         {{/ifEquals}}
         {{#ifEquals Status "2"}}
-          <a href="" class="text-danger">Bị từ chối</a> 
+          <div class="text-danger">Bị từ chối</div> 
         {{/ifEquals}}
         {{#ifEquals Status "3"}}
-          <a href="" class="text-danger">Chưa được duyệt</a> 
+          <div class="text-danger">Chưa được duyệt</div> 
         {{/ifEquals}}
       </td>
+      <td>
+        {{#ifEquals Status "2"}}
+          <a href="/writer/posts/edit?id={{PostID}}">
+          <button type="button" class="btn btn-danger">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+          </button>
+        </a> 
+        {{/ifEquals}}
+        {{#ifEquals Status "3"}}
+          <a href="/writer/posts/edit?id={{PostID}}">
+          <button type="button" class="btn btn-danger">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+          </button>
+        </a> 
+        {{/ifEquals}}
+        </td>
     </tr>
       
       {{/each}}

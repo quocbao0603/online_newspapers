@@ -1,5 +1,10 @@
+{{#section 'css'}}
+<link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.2.2/css/fileinput.min.css" media="all"
+  rel="stylesheet" type="text/css" />
+{{/section}}
 {{#section 'js'}}
-<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/mg5mdf920h2memeffbd6jvqanwjaovmtpfnl9vzuxgl1nwu5/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.2.2/js/fileinput.min.js"></script>
 <script>
   tinymce.init({
     selector: '#txtContent',
@@ -8,6 +13,10 @@
     toolbar: [
       'undo redo | bold italic underline strikethrough | numlist bullist | alignleft aligncenter alignright | forecolor backcolor | table link image media',
     ],
+  });
+  $('#txtAvatar').fileinput({
+    allowedFileExtensions: ['jpg', 'png', 'gif'],
+    dropZoneEnabled: false,
   });
 </script>
 <script>
@@ -19,6 +28,15 @@
   $subCat.show();
   $subCat.find('option').first().attr('selected', 'selected');
   });
+
+  $('#formAddPost').on('submit', function (e) {
+    if($('#subcategory').val() === "")
+    {
+      $('#subcategory').focus();
+      e.preventDefault();
+    }
+    
+  })
 </script>
 {{/section}}
 <div class="card">
@@ -26,18 +44,19 @@
     Bài viết mới
   </h4>
   <div class="card-body">
-    <form method="POST">
+    <form method="POST" id="formAddPost" enctype="multipart/form-data">
       <div class="form-group">
         <label for="txtPostName">Tên bài viết</label>
-        <input type="text" class="form-control" id="txtPostName" name="txtPostName" autofocus>
+        <input type="text" class="form-control" id="txtPostName" name="txtPostName" autofocus required>
       </div>
+      
       <div class="form-group">
         <label for="txtTinyContent">Nội dung tóm tắt</label>
-        <input type="text" class="form-control" id="txtTinyContent" name="txtTinyContent" >
+        <input type="text" class="form-control" id="txtTinyContent" name="txtTinyContent" required>
       </div>
       <div class="form-group">
         <label for="txtContent">Nội dung đầy đủ</label>
-        <textarea id="txtContent" name="txtContent" rows="20" ></textarea>
+        <textarea id="txtContent" name="txtContent" rows="20"></textarea>
       </div>
       <div class="form-group">
         <label for="txtCat">Chuyên mục</label>
@@ -49,7 +68,7 @@
                  <option class="Category-{{CatIDLv1}}" value="{{CatIDLv1}}">{{CatNameLv1}}</option>
               {{/each}}
           </select>
-          <select class="form-control col-sm-3" name="CatIDLv2"  id="subcategory">
+          <select class="form-control col-sm-3" name="CatIDLv2"  id="subcategory" required>
             {{#each lcCategories}}
               <optgroup class="Category-{{CatIDLv1}}" required>
               <option value="">Chọn chuyên mục cấp 2</option>
@@ -71,6 +90,10 @@
           </div>
         {{/each}}
       </div>
+      <div class="form-group">
+        <label for="txtAvatar">Ảnh đại diện bài viết</label>
+        <input type="file" class="form-control" id="txtAvatar" name="cover" multiple>
+      </div>
       <a class="btn btn-primary" href="/writer/myposts" role="button">
         <i class="fa fa-backward" aria-hidden="true"></i>
         Quay trở lại
@@ -79,6 +102,6 @@
         <i class="fa fa-check" aria-hidden="true"></i>
         Lưu
       </button>
-    </form>
+      </form>
   </div>
 </div>

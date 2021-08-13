@@ -35,8 +35,9 @@ module.exports = {
         const sql = `
     select p.*, c1.CatNameLv1 as CatNameLv1, c2.CatNameLv2 as CatNameLv2
     from posts p join CategoriesLv1 c1 join CategoriesLv2 c2 on c1.CatIDLv1 = c2.CatIDLv1 
-    AND c2.CatIDLv1 = p.CatIDLv1 AND c2.CatIDLv2 = p.CatIDLv2
-    where p.CatIDLv1 = ${catId}
+    AND c2.CatIDLv1 = p.CatIDLv1 AND c2.CatIDLv2 = p.CatIDLv2 
+    where p.CatIDLv1 = ${catId} AND p.Status = 1
+    order by p.Premium desc , p.PostID desc
     LIMIT 6 OFFSET ${offset}
     `;
         const raw_data = await db.raw(sql);
@@ -49,7 +50,8 @@ module.exports = {
     select p.*, c1.CatNameLv1 as CatNameLv1, c2.CatNameLv2 as CatNameLv2
     from posts p join CategoriesLv1 c1 join CategoriesLv2 c2 on c1.CatIDLv1 = c2.CatIDLv1 
     AND c2.CatIDLv1 = p.CatIDLv1 AND c2.CatIDLv2 = p.CatIDLv2
-    where p.CatIDLv1 = ${catIdLv1} AND p.catIDLv2 =  ${catIDLv2}
+    where p.CatIDLv1 = ${catIdLv1} AND p.catIDLv2 =  ${catIDLv2} AND p.Status = 1
+    order by p.Premium desc , p.PostID desc
     LIMIT 6 OFFSET ${offset}
     `;
         const raw_data = await db.raw(sql);
@@ -62,7 +64,8 @@ module.exports = {
     select p.*, c1.CatNameLv1 as CatNameLv1, c2.CatNameLv2 as CatNameLv2
     from posts p join CategoriesLv1 c1 join CategoriesLv2 c2 join tags_posts tp on c1.CatIDLv1 = c2.CatIDLv1 
     AND c2.CatIDLv1 = p.CatIDLv1 AND c2.CatIDLv2 = p.CatIDLv2 AND tp.PostID = p.PostID
-    where tp.TagID = ${TagID}
+    where tp.TagID = ${TagID} AND p.Status = 1
+    order by p.Premium desc , p.PostID desc
     LIMIT 6 OFFSET ${offset}
     `;
         const raw_data = await db.raw(sql);
@@ -76,6 +79,7 @@ module.exports = {
     from posts p join CategoriesLv1 c1 join CategoriesLv2 c2 on c1.CatIDLv1 = c2.CatIDLv1 
     AND c2.CatIDLv1 = p.CatIDLv1 AND c2.CatIDLv2 = p.CatIDLv2
     where p.Author = ${userID}
+    order by p.Premium desc , p.PostID desc
     LIMIT 6 OFFSET ${offset}
     `;
         const raw_data = await db.raw(sql);
@@ -109,7 +113,7 @@ module.exports = {
     select COUNT(*) as total
     from posts p join CategoriesLv1 c1 join CategoriesLv2 c2 join tags_posts tp on c1.CatIDLv1 = c2.CatIDLv1 
     AND c2.CatIDLv1 = p.CatIDLv1 AND c2.CatIDLv2 = p.CatIDLv2 AND tp.PostID = p.PostID
-    where tp.TagID = ${TagID}
+    where tp.TagID = ${TagID} AND p.Status = 1
     `;
         const raw_data = await db.raw(sql);
         const rows = raw_data[0];
@@ -117,7 +121,10 @@ module.exports = {
     },
     async countByCatIDLv1(catId) {
         const rows = await db("posts")
-            .where("CatIDLv1", catId)
+            .where({
+                CatIDLv1: catId,
+                Status:  1
+            })
             .count("*", { as: "total" });
 
         return rows[0].total;
@@ -127,6 +134,7 @@ module.exports = {
             .where({
                 CatIDLv1: catIdLv1,
                 CatIDLv2: catIDLv2,
+                Status:  1
             })
             .count("*", { as: "total" });
 
@@ -156,28 +164,32 @@ module.exports = {
             .join("categorieslv2", { "categorieslv2.CatIDLv1": "posts.CatIDLv1", "categorieslv2.CatIDLv2": "posts.CatIDLv2" })
             .join("categorieslv1", { "categorieslv1.CatIDLv1": "posts.CatIDLv1" })
         if (rows.length === 0) return null;
-
+        await addTag(rows)
         return rows[0];
     },
     async searchByText(text, offset) {
         const sql = `
     SELECT p.*, c1.CatNameLv1 as CatNameLv1, c2.CatNameLv2 as CatNameLv2 FROM posts p join CategoriesLv1 c1 join CategoriesLv2 c2  on c1.CatIDLv1 = c2.CatIDLv1 
     AND c2.CatIDLv1 = p.CatIDLv1 AND c2.CatIDLv2 = p.CatIDLv2
-    WHERE MATCH (p.PostName, p.TinyContent, p.FullContent) 
-    AGAINST ( '${text}' IN NATURAL LANGUAGE MODE) LIMIT 6 OFFSET ${offset};
+    WHERE MATCH (p.PostName, p.TinyContent, p.FullContent) AGAINST ( '${text}' IN NATURAL LANGUAGE MODE) AND p.Status = 1
+    order by p.Premium desc , p.PostID desc
+    LIMIT 6 OFFSET ${offset};
       `;
         const raw_data = await db.raw(sql);
         const list = raw_data[0];
         await addTag(list)
         return list;
     },
-    countSearchByText(text) {
+    async countSearchByText(text) {
         const sql = `
-    SELECT COUNT(*) FROM posts 
+    SELECT COUNT(*) as total
+    FROM posts 
     WHERE MATCH (PostName, TinyContent, FullContent) 
-    AGAINST ( '${text}' IN NATURAL LANGUAGE MODE);
+    AGAINST ( '${text}' IN NATURAL LANGUAGE MODE) AND Status = 1
       `;
-        return db.raw(sql);
+      const raw_data = await db.raw(sql);
+      const rows = raw_data[0];
+      return rows[0].total;
     },
     getPostsWaitUp() {
         return db('posts')

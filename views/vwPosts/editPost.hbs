@@ -13,10 +13,6 @@
 <script>
   $('#subcategory')
   .find('optgroup').hide(); // initialize
-  /*$('#formPostAdmin'){
-    var $curLv1 = $(this).find(class="Category-{{CatIDLv1}}");
-    attr('selected', 'selected');  
-  } */
   $('#category')
   .change(function() {
     var $cat = $(this).find('option:selected');
@@ -25,8 +21,18 @@
     $subCat.show();
     $subCat.find('option').first().attr('selected', 'selected');
   });
-  console.log("'"+ '.' + cat.attr('class') + "'");
-  console.log(cat.value.toString());
+
+  var mySelect = document.getElementById('txtStatus');
+  for(var i, j = 0; i = mySelect.options[j]; j++) {
+      if(i.value === post.Status) {
+        mySelect.selectedIndex = j;
+        console.log(j);
+        break;
+      }
+  }
+  
+
+
 </script>
 {{/section}}
 <div class="card">
@@ -38,6 +44,15 @@
       <div class="form-group">
         <label for="txtID">ID Bài viết</label>
         <input type="text" readonly class="form-control" id="txtID" name="txtID" value= "{{post.PostID}}"> 
+      </div>
+       <div class="form-group">
+        <label for="txtStatus">Tình trạng bài viết</label>
+        <select class="form-control" id="txtStatus" name = "txtStatus"> 
+          <option value = 0>0. Đã được duyệt & chờ xuất bản</option>
+          <option value = 1>1. Đã xuất bản</option>
+          <option value = 2>2. Bị từ chối</option>
+          <option value = 3>3. Chưa được duyệt</option>
+        </select>
       </div>
       <div class="form-group">
         <label for="txtPostName">Tên bài viết</label>

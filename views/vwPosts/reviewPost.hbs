@@ -1,13 +1,25 @@
 {{#section 'js'}}
 <script>
-  $('#subcategory').find('optgroup').hide(); // initialize
-  $('#category').change(function() {
-  var $cat = $(this).find('option:selected');
-  var $subCat = $('#subcategory').find('.' + $cat.attr('class'));
-  $('#subcategory').find('optgroup').not("'"+ '.' + $cat.attr('class') + "'").hide(); // hide other optgroup
-  $subCat.show(); 
-  $subCat.find('option').first().attr('selected', 'selected');
-  });
+  $('#subcategory')
+  .find('optgroup').hide(); // initialize
+  /*$('#formPostAdmin'){
+    var $curLv1 = $(this).find(class="Category-{{CatIDLv1}}");
+    attr('selected', 'selected');  
+  } */
+  $('#category')
+  .change(function() {
+    var $cat = $(this).find('option:selected');
+    var $subCat = $('#subcategory').find('.' + $cat.attr('class'));
+    $('#subcategory').find('optgroup').not("'"+ '.' + $cat.attr('class') + "'").hide(); // hide other optgroup
+    $subCat.show();
+    $subCat.find('option').first().attr('selected', 'selected');
+  }); 
+  $('#category').val("{{post.CatIDLv1}}").change();
+  $('.Category-{{post.CatIDLv1}} option[value="{{post.CatIDLv2}}"]').attr('selected','selected');
+  {{#each post.tag}}
+    $("#tagCheckbox{{TagID}}").prop('checked', true);
+  {{/each}}
+
 </script>
 <script>
   document.querySelector('#btnSubmit').addEventListener('click',function(e){
@@ -39,6 +51,10 @@
   <div class="card-body">
     <form method="POST" action="/editor/reviewPost/{{post.PostID}}">
         <div class="form-group">
+          <label for="txtID">ID Bài viết</label>
+          <input type="text" readonly class="form-control" id="txtID" name="txtID" value= "{{post.PostID}}"> 
+        </div>
+        <div class="form-group">
             <label for="txtPostName">Tên bài viết</label>
             <p class="text-primary">{{post.PostName}}</p>
         </div>
@@ -50,26 +66,14 @@
         <div class="form-group">
         <label for="txtCat">Chuyên mục</label>
         <br>
-        <table class="table" style="border: hidden;">
-          <tr>
-            <td><p class="text-primary" style="color:crimson !important">{{CatNameLv1}}|{{CatNameLv2}}</p></td>
-            <td class="text-right">
-            
-              <a class="btn btn-primary btn-sm" href="" role="button" title="Edit">
-                <i class="fa fa-pencil" aria-hidden="true"></i>
-              </a>
-            </td>
-          </tr>
-        </table>
-        
-        {{!-- <div class="">
-          <select class="form-control col-sm-3" id="category" required>
+        <div class="">
+          <select class="form-control col-sm-3" name="CatIDLv1" id="category" required>
               <option value="">Chọn chuyên mục cấp 1</option>
               {{#each lcCategories}}
                  <option class="Category-{{CatIDLv1}}" value="{{CatIDLv1}}">{{CatNameLv1}}</option>
               {{/each}}
           </select>
-          <select class="form-control col-sm-3" id="subcategory">
+          <select class="form-control col-sm-3" name="CatIDLv2"  id="subcategory" required>
             {{#each lcCategories}}
               <optgroup class="Category-{{CatIDLv1}}" required>
               <option value="">Chọn chuyên mục cấp 2</option>
@@ -79,7 +83,7 @@
             </optgroup>
             {{/each}}
           </select>
-        </div>  --}}
+        </div> 
       </div>
       <label for="postPremium">Loại bài viết</label><br>
       <div class="form-check">
@@ -95,7 +99,13 @@
    
       <div class="form-group">
         <label for="txtTags">Nhãn</label>
-        <input type="text" class="form-control" id="txtTags" name="txtTags" >
+        <br>
+        {{#each tags}}
+          <div class="form-check form-check-inline" >
+            <input class="form-check-input" type="checkbox" name="TagID" id="tagCheckbox{{TagID}}" value="{{TagID}}">
+            <label class="form-check-label" for="tagCheckbox{{TagID}}">{{TagName}}</label>
+          </div>
+        {{/each}}
       </div>
       <div class="form-group">
         <label for="txtTags">Nhận xét</label>

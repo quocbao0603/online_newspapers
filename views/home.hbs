@@ -255,7 +255,51 @@ function myFunction(postPremium) {
             <div class="col-md-8">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2><i class="fas fa-align-justify"></i>TIN TỨC NỔI BẬT</h2>
+                        <h2><i class="fas fa-align-justify"></i>TIN TỨC MỚI NHẤT</h2>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="mn-img">
+                                    <img src="/public/imgs/posts/{{topViewsNewsMain.PostID}}/main_thumbs.jpg" style="width:450px;height:292px;"/>
+                                </div>
+                                <div class="mn-content">
+                                    <a class="mn-title" href="/posts/details/{{topViewsNewsMain.PostID}}" onclick="return myFunction({{this.Premium}})">{{topViewsNewsMain.PostName}}</a>
+                                    <a class="mn-date" href=""><i class="far fa-clock"></i>{{topViewsNewsMain.Date}}</a>
+                                    <div class="mb-2">
+                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
+                                            href="posts/byCat/{{topViewsNewsMain.CatIDLv1}}/{{topViewsNewsMain.CatIDLv2}}">{{topViewsNewsMain.CatNameLv1}}|{{topViewsNewsMain.CatNameLv2}}</a>
+                                        {{#if this.Premium}}
+                                            <span class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2" style="background-color:coral"><i class="fa fa-diamond" aria-hidden="true"></i>Premium</span>
+                                        {{/if}}
+                                    </div>
+                                    <p>
+                                        {{topViewsNewsMain.TinyContent}}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                {{#each topViewsNews}}
+                                <div class="mn-list">
+                                    <div class="mn-img">
+                                        <img src="/public/imgs/posts/{{PostID}}/main_thumbs.jpg" style="width: 100px;height: 90px;"/>
+                                    </div>
+                                    <div class="mn-content">
+                                        <a class="mn-title" href="/posts/details/{{PostID}}" onclick="return myFunction({{this.Premium}})">{{PostName}}</a>
+                                        <a class="mn-date" href=""><i class="far fa-clock"></i>{{Date}}</a>
+                                        <div class="mb-2">
+                                            <a class="badge badge-primary"
+                                                href="posts/byCat/{{CatIDLv1}}/{{CatIDLv2}}">{{CatNameLv1}}|{{CatNameLv2}}</a>
+                                            {{#if this.Premium}}
+                                            <span class="badge badge-primary" style="background-color:coral"><i class="fa fa-diamond" aria-hidden="true"></i>Premium</span>
+                                            {{/if}}
+                                        </div>
+                                    </div>
+                                </div>
+                                {{/each}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <h2><i class="fas fa-align-justify"></i>ĐƯỢC XEM NHIỀU</h2>
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="mn-img">
@@ -289,50 +333,6 @@ function myFunction(postPremium) {
                                             <a class="badge badge-primary"
                                                 href="posts/byCat/{{CatIDLv1}}/{{CatIDLv2}}">{{CatNameLv1}}|{{CatNameLv2}}</a>
                                                 
-                                            {{#if this.Premium}}
-                                            <span class="badge badge-primary" style="background-color:coral"><i class="fa fa-diamond" aria-hidden="true"></i>Premium</span>
-                                            {{/if}}
-                                        </div>
-                                    </div>
-                                </div>
-                                {{/each}}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <h2><i class="fas fa-align-justify"></i>ĐƯỢC XEM NHIỀU</h2>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="mn-img">
-                                    <img src="/public/imgs/posts/{{topViewsNewsMain.PostID}}/main_thumbs.jpg" style="width:450px;height:292px;"/>
-                                </div>
-                                <div class="mn-content">
-                                    <a class="mn-title" href="/posts/details/{{topViewsNewsMain.PostID}}" onclick="return myFunction({{this.Premium}})">{{topViewsNewsMain.PostName}}</a>
-                                    <a class="mn-date" href=""><i class="far fa-clock"></i>{{topViewsNewsMain.Date}}</a>
-                                    <div class="mb-2">
-                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                            href="posts/byCat/{{topViewsNewsMain.CatIDLv1}}/{{topViewsNewsMain.CatIDLv2}}">{{topViewsNewsMain.CatNameLv1}}|{{topViewsNewsMain.CatNameLv2}}</a>
-                                        {{#if this.Premium}}
-                                            <span class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2" style="background-color:coral"><i class="fa fa-diamond" aria-hidden="true"></i>Premium</span>
-                                        {{/if}}
-                                    </div>
-                                    <p>
-                                        {{topViewsNewsMain.TinyContent}}
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                {{#each topViewsNews}}
-                                <div class="mn-list">
-                                    <div class="mn-img">
-                                        <img src="/public/imgs/posts/{{PostID}}/main_thumbs.jpg" style="width: 100px;height: 90px;"/>
-                                    </div>
-                                    <div class="mn-content">
-                                        <a class="mn-title" href="/posts/details/{{PostID}}" onclick="return myFunction({{this.Premium}})">{{PostName}}</a>
-                                        <a class="mn-date" href=""><i class="far fa-clock"></i>{{Date}}</a>
-                                        <div class="mb-2">
-                                            <a class="badge badge-primary"
-                                                href="posts/byCat/{{CatIDLv1}}/{{CatIDLv2}}">{{CatNameLv1}}|{{CatNameLv2}}</a>
                                             {{#if this.Premium}}
                                             <span class="badge badge-primary" style="background-color:coral"><i class="fa fa-diamond" aria-hidden="true"></i>Premium</span>
                                             {{/if}}

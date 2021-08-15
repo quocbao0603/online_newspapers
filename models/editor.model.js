@@ -9,12 +9,14 @@ const addTag = async function(list){
     return list;
 }
 module.exports ={
-    async getPostsManage(CatIDLv1,CatIDLv2){
+    async getPostsManage(CatIDLv1,CatIDLv2,offset){
         const sql = `
     select p.*, c1.CatNameLv1 as CatNameLv1, c2.CatNameLv2 as CatNameLv2
     from posts p join CategoriesLv1 c1 join CategoriesLv2 c2 on c1.CatIDLv1 = c2.CatIDLv1 
     AND c2.CatIDLv1 = p.CatIDLv1 AND c2.CatIDLv2 = p.CatIDLv2
-    where p.CatIDLv1 = ${CatIDLv1} AND p.catIDLv2 =  ${CatIDLv2} AND p.Status = 3
+    where p.CatIDLv1 = ${CatIDLv1} AND p.catIDLv2 =  ${CatIDLv2} 
+    Order by p.Status Desc
+    LIMIT 6 OFFSET ${offset}
     `;
     const raw_data = await db.raw(sql);
     const list = raw_data[0];
@@ -22,6 +24,21 @@ module.exports ={
     return list;
 
     },
+    async countPostManage(catIDLv1,catIDLv2){
+        const rows = await db("posts")
+        .where({
+            CatIDLv1: catIDLv1,
+            CatIDLv2: catIDLv2,
+        })
+        .count("*", { as: "total" });
+
+    return rows[0].total;
+    },
+
+
+
+
+
     getCatsManage(UserID){
         return db('editors')
         .where("userID",UserID) 
@@ -79,7 +96,15 @@ module.exports ={
         .update({
             Date: datePost,
         });
-    }
+    },
+    updateCategories(postID,CatIDLv1,CatIDLv2){
+        return db("posts")
+        .where("PostID", postID)
+        .update({
+            CatIDLv1:CatIDLv1,
+            CatIDLv2:CatIDLv2
+        });
+    },
 }
 
 

@@ -24,8 +24,9 @@ router.get("/addCatLv1",authAdministrator, function (req, res) {
 });
 
 router.post("/addCatLv1",authAdministrator, async function (req, res) {
+  const CatIDLv1 = await categoryModel.getPostCatLv1();
   const new_category = {
-    // CatID: -1,
+    CatIDLv1: +CatIDLv1.CatIDLv1 + 1,
     CatNameLv1: req.body.txtCatName,
   };
 
@@ -41,7 +42,7 @@ router.get("/edit",authAdministrator, async function (req, res) {
   if (category === null) {
     return res.redirect("/admin/categories");
   }
-  console.log(category)
+  //console.log(category)
   res.render("vwCategories/edit", {
     category,
   });
@@ -50,7 +51,7 @@ router.get("/edit",authAdministrator, async function (req, res) {
 router.get("/indexLv2",authAdministrator, async function (req, res) {
   const id = req.query.id || 0;
   const category = await categoryModel.allCatLv2ByCatLv1(id);
-  console.log(category)
+  //console.log(category)
   // if (category === null) {
   //   return res.redirect("/admin/categories");
   // }
@@ -72,9 +73,9 @@ router.get("/editCatLv2",authAdministrator, async function (req, res) {
   if (category === null) {
     return res.redirect("/admin/categories");
   }
-  console.log("editlv2")
-  console.log(category)
-  console.log(catLv1)
+  //console.log("editlv2")
+  //console.log(category)
+  //console.log(catLv1)
   res.render("vwCategories/editCatLv2", {
     category,
     catLv1,
@@ -103,13 +104,13 @@ router.post("/addCatLv2",authAdministrator, async function (req, res) {
   const lastCatIDLv2 = await categoryModel.getPosCatLv2(CatIDLv1);
   CatIDLv2 =0;
   if(typeof(lastCatIDLv2)=="undefined"){
-    CatIDLv2=0;
+    CatIDLv2=1;
   }
   else {
     CatIDLv2 = +lastCatIDLv2.CatIDLv2+1;
   }
   
-  console.log(typeof(CatIDLv2));
+  //console.log(typeof(CatIDLv2));
   const new_category = {
     // CatID: -1,
     CatNameLv2: req.body.txtCatName,
@@ -121,8 +122,9 @@ router.post("/addCatLv2",authAdministrator, async function (req, res) {
 });
 
 router.post("/patchCatLv2",authAdministrator, async function (req, res) {
+  const CatLv1 = req.body.CatIDLv1;
   await categoryModel.patchCatLv2(req.body);
-  res.redirect("/admin/categories/indexLv2?id="+req.body.CatIDLv1);
+  res.redirect("/admin/categories/indexLv2?id="+CatLv1);
 });
 
 router.post("/delCatLv2",authAdministrator, async function (req, res) {

@@ -27,6 +27,10 @@ module.exports = {
 
     return rows[0];
   },
+  async getPostCatLv1(){
+    const rows = await this.allCatLv1().orderBy("CatIDLv1","desc").first();
+    return rows;
+  },
 
   async getToTalCatLv2(CatIDLv1){
     const rows = await db("CategoriesLv2").where("CatIDLv1", CatIDLv1)
@@ -37,6 +41,7 @@ module.exports = {
     const rows = await this.allCatLv2ByCatLv1(CatIDLv1).orderBy("CatIDLv2","desc").first();
     return rows;
   },
+  
 
   allWithDetails() {
     // const sql = `

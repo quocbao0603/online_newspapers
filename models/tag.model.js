@@ -32,4 +32,9 @@ module.exports = {
   del(id) {
     return db("tags").where("TagID", id).del();
   },
+  async getTotalTag(){
+    const rows = await db("tags")
+    .count("*", { as: "total" });
+    return rows[0].total;
+  },
 };

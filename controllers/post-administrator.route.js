@@ -22,7 +22,10 @@ router.get("/tags/add",authAdministrator, function (req, res) {
     res.render("vwTags/add");
 });
 router.post("/tags/add",authAdministrator, async function (req, res) {
+    const tagID = await tagModel.getTotalTag();
+    console.log(tagID)
     const new_tag = {
+      TagID: tagID+1,
       TagName: req.body.txtTagName,
     };
     await tagModel.add(new_tag);

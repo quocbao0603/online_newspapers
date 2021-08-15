@@ -13,7 +13,7 @@
 <div class="card">
   <h4 class="card-header d-flex justify-content-between">
     {{this.title}}
-    <a class="btn btn-outline-success" href="/writer/posts/add" role="button">
+    <a class="btn btn-outline-success" href="/admin/posts/add" role="button">
       <i class="fa fa-plus" aria-hidden="true"></i>
       Bài viết mới
     </a>
@@ -29,6 +29,7 @@
       <thead>
         <tr>
           <th scope="col">STT</th>
+          <th scope="col">ID bài viết</th>
           <th scope="col">Tên bài viết</th>
           <th scope="col">Chuyên mục</th>
           <th scope="col">Nhãn</th>
@@ -42,6 +43,7 @@
       {{#each this.posts}}
       <tr>
       <th scope="row">{{format_index @index}}</th>
+      <td><a class="font-weight-bold">{{PostID}}</a></td>
       <td><a class="text-primary" href="/posts/details/{{PostID}}">{{PostName}}</a></td>
       <td><a href="/posts/byCat/{{CatIDLv1}}/{{CatIDLv2}}" class="badge badge-secondary">{{CatNameLv1}} | {{CatNameLv2}}</a></td>
       <td>{{#each tag}}

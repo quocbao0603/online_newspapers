@@ -36,6 +36,13 @@ module.exports = {
                 premium: time,
             });
     },
+    async updatePassword(id, new_password) {
+        return db("users")
+            .where("id", id)
+            .update({
+                password: new_password,
+            });
+    },
     patch(new_user) {
         const ID = new_user.id;
         delete new_user.id;
@@ -43,8 +50,8 @@ module.exports = {
             .where('id', ID)
             .update(new_user)
     },
-    del(userID){
+    del(userID) {
         return db("users").where("id", userID).del();
     }
-    
+
 };

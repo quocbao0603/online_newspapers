@@ -1,5 +1,5 @@
 {{#section 'js'}}
-<script src="https://cdn.tiny.cloud/1/5wzancut12fwbdpepoigav775mmcbx0kimb9x4fkw2d9o7c8/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/mg5mdf920h2memeffbd6jvqanwjaovmtpfnl9vzuxgl1nwu5/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
   tinymce.init({
     selector: '#txtContent',
@@ -13,6 +13,10 @@
 <script>
   $('#subcategory')
   .find('optgroup').hide(); // initialize
+  /*$('#formPostAdmin'){
+    var $curLv1 = $(this).find(class="Category-{{CatIDLv1}}");
+    attr('selected', 'selected');  
+  } */
   $('#category')
   .change(function() {
     var $cat = $(this).find('option:selected');
@@ -20,19 +24,12 @@
     $('#subcategory').find('optgroup').not("'"+ '.' + $cat.attr('class') + "'").hide(); // hide other optgroup
     $subCat.show();
     $subCat.find('option').first().attr('selected', 'selected');
-  });
-
-  var mySelect = document.getElementById('txtStatus');
-  for(var i, j = 0; i = mySelect.options[j]; j++) {
-      if(i.value === post.Status) {
-        mySelect.selectedIndex = j;
-        console.log(j);
-        break;
-      }
-  }
-  
-
-
+  }); 
+  $('#category').val("{{post.CatIDLv1}}").change();
+  $('.Category-{{post.CatIDLv1}} option[value="{{post.CatIDLv2}}"]').attr('selected','selected');
+  {{#each post.tag}}
+    $("#tagCheckbox{{TagID}}").prop('checked', true);
+  {{/each}}
 </script>
 {{/section}}
 <div class="card">
@@ -44,15 +41,6 @@
       <div class="form-group">
         <label for="txtID">ID Bài viết</label>
         <input type="text" readonly class="form-control" id="txtID" name="txtID" value= "{{post.PostID}}"> 
-      </div>
-       <div class="form-group">
-        <label for="txtStatus">Tình trạng bài viết</label>
-        <select class="form-control" id="txtStatus" name = "txtStatus"> 
-          <option value = 0>0. Đã được duyệt & chờ xuất bản</option>
-          <option value = 1>1. Đã xuất bản</option>
-          <option value = 2>2. Bị từ chối</option>
-          <option value = 3>3. Chưa được duyệt</option>
-        </select>
       </div>
       <div class="form-group">
         <label for="txtPostName">Tên bài viết</label>
@@ -69,14 +57,14 @@
       <div class="form-group">
         <label for="txtCat">Chuyên mục</label>
         <br>
-        <div class="" id = "formPostAdmin">
+        <div class="">
           <select class="form-control col-sm-3" name="CatIDLv1" id="category" required>
               <option value="">Chọn chuyên mục cấp 1</option>
               {{#each lcCategories}}
                  <option class="Category-{{CatIDLv1}}" value="{{CatIDLv1}}">{{CatNameLv1}}</option>
               {{/each}}
           </select>
-          <select class="form-control col-sm-3" name="CatIDLv2"  id="subcategory">
+          <select class="form-control col-sm-3" name="CatIDLv2"  id="subcategory" required>
             {{#each lcCategories}}
               <optgroup class="Category-{{CatIDLv1}}" required>
               <option value="">Chọn chuyên mục cấp 2</option>
@@ -98,7 +86,7 @@
           </div>
         {{/each}}
       </div>
-      <a class="btn btn-primary" href="/admin/posts/" role="button">
+      <a class="btn btn-primary" href="/writer/myposts/" role="button">
         <i class="fa fa-backward" aria-hidden="true"></i>
         Quay trở lại
       </a>
@@ -106,9 +94,9 @@
         <i class="fa fa-check" aria-hidden="true"></i>
         Lưu
       </button>
-      <button type="submit" class="btn btn-danger">
-        <i class="fa fa-trash-o" aria-hidden="true">Delete</i>
-      </button>
+      <a href="/writer/posts/del?id={{post.PostID}}" class="btn btn-danger">
+        <i class="fa fa-trash-o" aria-hidden="true">Xóa</i>
+      </a>
     </form>
   </div>
 </div>

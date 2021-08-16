@@ -3,7 +3,8 @@ const { del } = require("./tag.model");
 
 module.exports = {
     all() {
-        return db("users");
+        return db("users")
+        .orderBy("Permission","desc");
     },
     getUserByUserName(username) {
         return db("users").where("username", username).first();

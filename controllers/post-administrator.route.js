@@ -66,8 +66,11 @@ router.get("/users",authAdministrator, async function(req,res){
 router.get("/users/edit",authAdministrator, async function(req,res){
     const id = req.query.id || 0;
     const user = await userModel.getUserById(id);
+    const catManagement = await editorModel.getCatsManage(id).first();
+    console.log(catManagement)
     res.render("vwUsers/edit",{
         user,
+        catManagement
     })
 })
 

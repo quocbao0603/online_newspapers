@@ -13,9 +13,13 @@
     $('#subcategory').find('optgroup').not("'"+ '.' + $cat.attr('class') + "'").hide(); // hide other optgroup
     $subCat.show();
     $subCat.find('option').first().attr('selected', 'selected');
-  });
-  console.log("'"+ '.' + cat.attr('class') + "'");
-  console.log(cat.value.toString());
+  }); 
+  $('#category').val("{{catManagement.CatIDLv1}}").change();
+  $('.Category-{{catManagement.CatIDLv1}} option[value="{{catManagement.CatIDLv2}}"]').attr('selected','selected');
+  {{#each post.tag}}
+    $("#tagCheckbox{{TagID}}").prop('checked', true);
+  {{/each}}
+
 </script>
 <script>
   function validate() {

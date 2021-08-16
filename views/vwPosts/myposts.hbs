@@ -1,4 +1,6 @@
+
 {{#section 'js'}}
+
 <script>
   $(document).ready(function(){
     $("#myInput").on("keyup", function() {
@@ -7,7 +9,9 @@
         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
       });
     });
+    
   });
+
 </script>
 {{/section}}
 <div class="card">
@@ -25,7 +29,7 @@
     {{else}}
     <input class="form-control" id="myInput" type="text" placeholder="Tìm kiếm..">
 
-    <table class="table table-bordered">
+    <table id="myposts" class="table table-bordered">
       <thead>
         <tr>
           <th scope="col">STT</th>
@@ -39,7 +43,7 @@
       <tbody id="myTable">
       {{#each this.posts}}
       <tr>
-      <th scope="row">{{format_index @index}}</th>
+      <td scope="row">{{format_index @index}}</td>
       <td><a class="text-primary" href="/posts/details/{{PostID}}">{{PostName}}</a></td>
       <td><a href="/posts/byCat/{{CatIDLv1}}/{{CatIDLv2}}" class="badge badge-secondary">{{CatNameLv1}} | {{CatNameLv2}}</a></td>
       <td>{{#each tag}}
@@ -57,16 +61,44 @@
           <div class="text-danger">Bị từ chối</div> 
         {{/ifEquals}}
         {{#ifEquals Status "3"}}
-          <div class="text-danger">Chưa được duyệt</div> 
+          <div class="text-primary">Chưa được duyệt</div> 
         {{/ifEquals}}
       </td>
       <td>
         {{#ifEquals Status "2"}}
+        <button type="button" class="btn btn-danger"data-toggle="modal" data-target="#myModal">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+          </button>
+
+        <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Lý do bị từ chối</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          {{Notice}}
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
           <a href="/writer/posts/edit?id={{PostID}}">
           <button type="button" class="btn btn-danger">
             <i class="fa fa-pencil" aria-hidden="true"></i>
           </button>
         </a> 
+        </div>
+        
+      </div>
+    </div>
+  </div>
+          
         {{/ifEquals}}
         {{#ifEquals Status "3"}}
           <a href="/writer/posts/edit?id={{PostID}}">
@@ -81,6 +113,7 @@
       {{/each}}
       </tbody>
     </table>
+    <br>
     <nav aria-label="...">
       <ul class="pagination">
         <li class="page-item disabled">

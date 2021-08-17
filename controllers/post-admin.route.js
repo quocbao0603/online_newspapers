@@ -2,6 +2,8 @@ const express = require("express");
 const postModel = require("../models/post.model");
 const tagModel = require("../models/tag.model");
 const tagPostModel = require("../models/tag_post.model");
+const editorModel  = require("../models/editor.model");
+
 const moment = require("moment");
 const authAdmin = require("../middlewares/auth-admin.mdw");
 const router = express.Router();
@@ -121,6 +123,54 @@ router.post("/posts/del", authAdmin, async function(req, res) {
     const test_post = await postModel.del(res.body.PostID);
     console.log(test_post);
     res.redirect('/admin/posts');
+});
+
+
+
+router.get("/reviewPost/:id",authAdmin,async function(req,res){
+    const postID = +req.params.id || 0;
+    const post = await postModel.findById(postID);
+    CatNameLv1 = res.locals.lcCategories[post.CatIDLv1-1].CatNameLv1;
+    CatNameLv2 = res.locals.lcCategories[post.CatIDLv1-1].CatName[post.CatIDLv2-1].CatNameLv2;
+    const allTag = await tagModel.all();
+    postStatus=1;
+
+    //post.push({CatNameLv1: CatNameLv1,CatNameLv2: CatNameLv2})
+    //console.log(post);
+    res.render("vwposts/adminReviewPost",{
+        post:post,
+        tags: allTag,
+        CatNameLv1: CatNameLv1,
+        CatNameLv2: CatNameLv2,
+        postStatus:postStatus
+    })
+});
+
+router.post("/reviewPost/:id",authAdmin,async function(req,res){
+  const postID = +req.params.id || 0;
+  let postStatus = req.body.postStatus;
+  const cmt = req.body.txtComments;
+  const postPremium = req.body.postPremium;
+  const now =  moment().format();
+  //console.log('thoi gian hien tai: '+now);
+  DatePost = req.body.datePost;
+  //  DatePost = moment(DatePost, "YYYY-MM-DDThh:mm:ss").format("YYYY-MM-DD hh:mm:ss");
+  //console.log('thoi gian xuat ban'+DatePost)
+  if(postStatus == 1 ){
+    if(now<DatePost){
+      postStatus=0
+    }
+    await editorModel.setDatePost(postID,DatePost);
+  }
+  await editorModel.updatePostAfterCheck(postID,cmt,postStatus,postPremium);
+  await editorModel.updateCategories(postID,req.body.CatIDLv1,req.body.CatIDLv2);
+  console.log("txtId "+ req.body.txtID," tagID "+req.body.TagID);
+  await tagPostModel.patch(req.body.TagID, req.body.txtID)
+  
+ 
+  
+  res.redirect("/admin/posts")
+
 });
 
 module.exports = router;

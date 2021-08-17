@@ -67,7 +67,7 @@ function myFunction(){
     Duyệt bài viết
   </h4>
   <div class="card-body">
-    <form method="POST" action="/editor/reviewPost/{{post.PostID}}">
+    <form method="POST" action="/admin/reviewPost/{{post.PostID}}">
         <div class="form-group">
           <label for="txtID">ID Bài viết</label>
           <input type="text" readonly class="form-control" id="txtID" name="txtID" value= "{{post.PostID}}"> 
@@ -85,7 +85,7 @@ function myFunction(){
         <div class="form-group">
         <label for="txtCat">Chuyên mục</label>
         <br>
-        <div class="">
+        <div class="" >
           <select class="form-control col-sm-3" name="CatIDLv1" id="category" required>
               <option value="">Chọn chuyên mục cấp 1</option>
               {{#each lcCategories}}
@@ -133,7 +133,7 @@ function myFunction(){
         <input type="text" class="form-control" id="txtComments" name="txtComments" >
       </div>
       </div>
-      <a class="btn btn-primary" href="/editor/myposts" role="button">
+      <a class="btn btn-primary" href="/admin/posts" role="button">
         <i class="fa fa-backward" aria-hidden="true"></i>
         Quay trở lại
       </a>

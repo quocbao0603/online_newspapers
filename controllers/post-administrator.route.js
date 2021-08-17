@@ -3,6 +3,7 @@ const authAdministratorMdw = require("../middlewares/auth-administrator.mdw");
 const authAdministrator = require("../middlewares/auth-administrator.mdw");
 const editorModel = require("../models/editor.model");
 const tagModel = require("../models/tag.model");
+const tag_postModel = require("../models/tag_post.model");
 const userModel = require("../models/user.model");
 const router = express.Router();
 
@@ -35,12 +36,13 @@ router.post("/tags/add",authAdministrator, async function (req, res) {
 router.get("/tags/edit",authAdministrator, async function (req, res) {
     const id = req.query.id || 0;
     const tag = await tagModel.findByTagID(id);
-    console.log(tag);
+    const totalPostUseTag = await tag_postModel.countPostUseTagByTagID(id);
     if (tag === null) {
       return res.redirect("/administrator/tags/");
     }
     res.render("vwTags/edit", {
       tag,
+      totalPostUseTag
     });
 });
 router.post("/tags/patch",authAdministrator, async function (req, res) {
@@ -66,8 +68,11 @@ router.get("/users",authAdministrator, async function(req,res){
 router.get("/users/edit",authAdministrator, async function(req,res){
     const id = req.query.id || 0;
     const user = await userModel.getUserById(id);
+    const catManagement = await editorModel.getCatsManage(id).first();
+    console.log(catManagement)
     res.render("vwUsers/edit",{
         user,
+        catManagement
     })
 })
 
@@ -99,6 +104,7 @@ router.post("/users/patch",authAdministrator, async function(req,res){
 
   
 router.post("/users/del",authAdministrator, async function (req, res) {
+    await editorModel.del(req.body.id);
     await userModel.del(req.body.id);
     res.redirect("/administrator/users/");
 });

@@ -68,13 +68,14 @@ router.get("/reviewPost/:id",authEditor,async function(req,res){
 
 router.post("/reviewPost/:id",authEditor,async function(req,res){
   const postID = +req.params.id || 0;
-  const postStatus = req.body.postStatus;
+  let postStatus = req.body.postStatus;
   const cmt = req.body.txtComments;
   const postPremium = req.body.postPremium;
-  const now =  moment().format("YYYY-MM-DD h:m:s");
+  const now =  moment().format();
+  //console.log('thoi gian hien tai: '+now);
   DatePost = req.body.datePost;
-  DatePost = moment(DatePost, "YYYY-MM-DDTh:m").format("YYYY-MM-DD h:m:s");
-  console.log(DatePost)
+  //  DatePost = moment(DatePost, "YYYY-MM-DDThh:mm:ss").format("YYYY-MM-DD hh:mm:ss");
+  //console.log('thoi gian xuat ban'+DatePost)
   if(postStatus == 1 ){
     if(now<DatePost){
       postStatus=0

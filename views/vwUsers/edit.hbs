@@ -13,9 +13,13 @@
     $('#subcategory').find('optgroup').not("'"+ '.' + $cat.attr('class') + "'").hide(); // hide other optgroup
     $subCat.show();
     $subCat.find('option').first().attr('selected', 'selected');
-  });
-  console.log("'"+ '.' + cat.attr('class') + "'");
-  console.log(cat.value.toString());
+  }); 
+  $('#category').val("{{catManagement.CatIDLv1}}").change();
+  $('.Category-{{catManagement.CatIDLv1}} option[value="{{catManagement.CatIDLv2}}"]').attr('selected','selected');
+  {{#each post.tag}}
+    $("#tagCheckbox{{TagID}}").prop('checked', true);
+  {{/each}}
+
 </script>
 <script>
   function validate() {
@@ -52,11 +56,11 @@
       <div class="form-group">
         <p>Chọn thời gian:</p>
         <input type="radio" id="10" name="times" value="10000">
-        <label for="html">10s</label><br>
+        <label for="html">10 giây</label><br>
         <input type="radio" id="30" name="times" value="30000">
-        <label for="css">30s</label><br>
-        <input type="radio" id="120" name="times" value="120000">
-        <label for="javascript">120s</label>
+        <label for="css">3 phút</label><br>
+        <input type="radio" id="120" name="times" value="604800000">
+        <label for="javascript">7 ngày</label>
       </div>
       {{/ifEquals}}
       {{#ifEquals user.permission "1"}}

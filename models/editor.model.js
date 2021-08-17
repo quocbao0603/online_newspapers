@@ -105,6 +105,9 @@ module.exports ={
             CatIDLv2:CatIDLv2
         });
     },
+    del(userID) {
+        return db("editors").where("userID", userID).del();
+    }
 }
 
 

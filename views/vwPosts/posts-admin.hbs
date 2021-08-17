@@ -11,11 +11,10 @@
 </script>
 {{/section}}
 <div class="card">
-  <h4 class="card-header d-flex justify-content-between">
-    {{this.title}}
-    <a class="btn btn-outline-success" href="/admin/posts/add" role="button">
-      <i class="fa fa-plus" aria-hidden="true"></i>
-      Bài viết mới
+  <h4 class="card-header d-flex justify-content-end">
+    <a class="btn btn-outline-danger" href="/administrator/" role="button">
+      <i class="fa fa-minus" aria-hidden="true"></i>
+      Thoát
     </a>
   </h4>
   <div class="card-body">
@@ -23,7 +22,6 @@
     <h5 class="card-title">Không có dữ liệu!</h5>
     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
     {{else}}
-    <input class="form-control" id="myInput" type="text" placeholder="Tìm kiếm..">
 
     <table class="table table-bordered">
       <thead>
@@ -35,7 +33,7 @@
           <th scope="col">Nhãn</th>
           <th scope="col">Trạng thái</th>
           <th scope="col">Người đăng</th>
-          <th scope="col">Cập nhật</i> </th>
+         
           {{!-- <th scope="col">Xoá</th> --}}
         </tr>
       </thead>
@@ -58,22 +56,16 @@
           Đã xuất bản
         {{/ifEquals}}
         {{#ifEquals Status "2"}}
-          <a href="" class="text-danger">Bị từ chối</a> 
+          Bị từ chối
         {{/ifEquals}}
         {{#ifEquals Status "3"}}
-          <a href="" class="text-danger">Chưa được duyệt</a> 
+          <a href="/admin/reviewPost/{{PostID}}" class="text-danger">Chưa được duyệt</a> 
         {{/ifEquals}}
       </td>
       <td>
-        <a href="#" class="text-capitalize">{{name_author}}</a>
+        <i  class="text-capitalize">{{name_author}}</i>
       </td>
-      <td>
-        <a href="/admin/posts/edit?id={{PostID}}">
-          <button type="button" class="btn btn-danger">
-            <i class="fa fa-pencil" aria-hidden="true"></i>
-          </button>
-        </a>
-      </td>
+     
       {{!-- <td>
         <a href="#">
           <button type="button" class="btn btn-danger">

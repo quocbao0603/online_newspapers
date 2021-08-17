@@ -33,5 +33,15 @@ module.exports = {
   },
   del(post){
     return db("tags_posts").where('PostID', post).del();
+  },
+  async countPostUseTagByTagID(tagID){
+    const rows = await db("tags_posts")
+            .where({
+                TagID: tagID
+            })
+            .count("*", { as: "total" });
+
+        return rows[0].total;
+
   }
 };

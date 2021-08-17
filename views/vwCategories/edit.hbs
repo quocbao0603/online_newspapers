@@ -1,3 +1,15 @@
+{{#section 'js'}}
+<script>
+function checkBeforeDelCatLv1(countCatLv2) {
+  if(countCatLv2>0){
+    alert("Bạn phải xóa hết Catelories Level 2 trước khi xóa nó!!!");
+    return false;
+  }
+  return true;
+}
+</script>
+{{/section}}
+
 <div class="card">
   <h4 class="card-header">
     Category
@@ -13,11 +25,7 @@
         <input type="text" class="form-control" id="txtCatName" name="CatNameLv1" autofocus
           value="{{this.category.CatNameLv1}}">
       </div>
-      <a class="btn btn-primary" href="/admin/categories/" role="button">
-        <i class="fa fa-backward" aria-hidden="true"></i>
-        Back to List
-      </a>
-      <button type="submit" class="btn btn-danger" formaction="/admin/categories/delCatLv1">
+      <button type="submit" class="btn btn-danger" onclick="return checkBeforeDelCatLv1({{countCatLv2}})" formaction="/admin/categories/delCatLv1">
         <i class="fa fa-trash-o" aria-hidden="true"></i>
         Delete
       </button>

@@ -26,9 +26,11 @@ module.exports = function (app) {
   });
   app.use(async function(req,res,next){
     const posts = await postModel.getPostsWaitUp();
-    const now =  moment().format("YYYY-MM-DD h:m:s");
+    const now =  moment().format();
     for(i=0;i<posts.length;i++){
-      const timeUp = moment(posts[i].Date, "YYYY-MM-DDTh:m").format("YYYY-MM-DD h:m:s");
+      const timeUp = moment(posts[i].Date, "YYYY-MM-DDTh:m").format();
+      //console.log(timeUp+' time up');
+      //console.log(now+ ' time now')
       if(now>timeUp){
         await postModel.updatePostStatusByPostID(posts[i].PostID,1)
       }

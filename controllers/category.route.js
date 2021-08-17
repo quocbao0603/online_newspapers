@@ -1,6 +1,7 @@
 const express = require("express");
 const authAdministrator = require("../middlewares/auth-administrator.mdw");
 const categoryModel = require("../models/category.model");
+const postModel = require("../models/post.model");
 
 const router = express.Router();
 
@@ -39,12 +40,14 @@ router.post("/addCatLv1",authAdministrator, async function (req, res) {
 router.get("/edit",authAdministrator, async function (req, res) {
   const id = req.query.id || 0;
   const category = await categoryModel.findByIdCatLv1(id);
+  const countCatLv2 = await categoryModel.getToTalCatLv2(category.CatIDLv1);
   if (category === null) {
     return res.redirect("/admin/categories");
   }
   //console.log(category)
   res.render("vwCategories/edit", {
     category,
+    countCatLv2
   });
 });
 
@@ -70,6 +73,8 @@ router.get("/editCatLv2",authAdministrator, async function (req, res) {
   //const category = await categoryModel.findCatLv2ByCatLv1AndCatLv2(idlv1,idlv2);
   const category = await categoryModel.findCatLv2ByCatLv1AndCatLv2(idlv1,idlv2)
   const catLv1 = await categoryModel.findByIdCatLv1(idlv1);
+  const totalPostsCatLv2 = await postModel.countByCatIDLv2(idlv1,idlv2);
+  
   if (category === null) {
     return res.redirect("/admin/categories");
   }
@@ -79,6 +84,7 @@ router.get("/editCatLv2",authAdministrator, async function (req, res) {
   res.render("vwCategories/editCatLv2", {
     category,
     catLv1,
+    totalPostsCatLv2
   });
 });
 

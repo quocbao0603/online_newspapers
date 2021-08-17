@@ -1,3 +1,16 @@
+{{#section 'js'}}
+<script>
+function checkBeforeDel(totalPostUseTag) {
+  if(totalPostUseTag>0){
+    alert("Bạn phải bỏ hết các posts sử dụng tag này trước khi xóa nó!!!");
+    return false;
+  }
+  return true;
+}
+</script>
+{{/section}}
+
+
 <div class="card">
   <h4 class="card-header">
     Tags
@@ -17,7 +30,7 @@
         <i class="fa fa-backward" aria-hidden="true"></i>
         Back to List
       </a>
-      <button type="submit" class="btn btn-danger" formaction="/administrator/tags/del">
+      <button type="submit" class="btn btn-danger" onclick="return checkBeforeDel({{totalPostUseTag}})" formaction="/administrator/tags/del">
         <i class="fa fa-trash-o" aria-hidden="true"></i>
         Delete
       </button>

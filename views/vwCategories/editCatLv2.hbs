@@ -4,6 +4,15 @@ function product(postPremium) {
   alert(postPremium)
 }
 </script>
+<script>
+function checkBeforeDel(totalPosts) {
+  if(totalPosts>0){
+    alert("Bạn phải xóa hết bài báo thuộc category này trước khi xóa nó!!!");
+    return false;
+  }
+  return true;
+}
+</script>
 {{/section}}
 <div class="card">
   <h4 class="card-header">
@@ -25,11 +34,7 @@ function product(postPremium) {
         <input type="text" class="form-control" id="txtCatName" name="CatNameLv2" autofocus
           value="{{this.category.CatNameLv2}}">
       </div>
-      <a class="btn btn-primary" href="/admin/categories/indexLv2" role="button">
-        <i class="fa fa-backward" aria-hidden="true"></i>
-        Back to List
-      </a>
-      <button type="submit" class="btn btn-danger" formaction="/admin/categories/delCatLv2">
+      <button type="submit" class="btn btn-danger" onclick="return checkBeforeDel({{totalPostsCatLv2}})" formaction="/admin/categories/delCatLv2">
         <i class="fa fa-trash-o" aria-hidden="true"></i>
         Delete
       </button>

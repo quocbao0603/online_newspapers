@@ -61,11 +61,17 @@ router.post("/profile/", auth, async function(req, res) {
     user_update.name = req.body.name;
     user_update.email = req.body.email;
     user_update.dob = req.body.dob;
+    if (req.body.times !== undefined)
+        user_update.premium = req.body.times;
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    user_update.password = hashedPassword;
     user_update.dob = moment(user_update.dob).format("YYYY-MM-DD");
-    //console.log("Test user:");
-    //console.log(user_update);
-    //console.log(req.body);
+    console.log("Test user:");
+    console.log(user_update);
+    console.log(req.body.times);
     await userModel.patch(user_update);
+
+
     const url = req.session.retUrl || "/";
     res.redirect(url);
     //const url = "/account/profile/patch";

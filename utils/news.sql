@@ -1,11 +1,11 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : a
+ Source Server         : local
  Source Server Type    : MySQL
  Source Server Version : 100418
  Source Host           : localhost:3306
- Source Schema         : ec
+ Source Schema         : news
 
  Target Server Type    : MySQL
  Target Server Version : 100418
@@ -39,25 +39,19 @@ CREATE TABLE `categories`  (
   `CatID` int UNSIGNED NOT NULL AUTO_INCREMENT,
   `CatName` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`CatID`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 32 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = MyISAM AUTO_INCREMENT = 25 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of categories
 -- ----------------------------
 INSERT INTO `categories` VALUES (1, 'Sách');
 INSERT INTO `categories` VALUES (2, 'Điện thoại');
-INSERT INTO `categories` VALUES (3, 'Máy chụp hìnha');
-INSERT INTO `categories` VALUES (8, 'Bóng đá');
+INSERT INTO `categories` VALUES (3, 'Máy chụp hình');
+INSERT INTO `categories` VALUES (4, 'Quần áo - Giày dép');
 INSERT INTO `categories` VALUES (5, 'Máy tính');
 INSERT INTO `categories` VALUES (6, 'Đồ trang sức');
 INSERT INTO `categories` VALUES (7, 'Khác');
-INSERT INTO `categories` VALUES (9, 'Ti vi');
-INSERT INTO `categories` VALUES (10, 'mũ nón');
-INSERT INTO `categories` VALUES (11, '123');
-INSERT INTO `categories` VALUES (12, 'fifa online 4');
-INSERT INTO `categories` VALUES (29, 'fifa online 4');
-INSERT INTO `categories` VALUES (30, 'fifa online 4');
-INSERT INTO `categories` VALUES (31, 'hoc nua hoc mai');
+INSERT INTO `categories` VALUES (24, 'Ti vi');
 
 -- ----------------------------
 -- Table structure for categorieslv1
@@ -79,6 +73,7 @@ INSERT INTO `categorieslv1` VALUES (4, 'Kinh doanh');
 INSERT INTO `categorieslv1` VALUES (5, 'Khoa học');
 INSERT INTO `categorieslv1` VALUES (6, 'Thể thao');
 INSERT INTO `categorieslv1` VALUES (7, 'Giải trí');
+INSERT INTO `categorieslv1` VALUES (8, 'Sách Bảo');
 
 -- ----------------------------
 -- Table structure for categorieslv2
@@ -118,6 +113,8 @@ INSERT INTO `categorieslv2` VALUES (6, '2', 'Tenis');
 INSERT INTO `categorieslv2` VALUES (6, '3', 'Bóng bàn');
 INSERT INTO `categorieslv2` VALUES (7, '1', 'Showbiz');
 INSERT INTO `categorieslv2` VALUES (7, '2', 'Gameshow');
+INSERT INTO `categorieslv2` VALUES (8, '1', 'Sách LV2');
+INSERT INTO `categorieslv2` VALUES (8, '2', 'Sách _LV3');
 
 -- ----------------------------
 -- Table structure for categorietest
@@ -206,7 +203,7 @@ CREATE TABLE `comments`  (
   `CmtID` int NOT NULL,
   `PostsID` int NULL DEFAULT NULL,
   `UserID` int NULL DEFAULT NULL,
-  `Date` datetime(0) NULL DEFAULT NULL,
+  `Date` datetime NULL DEFAULT NULL,
   `Content` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`CmtID`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
@@ -238,8 +235,7 @@ INSERT INTO `comments` VALUES (21, 9, 1, '2021-07-01 00:00:00', 'qưdhiq');
 INSERT INTO `comments` VALUES (22, 1, 3, '2021-07-01 00:00:00', '1');
 INSERT INTO `comments` VALUES (23, 7, 1, '2021-07-05 00:00:00', 'abc');
 INSERT INTO `comments` VALUES (24, 7, 1, '2021-07-05 00:00:00', 'ok');
-INSERT INTO `comments` VALUES (25, 3, 1, '2021-07-06 00:00:00', 'a');
-INSERT INTO `comments` VALUES (26, 2, 1, '2021-07-06 00:00:00', 'a');
+INSERT INTO `comments` VALUES (25, 3, 1, '2021-08-12 00:00:00', 'test');
 
 -- ----------------------------
 -- Table structure for editors
@@ -250,7 +246,7 @@ CREATE TABLE `editors`  (
   `CatIDLv1` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `CatIDLv2` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`userID`, `CatIDLv1`, `CatIDLv2`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of editors
@@ -272,6 +268,7 @@ CREATE TABLE `linkedusers`  (
 -- ----------------------------
 -- Records of linkedusers
 -- ----------------------------
+INSERT INTO `linkedusers` VALUES ('111967067003602709369', 5, 'google');
 INSERT INTO `linkedusers` VALUES ('113633649691543279771', 4, 'google');
 INSERT INTO `linkedusers` VALUES ('117662512301572403486', 2, 'google');
 INSERT INTO `linkedusers` VALUES ('1441636862837274', 4, 'facebook');
@@ -301,7 +298,7 @@ CREATE TABLE `orderdetails`  (
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders`  (
   `OrderID` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `OrderDate` datetime(0) NOT NULL,
+  `OrderDate` datetime NOT NULL,
   `UserID` int NOT NULL,
   `Total` bigint NOT NULL,
   PRIMARY KEY (`OrderID`) USING BTREE
@@ -316,12 +313,12 @@ CREATE TABLE `orders`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `posts`;
 CREATE TABLE `posts`  (
-  `PostID` int NOT NULL,
+  `PostID` int NOT NULL AUTO_INCREMENT,
   `CatIDLv1` int NULL DEFAULT NULL,
   `CatIDLv2` int NULL DEFAULT NULL,
   `Author` int NULL DEFAULT NULL,
   `PostName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Date` datetime(0) NULL DEFAULT NULL,
+  `Date` datetime NULL DEFAULT NULL,
   `Avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `TinyContent` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `FullContent` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
@@ -331,7 +328,7 @@ CREATE TABLE `posts`  (
   `Views` int NOT NULL DEFAULT 0,
   PRIMARY KEY (`PostID`) USING BTREE,
   FULLTEXT INDEX `PostName`(`PostName`, `TinyContent`, `FullContent`)
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of posts
@@ -480,6 +477,7 @@ INSERT INTO `tags_posts` VALUES (6, 1);
 INSERT INTO `tags_posts` VALUES (6, 2);
 INSERT INTO `tags_posts` VALUES (6, 4);
 INSERT INTO `tags_posts` VALUES (6, 5);
+INSERT INTO `tags_posts` VALUES (6, 15);
 
 -- ----------------------------
 -- Table structure for userrefreshtokenext
@@ -510,7 +508,7 @@ CREATE TABLE `users`  (
   `permission` int NOT NULL,
   `premium` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = MyISAM AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of users

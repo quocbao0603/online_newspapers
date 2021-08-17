@@ -49,7 +49,20 @@
     {{#if infoUser}}
     <form method="POST">
       <div class="form-group row">
-        <label for="name" class="col-sm-2 col-form-label">Tên người dùng</label>
+        <label for="name" class="col-sm-2 col-form-label">
+            {{#ifEquals infoUser.permission "0"}}
+            Họ tên
+            {{/ifEquals}}
+            {{#ifEquals infoUser.permission "1"}}
+            Bút danh
+            {{/ifEquals}}
+            {{#ifEquals infoUser.permission "2"}}
+            Họ tên
+            {{/ifEquals}}
+            {{#ifEquals infoUser.permission "3"}}
+            Họ tên
+            {{/ifEquals}}
+        </label>
         <div class="col-sm-10">
           <input type="text" class="form-control-plaintext" id="name" name = "name" value="{{infoUser.name}}">
         </div>
@@ -73,14 +86,70 @@
 
       <div class="form-group row">
         <label for="permission" class="col-sm-2 col-form-label">Quyền truy cập</label>
-        <div class="col-sm-10">
-          <input type="text" readonly class="form-control-plaintext" id="permission" value={{infoUser.permission}}>
+        <div class="col-sm-10" > 
+          {{!--  infoUser.permission --}}
+          <td>
+            <b>
+            {{#ifEquals infoUser.permission "0"}}
+            Độc giả
+            {{/ifEquals}}
+            {{#ifEquals infoUser.permission "1"}}
+            Phóng viên
+            {{/ifEquals}}
+            {{#ifEquals infoUser.permission "2"}}
+            Biên tập viên
+            {{/ifEquals}}
+            {{#ifEquals infoUser.permission "3"}}
+             Quản trị viên
+            {{/ifEquals}}
+            </b>
+          </td>
         </div>
       </div>
-      <div class="form-group row">
-        <label for="premium" class="col-sm-2 col-form-label">Premium</label>
+      {{!-- <div class="form-group row">
+        <label for="" class="col-sm-2 col-form-label">Thời hạn premium còn lại</label>
         <div class="col-sm-10">
-          <input type="text" readonly class="form-control-plaintext" id="premium" value={{infoUser.premium}}>
+          <input type="text" readonly class="form-control-plaintext" id="" name="" value= infoUser.premium>
+        </div>
+      </div> --}}
+      
+      
+      <div class="form-group row">
+        <label for="" class="col-sm-2 col-form-label">Thời hạn premium còn lại</label>
+        <div class="col-sm-10">
+          <input type="text" readonly class="form-control-plaintext" id="" name="" value= {{infoUser.premium / 1000}}>
+        </div>
+        {{#ifEquals infoUser.premium "0"}}
+        <label for="premium" class="col-sm-2 col-form-label">Gia hạn Premium</label>
+        <input type="radio" id="10" name="times" value="10000">
+        <label for="html">10 giây</label><br>
+        <input type="radio" id="30" name="times" value="120000">
+        <label for="css">3 phút</label><br>
+        <input type="radio" id="120" name="times" value="604800000">
+        <label for="javascript">7 ngày</label>
+        {{/ifEquals}}
+      </div> 
+      
+      
+      {{!-- <p>Chọn thời gian:</p> --}}
+      {{!-- <input type="radio" id="10" name="times" value="10000">
+      <label for="html">10 giây</label><br>
+      <input type="radio" id="30" name="times" value="120000">
+      <label for="css">3 phút</label><br>
+      <input type="radio" id="120" name="times" value="604800000">
+      <label for="javascript">7 ngày</label>
+      <div class="form-group row">
+        <label for="premium" class="col-sm-2 col-form-label">Thời hạn</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control-plaintext" id="premium" name="premium" value=infoUser.premium>
+        </div>
+      </div> --}}
+
+
+      <div class="form-group row">
+        <label for="password" class="col-sm-2 col-form-label">Đổi mật khẩu mới</label>
+        <div class="col-sm-10">
+          <input type="password" class="form-control-plaintext" id="password" name = "password" value="">
         </div>
       </div>
 

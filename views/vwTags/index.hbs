@@ -1,3 +1,20 @@
+{{#section 'css'}}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+{{/section}}
+{{#section 'js'}}
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+
+<script>
+  $(document).ready(function () {
+    $('#managetags').DataTable({
+      paging: false,
+      searching: false,
+      bInfo: false,
+    });
+  });
+
+</script>
+{{/section}}
 <div class="card">
   <h4 class="card-header d-flex justify-content-end">
     <a class="btn btn-outline-success" style="margin-right: 10px;" href="/administrator/tags/add" role="button">
@@ -14,7 +31,7 @@
     <h5 class="card-title">Không có dữ liệu!</h5>
     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
     {{else}}
-    <table class="table table-hover">
+    <table id="managetags" class="table table-bordered">
       <thead>
         <tr>
           <th scope="col">#</th>

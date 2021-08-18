@@ -1,4 +1,9 @@
+{{#section 'css'}}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+{{/section}}
 {{#section 'js'}}
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+
 <script>
   $(document).ready(function(){
     $("#myInput").on("keyup", function() {
@@ -6,6 +11,13 @@
       $("#myTable tr").filter(function() {
         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
       });
+    });
+  });
+  $(document).ready(function () {
+    $('#manageposts').DataTable({
+      paging: false,
+      searching: false,
+      bInfo: false,
     });
   });
 </script>
@@ -23,11 +35,10 @@
     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
     {{else}}
 
-    <table class="table table-bordered">
+    <table id="manageposts" class="table table-bordered">
       <thead>
         <tr>
           <th scope="col">STT</th>
-          <th scope="col">ID bài viết</th>
           <th scope="col">Tên bài viết</th>
           <th scope="col">Chuyên mục</th>
           <th scope="col">Nhãn</th>
@@ -41,7 +52,6 @@
       {{#each this.posts}}
       <tr>
       <th scope="row">{{format_index @index}}</th>
-      <td><a class="font-weight-bold">{{PostID}}</a></td>
       <td><a class="text-primary" href="/posts/details/{{PostID}}">{{PostName}}</a></td>
       <td><a href="/posts/byCat/{{CatIDLv1}}/{{CatIDLv2}}" class="badge badge-secondary">{{CatNameLv1}} | {{CatNameLv2}}</a></td>
       <td>{{#each tag}}
@@ -56,10 +66,10 @@
           Đã xuất bản
         {{/ifEquals}}
         {{#ifEquals Status "2"}}
-          Bị từ chối
+          <div class="text-danger">Bị từ chối</div>
         {{/ifEquals}}
         {{#ifEquals Status "3"}}
-          <a href="/admin/reviewPost/{{PostID}}" class="text-danger">Chưa được duyệt</a> 
+          <a href="/admin/reviewPost/{{PostID}}" class="text-primary">Chưa được duyệt</a> 
         {{/ifEquals}}
       </td>
       <td>
@@ -79,6 +89,7 @@
       {{/each}}
       </tbody>
     </table>
+    <br>
     <nav aria-label="...">
       <ul class="pagination">
         <li class="page-item disabled">

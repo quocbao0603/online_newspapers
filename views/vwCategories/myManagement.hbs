@@ -1,4 +1,8 @@
+{{#section 'css'}}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+{{/section}}
 {{#section 'js'}}
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
 <script>
   $(document).ready(function(){
     $("#myInput").on("keyup", function() {
@@ -8,13 +12,20 @@
       });
     });
   });
+  $(document).ready(function () {
+    $('#manager').DataTable({
+      paging: false,
+      searching: false,
+      bInfo: false,
+    });
+  });
 </script>
 {{/section}}
 <div class="card">
   <h4 class="card-header d-flex justify-content-between">
     {{this.title}}
   </h4>
-   <table class="table table-bordered">
+   <table id="manager" class="table table-bordered">
       <thead>
         <tr>
           <th scope="col">STT</th>

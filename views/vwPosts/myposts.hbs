@@ -1,15 +1,25 @@
-
+{{#section 'css'}}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+{{/section}}
 {{#section 'js'}}
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
 
 <script>
-  $(document).ready(function(){
-    $("#myInput").on("keyup", function() {
+  $(document).ready(function () {
+    $("#myInput").on("keyup", function () {
       var value = $(this).val().toLowerCase();
-      $("#myTable tr").filter(function() {
+      $("#myTable tr").filter(function () {
         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
       });
     });
-    
+
+  });
+  $(document).ready(function () {
+    $('#myposts').DataTable({
+      paging: false,
+      searching: false,
+      bInfo: false,
+    });
   });
 
 </script>
@@ -41,76 +51,77 @@
         </tr>
       </thead>
       <tbody id="myTable">
-      {{#each this.posts}}
-      <tr>
-      <td scope="row">{{format_index @index}}</td>
-      <td><a class="text-primary" href="/posts/details/{{PostID}}">{{PostName}}</a></td>
-      <td><a href="/posts/byCat/{{CatIDLv1}}/{{CatIDLv2}}" class="badge badge-secondary">{{CatNameLv1}} | {{CatNameLv2}}</a></td>
-      <td>{{#each tag}}
-        <a href="/posts/tags/{{TagID}}" class="badge badge-primary">{{TagName}}</a>
-          {{/each}}
-      </td>
-      <td>
-        {{#ifEquals Status "0"}}
-          Đã được duyệt & chờ xuất bản
-        {{/ifEquals}}
-        {{#ifEquals Status "1"}}
-          Đã xuất bản
-        {{/ifEquals}}
-        {{#ifEquals Status "2"}}
-          <div class="text-danger">Bị từ chối</div> 
-        {{/ifEquals}}
-        {{#ifEquals Status "3"}}
-          <div class="text-primary">Chưa được duyệt</div> 
-        {{/ifEquals}}
-      </td>
-      <td>
-        {{#ifEquals Status "2"}}
-        <button type="button" class="btn btn-danger"data-toggle="modal" data-target="#myModal">
-            <i class="fa fa-eye" aria-hidden="true"></i>
-          </button>
+        {{#each this.posts}}
+        <tr>
+          <td scope="row">{{format_index @index}}</td>
+          <td><a class="text-primary" href="/posts/details/{{PostID}}">{{PostName}}</a></td>
+          <td><a href="/posts/byCat/{{CatIDLv1}}/{{CatIDLv2}}" class="badge badge-secondary">{{CatNameLv1}} |
+              {{CatNameLv2}}</a></td>
+          <td>{{#each tag}}
+            <a href="/posts/tags/{{TagID}}" class="badge badge-primary">{{TagName}}</a>
+            {{/each}}
+          </td>
+          <td>
+            {{#ifEquals Status "0"}}
+            Đã được duyệt & chờ xuất bản
+            {{/ifEquals}}
+            {{#ifEquals Status "1"}}
+            Đã xuất bản
+            {{/ifEquals}}
+            {{#ifEquals Status "2"}}
+            <div class="text-danger">Bị từ chối</div>
+            {{/ifEquals}}
+            {{#ifEquals Status "3"}}
+            <div class="text-primary">Chưa được duyệt</div>
+            {{/ifEquals}}
+          </td>
+          <td>
+            {{#ifEquals Status "2"}}
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
+              <i class="fa fa-eye" aria-hidden="true"></i>
+            </button>
 
-        <div class="modal" id="myModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">Lý do bị từ chối</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body">
-          {{Notice}}
-        </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
-          <a href="/writer/posts/edit?id={{PostID}}">
-          <button type="button" class="btn btn-danger">
-            <i class="fa fa-pencil" aria-hidden="true"></i>
-          </button>
-        </a> 
-        </div>
-        
-      </div>
-    </div>
-  </div>
-          
-        {{/ifEquals}}
-        {{#ifEquals Status "3"}}
-          <a href="/writer/posts/edit?id={{PostID}}">
-          <button type="button" class="btn btn-danger">
-            <i class="fa fa-pencil" aria-hidden="true"></i>
-          </button>
-        </a> 
-        {{/ifEquals}}
-        </td>
-    </tr>
-      
-      {{/each}}
+            <div class="modal" id="myModal">
+              <div class="modal-dialog">
+                <div class="modal-content">
+
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <h4 class="modal-title">Lý do bị từ chối</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+
+                  <!-- Modal body -->
+                  <div class="modal-body">
+                    {{Notice}}
+                  </div>
+
+                  <!-- Modal footer -->
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+                    <a href="/writer/posts/edit?id={{PostID}}">
+                      <button type="button" class="btn btn-danger">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                      </button>
+                    </a>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            {{/ifEquals}}
+            {{#ifEquals Status "3"}}
+            <a href="/writer/posts/edit?id={{PostID}}">
+              <button type="button" class="btn btn-danger">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+              </button>
+            </a>
+            {{/ifEquals}}
+          </td>
+        </tr>
+
+        {{/each}}
       </tbody>
     </table>
     <br>

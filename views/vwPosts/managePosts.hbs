@@ -1,4 +1,8 @@
+{{#section 'css'}}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+{{/section}}
 {{#section 'js'}}
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
 <script>
   $(document).ready(function(){
     $("#myInput").on("keyup", function() {
@@ -6,6 +10,13 @@
       $("#myTable tr").filter(function() {
         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
       });
+    });
+  });
+  $(document).ready(function () {
+    $('#manageposts').DataTable({
+      paging: false,
+      searching: false,
+      bInfo: false,
     });
   });
 </script>
@@ -21,7 +32,7 @@
     {{else}}
     <input class="form-control" id="myInput" type="text" placeholder="Tìm kiếm..">
 
-    <table class="table table-bordered">
+    <table id="manageposts" class="table table-bordered">
       <thead>
         <tr>
           <th scope="col">STT</th>
@@ -49,10 +60,10 @@
           Đã xuất bản
         {{/ifEquals}}
         {{#ifEquals Status "2"}}
-          Bị từ chối
+          <div class="text-danger">Bị từ chối</div>
         {{/ifEquals}}
         {{#ifEquals Status "3"}}
-          <a href="/editor/reviewPost/{{PostID}}" class="text-danger">Chưa được duyệt</a> 
+          <a href="/editor/reviewPost/{{PostID}}" class="text-primary">Chưa được duyệt</a> 
         {{/ifEquals}}
       </td>
     </tr>
@@ -60,6 +71,7 @@
       {{/each}}
       </tbody>
     </table>
+    <br>
     <nav aria-label="...">
       <ul class="pagination">
         <li class="page-item disabled">

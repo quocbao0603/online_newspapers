@@ -160,8 +160,8 @@ router.get("/details/:id", async function (req, res) {
 
 router.get("/tags/:id", async function (req, res) {
   const TagID = +req.params.id || 0;
-
-  const title = "Tag id: " + TagID;
+  const Tag = await tagModel.findByTagID(TagID);
+  const title = "Tag: " + Tag.TagName;
 
   const limit = 6;
   const page = req.query.page || 1;

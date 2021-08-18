@@ -4,7 +4,7 @@ const postModel = require("../models/post.model");
 
 const moment = require("moment");
 module.exports = function (app) {
-  app.use( function (req, res, next) {
+  app.use(async function (req, res, next) {
     res.locals.premium=0;
     if (typeof req.user === "undefined") {
       res.locals.auth = false;
@@ -16,11 +16,27 @@ module.exports = function (app) {
       user = req.user;
       id = user.id;
       res.locals.premium = user.premium;
-      setTimeout(async function(){
-        console.log("Tai khoan het han premium");
-        await userModel.updatePremium(id,0);
-        res.locals.premium = 0;
-      },+user.premium,id)
+      const  now = moment().format();
+      const timePre =  moment(await userModel.getTimePremium(id), "YYYY-MM-DDTh:m").format();
+     
+      //console.log(timePre+" thoi gian pre")
+      if(now<timePre){
+        res.locals.premium=1;
+      }
+      else{
+        res.locals.premium=0;
+      }
+
+      // setTimeout(async function(){
+      //   console.log("Tai khoan het han premium");
+      //   await userModel.updatePremium(id,0);
+      //   res.locals.premium = 0;
+      // },+user.premium,id)
+     
+
+
+
+
     }
     next();
   });

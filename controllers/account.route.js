@@ -69,7 +69,7 @@ router.post("/profile/", auth, async function(req, res) {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     user_update.password = hashedPassword;
     user_update.dob = moment(user_update.dob).format("YYYY-MM-DD");
-    user_update.pre = moment(req.body.premium).format("YYYY-MM-DD");
+    user_update.premium = moment(req.body.premium).format("YYYY-MM-DD");
     //console.log("Test user:");
     //console.log(user_update);
     //console.log(req.body);

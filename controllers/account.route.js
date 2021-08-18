@@ -72,11 +72,11 @@ router.post("/profile/", auth, async function(req, res) {
     if (req.body.password !== '')
         user_update.password = hashedPassword;
     user_update.dob = moment(user_update.dob).format("YYYY-MM-DD");
-    console.log("Test user:");
-    console.log(user_update);
-    console.log(req.body.times);
-    console.log("Test pass:");
-    console.log(req.body.password);
+    /*  console.log("Test user:");
+     console.log(user_update);
+     console.log(req.body.times);
+     console.log("Test pass:");
+     console.log(req.body.password); */
     user_update.pre = moment(req.body.premium).format("YYYY-MM-DD");
     //console.log("Test user:");
     //console.log(user_update);

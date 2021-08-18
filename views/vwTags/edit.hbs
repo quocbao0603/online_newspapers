@@ -2,7 +2,6 @@
 <script>
 function checkBeforeDel(totalPostUseTag) {
   if(totalPostUseTag>0){
-    alert("Bạn phải bỏ hết các posts sử dụng tag này trước khi xóa nó!!!");
     return false;
   }
   return true;
@@ -30,10 +29,36 @@ function checkBeforeDel(totalPostUseTag) {
         <i class="fa fa-backward" aria-hidden="true"></i>
         Back to List
       </a>
-      <button type="submit" class="btn btn-danger" onclick="return checkBeforeDel({{totalPostUseTag}})" formaction="/administrator/tags/del">
+      <button type="submit" class="btn btn-danger" onclick="return checkBeforeDel({{totalPostUseTag}})" formaction="/administrator/tags/del" data-toggle="modal" data-target="#myModal">
         <i class="fa fa-trash-o" aria-hidden="true"></i>
         Delete
       </button>
+      <div class="modal" id="myModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+          
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Lý do bị từ chối</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body">
+              Bạn phải gỡ tag này ở mọi bài viết trước khi xóa nó!!!
+            </div>
+            
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+
+
       <button type="submit" class="btn btn-success" formaction="/administrator/tags/patch">
         <i class="fa fa-check" aria-hidden="true"></i>
         Save

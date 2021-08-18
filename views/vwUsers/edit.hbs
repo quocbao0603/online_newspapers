@@ -100,7 +100,9 @@
         <i class="fa fa-backward" aria-hidden="true"></i>
         Back to List
       </a>
-      <button type="submit" class="btn btn-danger" formaction="/administrator/users/del">
+
+      {{#ifEquals user.permission "0"}}
+       <button type="submit" class="btn btn-danger" formaction="/administrator/users/del">
         <i class="fa fa-trash-o" aria-hidden="true"></i>
         Delete
       </button>
@@ -108,6 +110,31 @@
         <i class="fa fa-check" aria-hidden="true"></i>
         Save
       </button>
+      {{/ifEquals}}
+      {{#ifEquals user.permission "1"}}
+        <button type="submit" class="btn btn-danger" formaction="/administrator/users/del">
+        <i class="fa fa-trash-o" aria-hidden="true"></i>
+        Delete
+      </button>
+      <button type="submit" class="btn btn-success" formaction="/administrator/users/patch">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        Save
+      </button>
+      {{/ifEquals}}
+      {{#ifEquals user.permission "2"}}
+        <button type="submit" class="btn btn-danger" formaction="/administrator/users/del">
+        <i class="fa fa-trash-o" aria-hidden="true"></i>
+        Delete
+      </button>
+      <button type="submit" class="btn btn-success" formaction="/administrator/users/patch">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        Save
+      </button>
+      {{/ifEquals}}
+      
+    
+     
+      
     </form>
   </div>
 </div>

@@ -7,7 +7,6 @@ function product(postPremium) {
 <script>
 function checkBeforeDel(totalPosts) {
   if(totalPosts>0){
-    alert("Bạn phải xóa hết bài báo thuộc category này trước khi xóa nó!!!");
     return false;
   }
   return true;
@@ -34,10 +33,37 @@ function checkBeforeDel(totalPosts) {
         <input type="text" class="form-control" id="txtCatName" name="CatNameLv2" autofocus
           value="{{this.category.CatNameLv2}}">
       </div>
-      <button type="submit" class="btn btn-danger" onclick="return checkBeforeDel({{totalPostsCatLv2}})" formaction="/admin/categories/delCatLv2">
+      <button type="submit" class="btn btn-danger" onclick="return checkBeforeDel({{totalPostsCatLv2}})" formaction="/admin/categories/delCatLv2" data-toggle="modal" data-target="#myModal">
         <i class="fa fa-trash-o" aria-hidden="true"></i>
         Delete
       </button>
+      <div class="modal" id="myModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+          
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Lý do bị từ chối</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body">
+              Bạn phải xóa hết các bài viết thuộc chuyên mục của nó!!!
+            </div>
+            
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+
+
+
       <button type="submit" class="btn btn-success" formaction="/admin/categories/patchCatLv2">
         <i class="fa fa-check" aria-hidden="true"></i>
         Save

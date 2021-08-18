@@ -76,8 +76,8 @@ router.post("/profile/", auth, async function(req, res) {
     await userModel.patch(user_update);
 
 
-    const url = req.session.retUrl || "/";
-    res.redirect(url);
+    //const url = req.session.retUrl || "/";
+    res.redirect("/account/profile");
     //const url = "/account/profile/patch";
     //console.log("TEST URL patch: ");
     //console.log(url);

@@ -1,3 +1,4 @@
+const moment = require("moment");
 const db = require("../utils/db");
 const { del } = require("./tag.model");
 
@@ -28,6 +29,8 @@ module.exports = {
         return db("linkedusers").insert(new_linkedUser);
     },
     addUser(new_user) {
+        let now = moment().format();
+        new_user.premium = now;
         return db("users").insert(new_user);
     },
     updatePremium(id, time) {
@@ -58,13 +61,13 @@ module.exports = {
         return db("users")
         .where("id", userID)
         .update({
-            pre: date,
+            premium: date,
         });
     },
     async getTimePremium(userID){
         const rows = await db("users")
         .where("id", userID)
-    return rows[0].pre;
+    return rows[0].premium;
     }
 
 };

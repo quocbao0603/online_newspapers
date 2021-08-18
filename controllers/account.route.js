@@ -64,11 +64,14 @@ router.post("/profile/", auth, async function(req, res) {
     if (req.body.times !== undefined)
         user_update.premium = req.body.times;
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    user_update.password = hashedPassword;
+    if (req.body.password !== '')
+        user_update.password = hashedPassword;
     user_update.dob = moment(user_update.dob).format("YYYY-MM-DD");
     console.log("Test user:");
     console.log(user_update);
     console.log(req.body.times);
+    console.log("Test pass:");
+    console.log(req.body.password);
     await userModel.patch(user_update);
 
 

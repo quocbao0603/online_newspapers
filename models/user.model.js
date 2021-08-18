@@ -53,6 +53,18 @@ module.exports = {
     },
     del(userID) {
         return db("users").where("id", userID).del();
+    },
+    setPremium(userID,date){
+        return db("users")
+        .where("id", userID)
+        .update({
+            pre: date,
+        });
+    },
+    async getTimePremium(userID){
+        const rows = await db("users")
+        .where("id", userID)
+    return rows[0].pre;
     }
 
 };

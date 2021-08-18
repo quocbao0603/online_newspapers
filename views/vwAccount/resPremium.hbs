@@ -1,18 +1,14 @@
 {{#section 'js'}}
 <script>
-  function validate() {
-      if(document.getElementById('10').checked) {
-        
-        return true;
-      }else if(document.getElementById('30').checked) {
-        return true;
-      }
-      else if(document.getElementById('120').checked){
-        return true;
-      }
-        alert('Yêu cầu lựa chọn trước khi đăng ký!')
-        return false;
-    }
+  document.querySelector('#btnSignup').addEventListener('click',function(e){
+    
+      var datetime = document.querySelector('#timePremium').value;
+      if( datetime.length === 0){
+        alert('Yêu cầu chọn ngày hết hạn!!');
+        e.preventDefault();
+      }  
+    
+  });
 </script>
 {{/section}}
 
@@ -29,20 +25,9 @@
           <input type="text" class="form-control-plaintext" id="name" value="{{infoUser.name}}">
         </div>
       </div>
-      <p>Chọn thời gian:</p>
-      <input type="radio" id="10" name="times" value="10000">
-      <label for="html">10 giây</label><br>
-      <input type="radio" id="30" name="times" value="120000">
-      <label for="css">3 phút</label><br>
-      <input type="radio" id="120" name="times" value="604800000">
-      <label for="javascript">7 ngày</label>
-      <div class="form-group row">
-        <label for="premium" class="col-sm-2 col-form-label">Thời hạn</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control-plaintext" id="premium" name="premium" value={{infoUser.premium}}>
-        </div>
-      </div>
-      <button class="btn btn-primary btn-block" type="submit" id="btnSignup" onclick="return validate();">Đăng kí</button> 
+      <label for="timePremium">Ngày hết hạn</label><br>
+      <input type="datetime-local" id="timePremium" name="timePremium"><br><br><br>
+      <button class="btn btn-primary btn-block" type="submit" id="btnSignup">Đăng kí</button> 
       <a href="/" ><i class="fas fa-angle-left"></i> Trang chủ</a>
     </form>
     {{/if}}

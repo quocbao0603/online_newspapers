@@ -77,12 +77,17 @@
           <input type="text" readonly class="form-control-plaintext" id="permission" value={{infoUser.permission}}>
         </div>
       </div>
+
       <div class="form-group row">
-        <label for="premium" class="col-sm-2 col-form-label">Premium</label>
+        <label for="premium" class="col-sm-2 col-form-label">Ngày hết hạn Premium</label>
         <div class="col-sm-10">
-          <input type="text" readonly class="form-control-plaintext" id="premium" value={{infoUser.premium}}>
+          {{!-- <input type="date" id="birthday" name="birthday"> --}}
+          <input type="text" class="form-control-plaintext"  placeholder="MM/DD/YYYY" onfocus="this.type = 'date'" onblur="this.type = 'text'"
+          !-- id="premium" name = "premium"  value={{premium}}>
+          
         </div>
       </div>
+    
 
       
       <button type="submit" class="btn btn-success" onclick="return checkFunction()" formaction="/account/profile/">

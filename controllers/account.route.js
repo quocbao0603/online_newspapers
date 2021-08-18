@@ -46,12 +46,15 @@ router.get("/is-available", async function(req, res) {
     res.json(false);
 });
 
-router.get("/profile", auth, function(req, res) {
+router.get("/profile", auth,async function(req, res) {
     const user = req.user;
     user.dob = moment(user.dob, "YYYY-MM-DD").format("MM/DD/YYYY");
+    let premium = await userModel.getTimePremium(user.id);
+    premium = moment(premium, "YYYY-MM-DDTh:m:s").format("MM/DD/YYYY");
 
-    //console.log(user)
-    res.render("vwAccount/profile", { infoUser: user });
+    console.log(premium)
+    res.render("vwAccount/profile", { infoUser: user,
+    premium: premium });
 });
 
 router.post("/profile/", auth, async function(req, res) {
@@ -62,6 +65,7 @@ router.post("/profile/", auth, async function(req, res) {
     user_update.email = req.body.email;
     user_update.dob = req.body.dob;
     user_update.dob = moment(user_update.dob).format("YYYY-MM-DD");
+    user_update.pre = moment(req.body.premium).format("YYYY-MM-DD");
     //console.log("Test user:");
     //console.log(user_update);
     //console.log(req.body);
@@ -76,8 +80,9 @@ router.post("/profile/", auth, async function(req, res) {
 
 router.post("/resPremium", auth, async function(req, res) {
     //console.log(req.body.premium)
-    console.log(req.body.times)
-    await userModel.updatePremium(req.user.id, +req.body.times)
+    console.log(req.body.timePremium)
+    //await userModel.updatePremium(req.user.id, +req.body.times)
+    await userModel.setPremium(req.user.id,req.body.timePremium)
     const url = req.session.retUrl || "/";
     console.log(url)
     res.redirect(url);

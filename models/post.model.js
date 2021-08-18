@@ -76,7 +76,7 @@ module.exports = {
     from posts p join CategoriesLv1 c1 join CategoriesLv2 c2 on c1.CatIDLv1 = c2.CatIDLv1 
     AND c2.CatIDLv1 = p.CatIDLv1 AND c2.CatIDLv2 = p.CatIDLv2
     where p.Author = ${userID}
-    order by p.Premium desc , p.PostID desc
+    order by p.PostID desc
     LIMIT 6 OFFSET ${offset}
     `;
         const raw_data = await db.raw(sql);

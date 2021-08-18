@@ -123,7 +123,7 @@ router.post("/posts/edit", authWriter, async function(req, res) {
       Date: new Date(),
       TinyContent: req.body.txtTinyContent,
       FullContent: req.body.txtContent,
-      //Status: req.body.Status,
+      Status: 3,
       //Premium: req.body.Premium,
       //Views: req.body.Views,
   }

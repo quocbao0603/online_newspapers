@@ -81,7 +81,9 @@ router.post("/users/patch",authAdministrator, async function(req,res){
     const user = await userModel.getUserById(info.id);
     console.log(info)
     if(user.permission=="0"){
-        await userModel.updatePremium(info.id,info.times);
+        //await userModel.updatePremium(info.id,info.times);
+        await userModel.setPremium(info.id,info.timePremium)
+        console.log("abc")
     }
     else if(user.permission=="2"){
        const existUser = await editorModel.checkExistUser(info.id);

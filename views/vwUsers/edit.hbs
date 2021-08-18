@@ -22,6 +22,17 @@
 
 </script>
 <script>
+   document.querySelector('#btnSignup').addEventListener('click',function(e){
+    
+      var datetime = document.querySelector('#timePremium').value;
+      if( datetime.length === 0){
+        alert('Yêu cầu chọn ngày hết hạn!!');
+        e.preventDefault();
+      }  
+    
+  });
+</script>
+<script>
   function validate() {
       if(document.getElementById('10').checked) {
         
@@ -54,13 +65,8 @@
       </div>
       {{#ifEquals user.permission "0"}}
       <div class="form-group">
-        <p>Chọn thời gian:</p>
-        <input type="radio" id="10" name="times" value="10000">
-        <label for="html">10 giây</label><br>
-        <input type="radio" id="30" name="times" value="30000">
-        <label for="css">3 phút</label><br>
-        <input type="radio" id="120" name="times" value="604800000">
-        <label for="javascript">7 ngày</label>
+        <label for="timePremium">Ngày hết hạn</label><br>
+        <input type="datetime-local" id="timePremium" name="timePremium"><br><br>
       </div>
       {{/ifEquals}}
       {{#ifEquals user.permission "1"}}

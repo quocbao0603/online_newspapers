@@ -115,7 +115,7 @@
       
       
       <div class="form-group row">
-        <label for="" class="col-sm-2 col-form-label">Thời hạn premium còn lại</label>
+        <label for="" class="col-sm-2 col-form-label">Thời hạn premium</label>
         <div class="col-sm-10">
           <input type="text" readonly class="form-control-plaintext" id="" name="" value= {{infoUser.premium}}>
         </div>
@@ -139,12 +139,15 @@
       <input type="radio" id="120" name="times" value="604800000">
       <label for="javascript">7 ngày</label>
       <div class="form-group row">
-        <label for="premium" class="col-sm-2 col-form-label">Thời hạn</label>
+        <label for="premium" class="col-sm-2 col-form-label">Ngày hết hạn Premium</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control-plaintext" id="premium" name="premium" value=infoUser.premium>
+          {{!-- <input type="date" id="birthday" name="birthday"> --}}
+          <input type="text" class="form-control-plaintext"  placeholder="MM/DD/YYYY" onfocus="this.type = 'date'" onblur="this.type = 'text'"
+          !-- id="premium" name = "premium"  value={{premium}}>
+          
+          
         </div>
-      </div> --}}
-
+      </div>
 
       <div class="form-group row">
         <label for="password" class="col-sm-2 col-form-label">Đổi mật khẩu mới</label>
@@ -152,6 +155,7 @@
           <input type="password" class="form-control-plaintext" id="password" name = "password" value="">
         </div>
       </div>
+    
 
       
       <button type="submit" class="btn btn-success" onclick="return checkFunction()" formaction="/account/profile/">

@@ -33,6 +33,11 @@ function checkBeforeDel(totalPosts) {
         <input type="text" class="form-control" id="txtCatName" name="CatNameLv2" autofocus
           value="{{this.category.CatNameLv2}}">
       </div>
+      <a class="btn btn-primary" href="/admin/categories/indexLv2?id={{catLv1.CatIDLv1}}" role="button">
+        <i class="fa fa-backward" aria-hidden="true"></i>
+        Back to List
+      </a>
+
       <button type="submit" class="btn btn-danger" onclick="return checkBeforeDel({{totalPostsCatLv2}})" formaction="/admin/categories/delCatLv2" data-toggle="modal" data-target="#myModal">
         <i class="fa fa-trash-o" aria-hidden="true"></i>
         Delete

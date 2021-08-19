@@ -42,7 +42,7 @@
       <tbody>
         {{#each this.categories}}
         <tr>
-          <th scope="row">{{CatIDLv1}}</th>
+          <th scope="row">{{format_index @index}}</th>
           <td><a href="/admin/categories/indexLv2?id={{CatIDLv1}}">{{CatNameLv1}}</a></td>
           <td class="text-right">
             <a class="btn btn-primary btn-sm" href="/admin/categories/edit?id={{CatIDLv1}}" role="button" title="Edit">

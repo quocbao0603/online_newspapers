@@ -36,8 +36,30 @@ img {
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 </style>
+
+<link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+    
 {{/section}}
 {{#section 'js'}}
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js">
+</script>
+    
+<script>
+    $('#dob').datetimepicker({
+        format: 'd/m/Y',
+        timepicker: false,
+    });
+    
+    $("#dob").val("{{infoUser.dob}}").change();
+    $('#premium').datetimepicker({
+        format: 'd/m/Y',
+        timepicker: false,
+    });
+    
+    $("#premium").val("{{datePremium}}").change();
+</script>
 <script>
 $("#info-form").on("submit", function (e) {
   e.preventDefault();
@@ -129,13 +151,11 @@ $("#info-form").on("submit", function (e) {
                 </div>
                 <div class="form-group">
                     <label for="dob">Ngày sinh</label>
-                    <input type="text" class="form-control"  placeholder="MM/DD/YYYY" onfocus="this.type = 'date'" onblur="this.type = 'text'"
-          !-- id="dob" name = "dob"  value="{{infoUser.dob}}" required>
+                    <input type="text" class="form-control"  placeholder="MM/DD/YYYY" id="dob" name = "dob" required>
                 </div>
                 <div class="form-group">
                     <label for="premium">Ngày hết hạn Premium</label>
-                    <input type="text" class="form-control"  placeholder="MM/DD/YYYY" onfocus="this.type = 'date'" onblur="this.type = 'text'"
-          !-- id="premium" name = "premium"  value="{{premium}}" required>
+                    <input type="text" class="form-control"  placeholder="MM/DD/YYYY" id="premium" name = "premium" required>
                 </div>
                 
                 <hr class="my-4" />

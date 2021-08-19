@@ -5,7 +5,7 @@ const { del } = require("./tag.model");
 module.exports = {
     all() {
         return db("users")
-            .orderBy("Permission", "desc");
+            .orderBy("permission", "desc");
     },
     getUserByUserName(username) {
         return db("users").where("username", username).first();

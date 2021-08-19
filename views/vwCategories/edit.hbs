@@ -28,6 +28,10 @@
       <div id="thongbao">
 
       </div>
+      <a class="btn btn-primary" href="/admin/categories/" role="button">
+        <i class="fa fa-backward" aria-hidden="true"></i>
+        Back to List
+      </a>
       <button type="submit" class="btn btn-danger" onclick="return checkBeforeDelCatLv1({{countCatLv2}})"
         formaction="/admin/categories/delCatLv1" data-toggle="modal" data-target="#myModal">
         <i class="fa fa-trash-o" aria-hidden="true"></i>
@@ -57,6 +61,7 @@
           </div>
         </div>
       </div>
+      
       <button type="submit" class="btn btn-success" formaction="/admin/categories/patchCatLv1">
         <i class="fa fa-check" aria-hidden="true"></i>
         Save

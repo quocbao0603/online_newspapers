@@ -48,14 +48,14 @@ router.get("/is-available", async function(req, res) {
 
 router.get("/profile", auth, async function(req, res) {
     const user = req.user;
-    user.dob = moment(user.dob, "YYYY-MM-DD").format("MM/DD/YYYY");
+    user.dob = moment(user.dob, "YYYY-MM-DD").format("DD/MM/YYYY");
     let premium = await userModel.getTimePremium(user.id);
-    premium = moment(premium, "YYYY-MM-DDTh:m:s").format("MM/DD/YYYY");
+    datePremium = moment(premium, "YYYY-MM-DDTh:m:s").format("DD/MM/YYYY");
 
-    console.log(premium)
+    console.log(datePremium)
     res.render("vwAccount/profile", {
         infoUser: user,
-        premium: premium
+        datePremium: datePremium
     });
 });
 
@@ -71,8 +71,8 @@ router.post("/profile/", auth, async function(req, res) {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     if (req.body.password !== '')
         user_update.password = hashedPassword;
-    user_update.dob = moment(user_update.dob).format("YYYY-MM-DD");
-    user_update.premium = moment(req.body.premium).format("YYYY-MM-DD");
+    user_update.dob = moment(user_update.dob, "DD/MM/YYYY").format("YYYY-MM-DD");
+    user_update.premium = moment(req.body.premium, "DD/MM/YYYY").format("YYYY-MM-DD");
     //console.log("Test user:");
     //console.log(user_update);
     //console.log(req.body);
@@ -89,9 +89,10 @@ router.post("/profile/", auth, async function(req, res) {
 
 router.post("/resPremium", auth, async function(req, res) {
     //console.log(req.body.premium)
-    console.log(req.body.timePremium)
+    timePremium = moment(req.body.timePremium, "DD/MM/YYYY").format("YYYY-MM-DD");
+    console.log(timePremium);
         //await userModel.updatePremium(req.user.id, +req.body.times)
-    await userModel.setPremium(req.user.id, req.body.timePremium)
+    await userModel.setPremium(req.user.id, timePremium)
     const url = req.session.retUrl || "/";
     console.log(url)
     res.redirect(url);

@@ -39,7 +39,7 @@
       <tbody>
         {{#each this.users}}
         <tr>
-          <th scope="row">{{id}}</th>
+          <th scope="row">{{format_index @index}}</th>
           <td>{{name}}</td>
           <td>
             {{#ifEquals permission "0"}}

@@ -1,4 +1,18 @@
+{{#section 'css'}}
+<link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+  
+{{/section}}
 {{#section 'js'}}
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js">
+</script>
+<script>
+    $('#timePremium').datetimepicker({
+        format: 'd/m/Y',
+        timepicker: false,
+    });
+</script>
 <script>
   document.querySelector('#btnSignup').addEventListener('click',function(e){
     
@@ -25,8 +39,12 @@
           <input type="text" class="form-control-plaintext" id="name" value="{{infoUser.name}}">
         </div>
       </div>
-      <label for="timePremium">Ngày hết hạn</label><br>
-      <input type="datetime-local" id="timePremium" name="timePremium"><br><br><br>
+      <div class="form-group row">
+        <label for="timePremium" class="col-sm-2 col-form-label">Ngày hết hạn</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control-plaintext" id="timePremium" name="timePremium" placeholder="MM/DD/YYYY">
+        </div>
+      </div>
       <button class="btn btn-primary btn-block" type="submit" id="btnSignup">Đăng kí</button> 
       <a href="/" ><i class="fas fa-angle-left"></i> Trang chủ</a>
     </form>

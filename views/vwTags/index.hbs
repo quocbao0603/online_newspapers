@@ -42,7 +42,7 @@
       <tbody>
         {{#each this.tags}}
         <tr>
-          <th scope="row">{{TagID}}</th>
+          <th scope="row">{{format_index @index}}</th>
           <td>{{TagName}}</td>
           <td class="text-right">
             <a class="btn btn-primary btn-sm" href="/administrator/tags/edit?id={{TagID}}" role="button" title="Edit">
